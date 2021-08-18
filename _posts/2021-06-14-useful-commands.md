@@ -117,6 +117,11 @@ crontab -l
 
 #### Create a tarball with `tar`
 
+```bash
+tar -cvf foo.tar file1 file2  # Compress, verbose, file
+tar -xvf foo.tar              # Extract, verbose, file
+```
+
 #### Transfer data from a URL with `curl`
 
 Below will get you the HTML for Google:
@@ -131,6 +136,11 @@ Below will get you the index file for Google:
 
 ```bash
 wget www.google.com
+```
+It has a useful option to mirror an external source, could be an FTP server or similar.
+
+```bash
+wget -m url
 ```
 
 #### Split and combine files with `split` and `cat`
@@ -183,6 +193,22 @@ Replace all occurences of bash with linux in file.txt and redirect the output to
 sed 's/bash/linux/g' file.txt > new_file.txt
 ```
 
+#### Find files with `find`
+
+Below will find all shell scripts.
+
+```bash
+find . -type f -name *.sh
+```
+Below will find and delete files created by R and Python.
+
+```bash
+find . -type f -name "*.py[co]" -delete
+find . -type d -name "__pycache__" -delete
+find . -type f -name ".Rhistory" -delete
+find . -type f -name ".RData" -delete
+```
+
 #### Secure shell to a remote machine with `ssh`
 
 `ssh` is useful for logging into a remote machine and execute commands on it.
@@ -191,6 +217,13 @@ I've found it useful to create a SSH tunnel when developing a `bokeh` server on 
 
 ```bash
 ssh -NfL localhost:5006:localhost:5006 user@remote.host
+```
+
+#### Create a checksum with sha256sum
+
+```bash
+sha256sum /path/to/file
+sha256sum /path/to/files/*
 ```
 
 #### Sync data with `rsync`
