@@ -208,6 +208,31 @@ find . -type d -name "__pycache__" -delete
 find . -type f -name ".Rhistory" -delete
 find . -type f -name ".RData" -delete
 ```
+Find and execute a command. Below will extract all tarballs in `./folder/with/tarballs`.
+
+```bash
+find ./folder/with/tarballs \
+  -name '*.tgz' \
+  -type f \
+  -exec \
+  tar --one-top-level -C ./folder/with/tarballs -zxvf {}  \;
+```
+
+Using -exec with a semicolon (`find . -exec ls '{}' \;`), will execute
+
+```bash
+ls file1
+ls file2
+ls file3
+```
+
+But if you use a plus sign instead (`find . -exec ls '{}' \+`), as many filenames as possible are passed as arguments to a single command:
+
+```bash
+ls file1 file2 file3
+```
+
+The number of filenames is only limited by the system's maximum command line length. If the command exceeds this length, the command will be called multiple times.
 
 #### Secure shell to a remote machine with `ssh`
 
@@ -219,11 +244,26 @@ I've found it useful to create a SSH tunnel when developing a `bokeh` server on 
 ssh -NfL localhost:5006:localhost:5006 user@remote.host
 ```
 
-#### Create a checksum with sha256sum
+#### Create a checksum with sha256sum and md5sum
 
 ```bash
 sha256sum /path/to/file
 sha256sum /path/to/files/*
+md5sum /path/to/file
+md5sum /path/to/files/*
+```
+
+And check the checksums with.
+
+```bash
+sha256sum /path/to/files/* > checksums.sha256
+sha256sum --check checksums.sha256
+```
+and 
+
+```bash
+md5sum /path/to/files/* > checksums.md5
+md5sum --check checksums.md5
 ```
 
 #### Sync data with `rsync`
