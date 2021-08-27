@@ -265,6 +265,9 @@ and
 md5sum /path/to/files/* > checksums.md5
 md5sum --check checksums.md5
 ```
+#### ``scp` for secure transfer of files via ssh.
+
+Enough said.
 
 #### Sync data with `rsync`
 
