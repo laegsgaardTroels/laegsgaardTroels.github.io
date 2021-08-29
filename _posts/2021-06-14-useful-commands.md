@@ -95,8 +95,16 @@ jobs
 View the disk usage in the current directory.
 
 ```bash
-du -h -d 1
+du -h -s
 ```
+
+To go a bit deeper use.
+
+```bash
+du -h -d 2
+```
+
+etc.
 
 #### File Tree with `tree`
 
@@ -183,6 +191,11 @@ Search for a pattern in the current folder and optionally sub-directories.
 ```bash
 grep <PATTERN> *
 grep -r <PATTERN> *
+```
+It can often be useful to grep from your bash history.
+
+```bash
+history | grep foo
 ```
 
 #### Find and replace with `sed`
