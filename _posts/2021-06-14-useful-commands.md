@@ -301,7 +301,7 @@ Enough said.
 #### Get the current user with `whoami`
 
 ```
-whoami                                      # Outputs: trol
+whoami                                      # Outputs: troels (or whatever username you have).
 ```
 
 # References
