@@ -27,6 +27,13 @@ rm file.txt                        # Remove file.
 rm -rf folder                      # Remove folder.
 ```
 
+#### Create a directory with `mkdir`
+
+```bash
+mkdir new_dir
+mkdir -p new_dir                   # New error if existing and create parent folders.
+```
+
 #### Move and renmae file with `mv`
 
 ```bash
@@ -43,7 +50,7 @@ ls -l                              # To view permissions.
 
 #### Kill a process with `kill`
 
-You get the process id (`<PID`) from `top` or `ps`.
+You get the process id (`<PID>`) from `top` or `ps`.
 
 ```bash
 kill <PID>
