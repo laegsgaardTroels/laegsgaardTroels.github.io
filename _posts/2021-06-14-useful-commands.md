@@ -257,7 +257,7 @@ I've found it useful to create a SSH tunnel when developing a `bokeh` server on 
 ssh -NfL localhost:5006:localhost:5006 user@remote.host
 ```
 
-#### Create a checksum with sha256sum and md5sum
+#### Create a checksum with `sha256sum` and `md5sum`
 
 ```bash
 sha256sum /path/to/file
