@@ -9,6 +9,7 @@ Useful commands. <!--more-->
 
 ```bash
 cd to/new/directory/
+cd -                               # Go back to previous directory.
 ```
 
 #### Clear the shell with `clear`
