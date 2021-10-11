@@ -290,6 +290,30 @@ md5sum --check checksums.md5
 
 Enough said.
 
+#### Change user/group with `chown` and permissions with `chmod`
+
+The `chmod` (short for change mode) command is used to manage file system access permissions on Unix and Unix-like systems. There are three basic file system permissions, or modes, to files and directories, see [2]:
+
+- `read (r)`
+- `write (w)`
+- `execute (x)` Can i do a `ls` in a directory as an example.
+- 
+Each mode can be applied to these classes:
+
+- `user (u)` The user is the account that owns the file.
+- `group (g)` The group that owns the file may have other accounts on the system as members.
+- `other (o)` The remaining class, other (sometimes referred to as world), means all other accounts on the system.
+
+From `man chmod`: `Each MODE is of the form '[ugoa]*([-+=]([rwxXst]*|[ugo]))+|[-+=][0-7]+'.`
+
+The references are shorthand (u, g, or o) for each class. The operator determines whether to add (+), remove (-) or explicitly set (=) the particular permissions. The modes are read (r), write (w), or execute (x).
+
+You can combine multiple references and modes to set the desired access all at once. For example, to explicitly make file3 readable and executable to everyone:
+
+```bash
+chmod ugo=rx file3   # user(u),group(g),other(o)=read(r),execute(x)
+```
+
 #### Sync data with `rsync`
 
 #### Mount a folder with `nfs`
@@ -307,3 +331,5 @@ whoami                                      # Outputs: troels (or whatever usern
 # References
 
 [1] https://stedolan.github.io/jq/
+
+[2] https://cets.seas.upenn.edu/answers/chmod.html
