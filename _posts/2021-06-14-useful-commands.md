@@ -214,6 +214,12 @@ Replace all occurences of bash with linux in file.txt and redirect the output to
 sed 's/bash/linux/g' file.txt > new_file.txt
 ```
 
+You can use another seperator, in below I use `:` instead of `/`:
+
+```bash
+sed -i 's:<title>slides slides</title>:<title>Slides</title>:g'
+```
+
 #### Find files with `find`
 
 Below will find all shell scripts.
