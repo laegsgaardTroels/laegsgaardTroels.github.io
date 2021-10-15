@@ -25,3 +25,7 @@ excerpt_separator: <!--more-->
 # https://desiredpersona.com/disqus-comments-jekyll/
 disqus:
    shortname: machinelearningnotes-1
+
+collections:
+    courses:
+        output: true

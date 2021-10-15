@@ -1,30 +1,39 @@
 ---
 layout: default
 title: Courses
+output: true
 ---
 
+
 <div class="row">
+  {% for post in site.courses %}
+
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch" style="margin-bottom: 20px;">
         <div class="card"
-             style="border: 3.0;
-                      background: transparent;
-                      padding: 10%;"
-             >
-             <div class="row-11">
-                 <img style="height:220px; max-height:270px; width:300px; border: 0; background: transparent; padding: 5%;" src="/assets/images/base/r.svg" onerror="this.src=/assets/images/base/missing.jpg">
-             </div>
+              style="border: 3.0;
+                     background: transparent;
+                     padding: 10%;"
+        >
+            <div class="row-11">
+              <img style="height:220px; max-height:270px; width:300px; border: 0; background: transparent; padding: 5%;"src="{{ post.image }}" onerror="this.src=/assets/images/base/missing.jpg">
+            </div>
             <div class="row-1">
-                <h3>Applied Data Science with R</h1>
-                <strong> Language: R </strong>
-                <p>Learn how to solve many commonly faced problems when applying R for Data Science and become an even more important part of your company. This course will introduce you to the most important Data Science tools in R to effectively solve many real life problems. [...]</p>
-                <a href="courses/applied-data-science-with-r-slides/index.html">Continue reading</a>
+              <h3>{{ post.title }}</h3>
+  	          <strong> {{ post.category }} </strong>
+              <div class="text-muted">{{ post.date | date_to_string }}</div>
+              <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | append: '[...]'}}</p>
+              <a href="{{ post.url }}">Continue reading</a>
 
-                &emsp;
-                <a href="https://github.com/laegsgaardTroels/applied-data-science-with-r-slides" target="_blank">
+              {% if post.code %}
+                  &emsp;
+                  <a href="{{ post.code }}" target="_blank">
                     [<i>View code</i> <span class="fa fa-github"></span>]
-                </a>
+                  </a>
+              {% endif %}
 
             </div>
         </div>
     </div>
+
+  {% endfor %}
 </div>
