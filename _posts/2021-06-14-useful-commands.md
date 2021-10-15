@@ -9,6 +9,7 @@ Useful commands. <!--more-->
 
 ```bash
 cd to/new/directory/
+cd -                               # Go back to previous directory.
 ```
 
 #### Clear the shell with `clear`
@@ -24,6 +25,13 @@ clear
 ```bash
 rm file.txt                        # Remove file.
 rm -rf folder                      # Remove folder.
+```
+
+#### Create a directory with `mkdir`
+
+```bash
+mkdir new_dir
+mkdir -p new_dir                   # New error if existing and create parent folders.
 ```
 
 #### Move and renmae file with `mv`
@@ -42,7 +50,7 @@ ls -l                              # To view permissions.
 
 #### Kill a process with `kill`
 
-You get the process id (`<PID`) from `top` or `ps`.
+You get the process id (`<PID>`) from `top` or `ps`.
 
 ```bash
 kill <PID>
@@ -95,8 +103,16 @@ jobs
 View the disk usage in the current directory.
 
 ```bash
-du -h -d 1
+du -h -s
 ```
+
+To go a bit deeper use.
+
+```bash
+du -h -d 2
+```
+
+etc.
 
 #### File Tree with `tree`
 
@@ -184,6 +200,11 @@ Search for a pattern in the current folder and optionally sub-directories.
 grep <PATTERN> *
 grep -r <PATTERN> *
 ```
+It can often be useful to grep from your bash history.
+
+```bash
+history | grep foo
+```
 
 #### Find and replace with `sed`
 
@@ -191,6 +212,12 @@ Replace all occurences of bash with linux in file.txt and redirect the output to
 
 ```bash
 sed 's/bash/linux/g' file.txt > new_file.txt
+```
+
+You can use another seperator, in below I use `:` instead of `/`:
+
+```bash
+sed -i 's:<title>slides slides</title>:<title>Slides</title>:g'
 ```
 
 #### Find files with `find`
@@ -244,7 +271,7 @@ I've found it useful to create a SSH tunnel when developing a `bokeh` server on 
 ssh -NfL localhost:5006:localhost:5006 user@remote.host
 ```
 
-#### Create a checksum with sha256sum and md5sum
+#### Create a checksum with `sha256sum` and `md5sum`
 
 ```bash
 sha256sum /path/to/file
@@ -265,9 +292,33 @@ and
 md5sum /path/to/files/* > checksums.md5
 md5sum --check checksums.md5
 ```
-#### ``scp` for secure transfer of files via ssh.
+#### `scp` for secure transfer of files via `ssh`.
 
 Enough said.
+
+#### Change user/group with `chown` and permissions with `chmod`
+
+The `chmod` (short for change mode) command is used to manage file system access permissions on Unix and Unix-like systems. There are three basic file system permissions, or modes, to files and directories, see [2]:
+
+- `read (r)`
+- `write (w)`
+- `execute (x)` Can i do a `ls` in a directory as an example.
+- 
+Each mode can be applied to these classes:
+
+- `user (u)` The user is the account that owns the file.
+- `group (g)` The group that owns the file may have other accounts on the system as members.
+- `other (o)` The remaining class, other (sometimes referred to as world), means all other accounts on the system.
+
+From `man chmod`: `Each MODE is of the form '[ugoa]*([-+=]([rwxXst]*|[ugo]))+|[-+=][0-7]+'.`
+
+The references are shorthand (u, g, or o) for each class. The operator determines whether to add (+), remove (-) or explicitly set (=) the particular permissions. The modes are read (r), write (w), or execute (x).
+
+You can combine multiple references and modes to set the desired access all at once. For example, to explicitly make file3 readable and executable to everyone:
+
+```bash
+chmod ugo=rx file3   # user(u),group(g),other(o)=read(r),execute(x)
+```
 
 #### Sync data with `rsync`
 
@@ -280,9 +331,11 @@ Enough said.
 #### Get the current user with `whoami`
 
 ```
-whoami                                      # Outputs: trol
+whoami                                      # Outputs: troels (or whatever username you have).
 ```
 
 # References
 
 [1] https://stedolan.github.io/jq/
+
+[2] https://cets.seas.upenn.edu/answers/chmod.html
