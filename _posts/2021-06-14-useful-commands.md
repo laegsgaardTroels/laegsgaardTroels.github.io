@@ -32,8 +32,8 @@ The `&&` and `||` also works as logical AND and OR operators:
 ```bash
 true || echo foo                   # Doesn't echo anything.
 false || echo foo                  # Echos foo.
-true || echo foo                   # Echos foo.
-false || echo foo                  # Doesn't echo anything.
+true && echo foo                   # Echos foo.
+false && echo foo                  # Doesn't echo anything.
 ```
 
 Below can be useful in a Makefile if you don't care if the command was succesful. E.g. if you want to make sure something has been removed. 
