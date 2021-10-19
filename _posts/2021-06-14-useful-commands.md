@@ -3,7 +3,44 @@ image: "/assets/images/base/linux.svg"
 category: Bash
 ---
 
-Useful commands. <!--more-->
+Useful commands and operators. <!--more-->
+
+#### `||` and `&&`
+
+See [3]. 
+
+AND and OR lists are sequences of one or more pipelines separated by the control operators `&&` and `||`, respectively. AND and OR lists are executed with left associativity.
+
+An AND list has the form
+
+```bash
+command1 && command2
+command2 is executed if, and only if, command1 returns an exit status of zero (success).
+```
+
+An OR list has the form
+
+```bash
+command1 || command2
+command2 is executed if, and only if, command1 returns a non-zero exit status.
+```
+
+The return status of AND and OR lists is the exit status of the last command executed in the list.
+
+The `&&` and `||` also works as logical AND and OR operators:
+
+```bash
+true || echo foo                   # Doesn't echo anything.
+false || echo foo                  # Echos foo.
+true || echo foo                   # Echos foo.
+false || echo foo                  # Doesn't echo anything.
+```
+
+Below can be useful in a Makefile if you don't care if the command was succesful. E.g. if you want to make sure something has been removed. 
+
+```bash
+some_command || true
+```
 
 #### Change directory with `cd`
 
@@ -320,6 +357,14 @@ You can combine multiple references and modes to set the desired access all at o
 chmod ugo=rx file3   # user(u),group(g),other(o)=read(r),execute(x)
 ```
 
+**Example:** The `chown` changes the ownership of all files and folders to user: tlg and group: users. The `chmod` changes changes the permissions to to read, write for user and groups.
+
+```bash
+sudo chown tlg:users -R .
+sudo chmod ug=rwx -R .
+ll
+```
+
 #### Sync data with `rsync`
 
 #### Mount a folder with `nfs`
@@ -339,3 +384,5 @@ whoami                                      # Outputs: troels (or whatever usern
 [1] https://stedolan.github.io/jq/
 
 [2] https://cets.seas.upenn.edu/answers/chmod.html
+
+[3] https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Lists
