@@ -58,7 +58,7 @@ $$
 $$
 \begin{aligned}
 \mathbb{P}\left(\max_{h\in\mathcal{H}}\vert R(h)-\hat{R}(h)\vert >\epsilon\right)&=\mathbb{P}\left(\bigcup_{h\in\mathcal{H}}\vert R(h)-\hat{R}(h)\vert >\epsilon\right)\\
-&\leq\mathbb{P}\left(\vert R(h)-\hat{R}(h)\vert >\epsilon\right) \\
+&\leq\sum_{h\in\mathcal{H}} \mathbb{P}\left(\vert R(h)-\hat{R}(h)\vert >\epsilon\right) \\
 &\leq 2\vert \mathcal{H}\vert e^{-2N\epsilon^2}
 \end{aligned}
 $$
