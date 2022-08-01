@@ -1,7 +1,0 @@
-[submodule "_courses/applied-data-science-with-r-slides"]
-    path = _courses/applied-data-science-with-r-slides
-    url = https://github.com/laegsgaardTroels/applied-data-science-with-r-slides
-    
-[submodule "_courses/introduction-to-pyspark-with-azure-databricks-notebooks-slides"]
-    path = _courses/introduction-to-pyspark-with-azure-databricks-notebooks-slides
-    url = https://github.com/laegsgaardTroels/introduction-to-pyspark-with-azure-databricks-notebooks-slides
