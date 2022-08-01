@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+    <head>
+
+        <style>
+            $styles.html()$
+        </style>
+        $for(css)$
+            <link rel="stylesheet" href="$css$" />
+        $endfor$
+
+        $for(header-includes)$
+            $header-includes$
+        $endfor$
+        $if(math)$
+            $math$
+        $endif$
+
+        <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+    </head>
+    <body>
+
+        $for(include-before)$
+        $include-before$
+        $endfor$
+
+        <div class="container">
+            <br>
+            <div class="row">
+                $for(post)$
+
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch" style="margin-bottom: 20px;">
+                    <div class="card"
+                          style="border: 3.0;
+                                 background: transparent;
+                                 padding: 10%;"
+                    >
+                        <div class="row-11">
+                          <img style="height:220px; max-height:270px; width:300px; border: 0; background: transparent; padding: 5%;"src="$post.image$" onerror="this.src=assets/images/base/missing.jpg">
+                        </div>
+                        <div class="row-1">
+                          <h3>$post.title$</h3>
+                          <strong>$post.category$</strong>
+                          <div class="text-muted">$post.date$</div>
+                          <p>$post.excerpt$</p>
+                          <a href="$post.url$">Continue reading</a>
+
+                          $if(post.code)$
+                              &emsp;
+                              <a href="$post.code$" target="_blank">
+                                [<i>View code</i> <span class="fa fa-github"></span>]
+                              </a>
+                          $endif$
+
+                        </div>
+                    </div>
+                </div>
+
+              $endfor$
+            </div>
+            <br>
+            <br>
+        </div>
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
