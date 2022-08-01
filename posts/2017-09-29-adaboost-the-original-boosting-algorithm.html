@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+      <style>
+        img {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        figcaption {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        code {
+          font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+          background-color: #f5f5f5;
+          padding: .2em .4em;
+          font-size: 85%;
+          margin: 0;
+        }
+        pre {
+          margin: 1em 0;
+          background-color: #f5f5f5;
+          padding: 1em;
+          overflow: auto;
+        }
+        pre code {
+          padding: 0;
+          overflow: visible;
+          overflow-wrap: normal;
+        }
+        .sourceCode {
+         background-color: #f5f5f5;
+         overflow: visible;
+        }
+        hr {
+          background-color: #1a1a1a;
+          border: none;
+          height: 1px;
+          margin: 1em 0;
+        }
+        table {
+          margin: 1em 0;
+          border-collapse: collapse;
+          width: 100%;
+          overflow-x: auto;
+          display: block;
+          font-variant-numeric: lining-nums tabular-nums;
+        }
+        table caption {
+          margin-bottom: 0.75em;
+        }
+        tbody {
+          margin-top: 0.5em;
+          border-top: 1px solid #1a1a1a;
+          border-bottom: 1px solid #1a1a1a;
+        }
+        th {
+          border-top: 1px solid #1a1a1a;
+          padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+        td {
+          padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+        header {
+          margin-bottom: 4em;
+          text-align: center;
+        }
+        #TOC li {
+          list-style: none;
+        }
+        #TOC ul {
+          padding-left: 1.3em;
+        }
+        #TOC > ul {
+          padding-left: 0;
+        }
+        #TOC a:not(:hover) {
+          text-decoration: none;
+        }
+        code{white-space: pre-wrap;}
+        span.smallcaps{font-variant: small-caps;}
+        span.underline{text-decoration: underline;}
+        div.column{display: inline-block; vertical-align: top; width: 50%;}
+        div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+        ul.task-list{list-style: none;}
+        pre > code.sourceCode { white-space: pre; position: relative; }
+        pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+        pre > code.sourceCode > span:empty { height: 1.2em; }
+        .sourceCode { overflow: visible; }
+        code.sourceCode > span { color: inherit; text-decoration: inherit; }
+        div.sourceCode { margin: 1em 0; }
+        pre.sourceCode { margin: 0; }
+        @media screen {
+        div.sourceCode { overflow: auto; }
+        }
+        @media print {
+        pre > code.sourceCode { white-space: pre-wrap; }
+        pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+        }
+        pre.numberSource code
+          { counter-reset: source-line 0; }
+        pre.numberSource code > span
+          { position: relative; left: -4em; counter-increment: source-line; }
+        pre.numberSource code > span > a:first-child::before
+          { content: counter(source-line);
+            position: relative; left: -1em; text-align: right; vertical-align: baseline;
+            border: none; display: inline-block;
+            -webkit-touch-callout: none; -webkit-user-select: none;
+            -khtml-user-select: none; -moz-user-select: none;
+            -ms-user-select: none; user-select: none;
+            padding: 0 4px; width: 4em;
+            color: #aaaaaa;
+          }
+        pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+        div.sourceCode
+          {   }
+        @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+        }
+        code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+        code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+        code span.at { color: #7d9029; } /* Attribute */
+        code span.bn { color: #40a070; } /* BaseN */
+        code span.bu { } /* BuiltIn */
+        code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+        code span.ch { color: #4070a0; } /* Char */
+        code span.cn { color: #880000; } /* Constant */
+        code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+        code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+        code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+        code span.dt { color: #902000; } /* DataType */
+        code span.dv { color: #40a070; } /* DecVal */
+        code span.er { color: #ff0000; font-weight: bold; } /* Error */
+        code span.ex { } /* Extension */
+        code span.fl { color: #40a070; } /* Float */
+        code span.fu { color: #06287e; } /* Function */
+        code span.im { color: #007020; font-weight: bold; } /* Import */
+        code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+        code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+        code span.op { color: #666666; } /* Operator */
+        code span.ot { color: #007020; } /* Other */
+        code span.pp { color: #bc7a00; } /* Preprocessor */
+        code span.sc { color: #4070a0; } /* SpecialChar */
+        code span.ss { color: #bb6688; } /* SpecialString */
+        code span.st { color: #4070a0; } /* String */
+        code span.va { color: #19177c; } /* Variable */
+        code span.vs { color: #4070a0; } /* VerbatimString */
+        code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      </style>
+              <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+      
+                <!-- Using Bootstrap starter template: https://getbootstrap.com/docs/4.0/getting-started/introduction/-->
+                <!-- Required meta tags -->
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="shortcut icon" type="image/png" href="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png">
+
+                <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css">Bootstrap CSS -->
+
+
+                <!-- 
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({
+                    jax: ["input/TeX", "output/HTML-CSS"],
+                    tex2jax: {
+                      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+                      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+                      processEscapes: true,
+                      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                    }
+                    //,
+                    //displayAlign: "left",
+                    //displayIndent: "2em"
+                  });
+                </script>
+                <script type="text/javascript" async
+                        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+                </script>
+                MathJax -->
+
+                <!-- Font Awesome CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+    <title>Adaboost The Original Boosting Algorithm</title>
+  </head>
+  <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">ML-Notes</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/courses.html"> Courses </a>
+                    <a class="nav-link" href="/about.html"> About </a>
+                </div>
+            </div>
+        </nav>
+
+    
+    <div class="container">
+        <br>
+        <div class="page-header">
+            <div class="pull-left">
+                <h1>Adaboost The Original Boosting Algorithm</h1>
+                <strong>Algorithm</strong>
+                <div class="text-muted">2017-09-29</div>
+            </div>
+            
+            <div class="pull-right">
+
+                                <div class="text-right">
+                    <a href="https://github.com/laegsgaardTroels/adaboost-the-original-boosting-algorithm">
+                        [<i>View code on Github</i> <span class="fa fa-github"></span>]
+                    </a>
+                </div>
+                
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        
+
+        <br>
+        <p>In this post the famous AdaBoost algoritm will be implemented
+        in R<!--more--> and tested on simulated data. The post is
+        intented to yield some intuition and understanding about what
+        boosting is via an exercise.</p>
+        <p>What is boosting? Lets start explaining this with a nice
+        analogy provided by the masters of boosting: Yoav Freund and
+        Robert E. Schapire, you could imagine the horse racing-gampler
+        being an overly intelligent gambler from Peaky Blinders:</p>
+        <p>“… <em>A horse-racing gambler, hoping to maximize his
+        winnings, decides to create a computer program that will
+        accurately predict the winner of a horse race based on the usual
+        information (number of races recently won by each horse, betting
+        odds for each horse, etc.). To create such a program, he asks a
+        highly successful expert gambler to explain his betting
+        strategy. Not surprisingly, the expert is unable to articulate a
+        grand set of rules for selecting a horse. On the other hand,
+        when presented with the data for a specific set of races, the
+        expert has no trouble coming up with a “rule of thumb” for that
+        set of races (such as, “Bet on the horse that has recently won
+        the most races” or “Bet on the horse with the most favored
+        odds”). Although such a rule of thumb, by itself, is obviously
+        very rough and inaccurate, it is not unreasonable to expect it
+        to provide predictions that are at least a little bit better
+        than random guessing. Furthermore, by repeatedly asking the
+        expert’s opinion on different collections of races, the gambler
+        is able to extract many rules of thumb. In order to use these
+        rules of thumb to maximum advantage, there are two problems
+        faced by the gambler: First, how should he choose the
+        collections of races presented to the expert so as to extract
+        rules of thumb from the expert that will be the most useful?
+        Second, once he has collected many rules of thumb, how can they
+        be combined into a single, highly accurate prediction rule?</em>
+        …” -<a
+        href="https://cseweb.ucsd.edu/~yfreund/papers/IntroToBoosting.pdf">Yoav
+        Freund and Robert E. Schapire</a></p>
+        <p>The idea of boosting is to take these weak rules of thumbs,
+        also called <em>weak classifiers</em> \(h_t\), and via a
+        procedure, called a <em>boosting algorithm</em>, produce a
+        strong classifier.</p>
+        <p><span class="math display">\[H_T(x)=\text{sign}\sum_{t=0}^T
+        \alpha_t h_t(x)\]</span></p>
+        <p>AdaBoost was the first really succesful boosting algorithm,
+        it has undergone a lot of empirical testing and theoretical
+        study. If you are more interested after this post, in the
+        theory, then I suggest you look into the book [2].</p>
+        <h2 id="packages">Packages</h2>
+        <p>The packages that will be used in this post is the
+        <code>ggplot2</code>, a package used for plotting in R,
+        <code>latex2exp</code>, which is used to insert some latex code
+        in R and <code>pacman</code> which has the function
+        <code>pacman::p_load</code> that can be used to install and load
+        packages,</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggplot2, latex2exp)</span></code></pre></div>
+        <p>The <code>pacman::p_load</code> function can be seen as a
+        more robust alternative to the functions <code>require</code>
+        and <code>library</code>, which are usually used to load in
+        packages.</p>
+        <h2 id="simulating-data">Simulating data</h2>
+        <p>To have complete control over the set-up for this exercise,
+        the data for the classification problem will be simulated. First
+        we will simulate <code>m &lt;- 10^5</code> datapoints in a
+        circle with added noise <code>sd&lt;-0.13</code>, and put the
+        result in the dataframe <code>circ.df</code>, with the label
+        <code>-1</code>.</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">runif</span>(m, <span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>circ.x <span class="ot">&lt;-</span> <span class="fu">cos</span>(theta) <span class="sc">+</span> <span class="fu">rnorm</span>(m,<span class="at">sd=</span>sd)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>circ.y <span class="ot">&lt;-</span> <span class="fu">sin</span>(theta) <span class="sc">+</span> <span class="fu">rnorm</span>(m,<span class="at">sd=</span>sd)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>circ.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">x =</span> circ.x, <span class="at">y =</span> circ.y)</span></code></pre></div>
+        <p>Simulate <code>m</code> points inside the circle with added
+        noise and put it in <code>center.df</code>.</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>center.x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(m,<span class="at">sd=</span>sd)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>center.y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(m,<span class="at">sd=</span>sd)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>center.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> <span class="dv">1</span>, <span class="at">x =</span> center.x, <span class="at">y =</span> center.y)</span></code></pre></div>
+        <p>Bind the two dataframes together row-wise with rbind and
+        scrample the data s.t. they don’t lie in order.</p>
+        <pre><code>df &lt;- rbind(circ.df, center.df)
+df &lt;- df[sample(1:dim(df)[1],dim(df)[1]),]</code></pre>
+        <p>Split it up in a training- and test- set, s.t. the model can
+        be validated on the test-set afterwards</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> df[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(<span class="fu">dim</span>(df)[<span class="dv">1</span>]<span class="sc">/</span><span class="dv">2</span>),]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> df[<span class="fu">round</span>(<span class="fu">dim</span>(df)[<span class="dv">1</span>]<span class="sc">/</span><span class="dv">2</span>)<span class="sc">:</span><span class="fu">dim</span>(df)[<span class="dv">1</span>],]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>train.X <span class="ot">&lt;-</span> train[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>train.y <span class="ot">&lt;-</span> train[,<span class="dv">1</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>test.X <span class="ot">&lt;-</span> test[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>test.y <span class="ot">&lt;-</span> test[,<span class="dv">1</span>]</span></code></pre></div>
+        <p>Finally plot the training data to see how it looks like. The
+        blue points are those simulated on the circle, with label -1,
+        and the red are the ones simulated inside the circle, label
+        1.</p>
+        <p><img src="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png"></p>
+        <h2 id="make-weak-classifier">Make weak classifier</h2>
+        <p>The basic component of boosting is the <em>weak
+        classifiers</em>, these are the rules of thumb in the above
+        analogy. The AdaBoost algorithm combines these to a strong
+        classifer.</p>
+        <p>Say we have some prior knowlede about the problem and decides
+        to construct the weak classifiers as follows: First make a
+        finite set of classifiers, which are plotted below, for each
+        line below (vertical and horizontal) there are two hypotheses,
+        one which is positive when points is on one side of the line,
+        and one which is positive when point is on the other side. The
+        classifier selected is then the one which minimizes the weigthed
+        error:</p>
+        <p><span class="math display">\[e_t=\sum_{i=0}^{2m} w_i
+        1\{h_t(x_i)\neq y_i\}\]</span></p>
+        <p><img src="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleHypothesisSet.png"></p>
+        <p>In practice the weak classifiers are often simple decision
+        trees, could be stumps: Trees with only one split. But in
+        general one could try out the AdaBoost with almost any procedure
+        in which one can weigh the error.</p>
+        <h2 id="the-adaboost-algorithm">The AdaBoost algorithm</h2>
+        <p>The algorithm keeps some quantities throughout a loop. These
+        are here implemented below.</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">nrow</span>(train.X),<span class="fu">nrow</span>(train.X))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">list</span>()</span></code></pre></div>
+        <p>The w denotes the weights presented above. These can be
+        viewed as a probability distribution held over, in each round
+        <code>t</code> of AdaBoost, the observations, and initialized as
+        uniform. This distribution is used to fit a weak classifier
+        <code>h_t</code> in each iteration, and to get a weighted
+        accuracy <code>e_t</code>.</p>
+        <p>Two additional quantities are also keept throughout the
+        loops. The training error and test error:</p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>train_err <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>test_err <span class="ot">&lt;-</span> <span class="fu">c</span>()</span></code></pre></div>
+        <p>these will be used for evaluation of the algorithm
+        afterwards.</p>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>T_){</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">fit</span>(train.X, train.y, H.space, w)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  e_t <span class="ot">&lt;-</span> res[[<span class="dv">1</span>]]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  h_t <span class="ot">&lt;-</span> res[[<span class="dv">2</span>]]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  alpha_t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">log</span>((<span class="dv">1</span><span class="sc">-</span>e_t)<span class="sc">/</span>e_t)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  Z_t <span class="ot">&lt;-</span>  <span class="dv">2</span><span class="sc">*</span><span class="fu">sqrt</span>(e_t<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>e_t))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  w <span class="ot">&lt;-</span> w <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>alpha_t<span class="sc">*</span>train.y<span class="sc">*</span><span class="fu">predict</span>(train.X,<span class="fu">list</span>(h_t),<span class="dv">1</span>)) <span class="sc">/</span> Z_t</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  alphas[[t]] <span class="ot">&lt;-</span> alpha_t</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  H[[t]] <span class="ot">&lt;-</span> h_t</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  train_err <span class="ot">&lt;-</span> <span class="fu">c</span>(train_err, <span class="fu">mean</span>(<span class="fu">predict</span>(train.X,H,alphas) <span class="sc">!=</span> train.y))</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  test_err <span class="ot">&lt;-</span> <span class="fu">c</span>(test_err, <span class="fu">mean</span>(<span class="fu">predict</span>(test.X,H,alphas) <span class="sc">!=</span> test.y))</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+        <p>The weighted accuracy <code>e_t</code> is used to weigh the
+        new weak hypothesis in the final ensemble by
+        <code>alpha_t</code>, weighing them s.t. they greedly
+        contributes the most to the ensemble in terms of in-sample
+        error. This can also intuitively be inferred by a plot of the
+        functional dependency between these two quantities</p>
+        <p>At the end of each iteration the distribution w is updated,
+        putting more weight to incorrectly classified observations
+        <code>w * exp(-alpha_t*train.y*predict(train.X,list(h_t),1))</code>.
+        The <code>Z_t</code> is used for normalization of the weights to
+        a probability distribution.</p>
+        <h2 id="running-the-algorithm">Running the algorithm</h2>
+        <p>Below one sees how the algorithm combines the weak
+        classifiers. To the left one sees the combined classifier at
+        iteration t and to the right the hypothesis fitted at iteration
+        t of AdaBoost. Observations marked green is classified correctly
+        by the given hypothesis and observations marked red are
+        classified incorrectly. One observes how AdaBoost zooms in on
+        the observations which is hard to classify, in the last
+        iterations: Those on the inside of the circle. AdaBoost is also
+        used in the outlier detection because of this property.</p>
+        <p>One also observes the algorithm sometimes chooses a
+        hypothesis to the far right classifying all observations as the
+        same, which makes sense when the majority of the observations,
+        in the weighted error at the given iteration, is of that label,
+        as seen in iteration 3, it does seem to make sense in the
+        ensemble to add this seemingly useless classifier.</p>
+        <div id="gifdiv">
+        <img src="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleHypothesisAndH1-compressed.jpg" onclick="changeImage()" id="adagif">
+        </div>
+        <h2 id="result-on-the-test-set">Result on the test set</h2>
+        <p>Below one sees the training- (blue) and test- (red) error,
+        which seems to be almost identical in this example. The green
+        line is plot off a probably almost correct (PAC) learning bound:
+        A bound on how bad an algorithm can perform under some rather
+        general statistical assumptions, with a given probability, hence
+        probably almost. The below green line is a plot of this bound:
+        Out-of-sample error is below this line with 95% probability. The
+        bound seems to predict a fast overfitting as a function of the
+        number of trees, i.e. one observes that the bound increases very
+        fast as a function of the number of trees in the ensemble, it
+        cannot bound the generalization error.</p>
+        <p>But as seen in the plotted training- and test-error, red and
+        blue, it seems to be benificial to run AdaBoost in more rounds
+        than indicated by the bound, which is also the case in practical
+        applications.</p>
+        <p><img src="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExamplegeneralizationBound.png"></p>
+        <p>One interesting aspect about these bounds on generalization
+        performance from a practical point of view, is that they can
+        often be decomposed into two terms,</p>
+        <p><span class="math display">\[R(H) \leq
+        \hat{R}(H)+\Omega(H)\]</span></p>
+        <p>Where \(R(H)\) is the true generalization error, \((H)\) is
+        the in-sample loss, which decreases as a function of complexity,
+        here being the number of trees in the ensemble, and \((H)\) is a
+        complexity term, which increases as a complexity increases, here
+        it increases as the number of trees grows. Such bounds, found
+        many places in theory, indicates a trade-off between in-sample
+        fit and complexity, a phenomenon also sees in practice.</p>
+        <h2 id="conclusion">Conclusion</h2>
+        <p>This post touched the surface of some components of AdaBoost,
+        and hopefully woke some interest into these types of
+        algorithms.</p>
+        <h2 id="references">References</h2>
+        <p>[1] Yoav Freund and Robert E. Schapire, <em><a
+        href="https://cseweb.ucsd.edu/~yfreund/papers/IntroToBoosting.pdf">A
+        Short Introduction to Boosting</a></em>. Journal of Japanese
+        Society for Artificial Intelligence, 1999</p>
+        <p>[2] Yoav Freund and Robert E. Schapire, <em>Boosting:
+        Foundations and Algorithms</em>. The MIT Press, 2012</p>
+        <script>
+        var adagifIsJPG = true;
+        (new Image()).src = "/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoost.gif";
+        function changeImage() {
+            if (adagifIsJPG) {
+                document.getElementById("adagif").src = "/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoost.gif";
+                adagifIsJPG = false;
+            } else {
+                document.getElementById("adagif").src = "/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleHypothesisAndH1-compressed.jpg";
+                adagifIsJPG = true;
+            }
+        }
+        </script>
+        <br>
+        <br>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- dynamically load mathjax for compatibility with self-contained -->
+    <script>
+        (function () {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+                    document.getElementsByTagName("head")[0].appendChild(script);
+                })();
+    </script>
+      </body>
+</html>

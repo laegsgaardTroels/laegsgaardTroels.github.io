@@ -1,0 +1,50 @@
+I"‘<p>The pipeline object in sklearn makes it easy to sequentially apply a list of transforms and a final estimator [1]. This makes it easy to organize models.
+PySpark has a similar pipeline API but there are some differences.<!--more--></p>
+
+<ol>
+  <li>There are a <code class="language-plaintext highlighter-rouge">.fit()</code> and <code class="language-plaintext highlighter-rouge">.transform()</code> method, they work in the same way in sklearn but on the <code class="language-plaintext highlighter-rouge">pyspark.sql.DataFrame</code>, but there are  no <code class="language-plaintext highlighter-rouge">.predict()</code> method.</li>
+  <li>You can specify the subset of input features in a pipeline. E.g. you donâ€™t have to apply the model to <em>all</em> the columns in a dataframe <code class="language-plaintext highlighter-rouge">X</code> but you can do with a subset.</li>
+  <li>Similar with the response variable can be specified as a column in the dataframe.</li>
+  <li>When predicting you use the <code class="language-plaintext highlighter-rouge">.transform()</code> method on a fitted model object, which adds extra column(s) based on the model.</li>
+  <li>The input features are <code class="language-plaintext highlighter-rouge">Vector</code> object, You usually use the <code class="language-plaintext highlighter-rouge">VectorAssembler</code> in the first step of the pipeline to assemble input features into this object.</li>
+</ol>
+
+<p>Sample code snippet:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">PipelineModel</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">VectorAssembler</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.regression</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+
+
+<span class="n">assembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span>
+    <span class="n">inputCols</span><span class="o">=</span><span class="n">feature_cols</span><span class="p">,</span>
+    <span class="n">outputCol</span><span class="o">=</span><span class="s">"features"</span>
+<span class="p">)</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span>
+    <span class="n">featuresCol</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span>
+    <span class="n">labelCol</span><span class="o">=</span><span class="n">response_variable</span><span class="p">,</span>
+    <span class="n">predictionCol</span><span class="o">=</span><span class="s">"prediction"</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">parameters</span>
+<span class="p">)</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">assembler</span><span class="p">,</span> <span class="n">rf</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">test_with_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>  <span class="c1"># This will add a `prediction` column AND a `features` column to test.
+</span>
+<span class="c1"># Save the model for later use.
+</span><span class="n">model</span><span class="p">.</span><span class="n">write</span><span class="p">().</span><span class="n">overwrite</span><span class="p">().</span><span class="n">save</span><span class="p">(</span><span class="s">'/tmp/my_great_model'</span><span class="p">)</span>
+
+<span class="c1"># Load the model later.
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">PipelineModel</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">'/tmp/my_great_model'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The added <code class="language-plaintext highlighter-rouge">features</code> column is added from the <code class="language-plaintext highlighter-rouge">VectorAssembler</code>.</p>
+
+<h2 id="references">References</h2>
+
+<p>[1] <a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">Sklearn pipeline docs</a></p>
+
+<p>[2] <a href="https://spark.apache.org/docs/latest/ml-pipeline.html">Spark pipeline docs</a></p>
+:ET

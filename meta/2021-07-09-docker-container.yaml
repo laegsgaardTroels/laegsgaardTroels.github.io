@@ -1,0 +1,14 @@
+{
+    "title": "Docker Container",
+    "date": "2021-07-09",
+    "year": "2021",
+    "month": "07",
+    "day": "09",
+    "content": "",
+    "excerpt": "Commands to run a minimal docker container. [...]",
+    "url": "/posts/2021-07-09-docker-container.html",
+    "image": "/assets/images/base/docker.svg",
+    "category": "Docker",
+    "code": "",
+    "author": "Troels L\u00e6gsgaard"
+}

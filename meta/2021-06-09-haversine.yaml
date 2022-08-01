@@ -1,0 +1,14 @@
+{
+    "title": "Haversine",
+    "date": "2021-06-09",
+    "year": "2021",
+    "month": "06",
+    "day": "09",
+    "content": "",
+    "excerpt": "The haversine distance can be used to calculate the distance between two points on a sphere. Here is my derivation of it. [...]",
+    "url": "/posts/2021-06-09-haversine.html",
+    "image": "/assets/images/2021-06-09-haversine/law-of-haversines.svg",
+    "category": "Distance Metric",
+    "code": "https://github.com/laegsgaardTroels/haversine",
+    "author": "Troels L\u00e6gsgaard"
+}

@@ -1,5 +1,0 @@
-/* modification for button copy */
-.highlight > pre > div{
-  display: flex;
-  flex-direction: row-reverse;
-}

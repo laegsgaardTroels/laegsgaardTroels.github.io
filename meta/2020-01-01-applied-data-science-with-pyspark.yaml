@@ -1,0 +1,14 @@
+{
+    "title": "Applied Data Science With Pyspark",
+    "date": "2020-01-01",
+    "year": "2020",
+    "month": "01",
+    "day": "01",
+    "content": "",
+    "excerpt": "Spark er et popul\u00e6rt framework til processering af enorme m\u00e6ngder data, brugt bredt i industrien. Dette kursus vil give dig en kort introduktion til den popul\u00e6re Python API til Spark frameworket gennem brug af Azure Databricks Notebooks. [...]",
+    "url": "/posts/2020-01-01-applied-data-science-with-pyspark.html",
+    "image": "/assets/images/base/apache_spark.svg",
+    "category": "Course",
+    "code": "https://github.com/laegsgaardTroels/applied-data-science-with-pyspark-slides",
+    "author": "Troels L\u00e6gsgaard"
+}

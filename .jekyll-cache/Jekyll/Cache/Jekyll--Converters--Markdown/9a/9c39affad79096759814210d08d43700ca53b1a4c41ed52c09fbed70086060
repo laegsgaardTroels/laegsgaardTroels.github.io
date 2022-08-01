@@ -1,0 +1,342 @@
+I"~Y<p>Useful commands and operators. <!--more--></p>
+
+<h4 id="-and-"><code class="language-plaintext highlighter-rouge">||</code> and <code class="language-plaintext highlighter-rouge">&amp;&amp;</code></h4>
+
+<p>See [3].</p>
+
+<p>AND and OR lists are sequences of one or more pipelines separated by the control operators <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> and <code class="language-plaintext highlighter-rouge">||</code>, respectively. AND and OR lists are executed with left associativity.</p>
+
+<p>An AND list has the form</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command1 <span class="o">&amp;&amp;</span> command2
+command2 is executed <span class="k">if</span>, and only <span class="k">if</span>, command1 returns an <span class="nb">exit </span>status of zero <span class="o">(</span>success<span class="o">)</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<p>An OR list has the form</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>command1 <span class="o">||</span> command2
+command2 is executed <span class="k">if</span>, and only <span class="k">if</span>, command1 returns a non-zero <span class="nb">exit </span>status.
+</code></pre></div></div>
+
+<p>The return status of AND and OR lists is the exit status of the last command executed in the list.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">&amp;&amp;</code> and <code class="language-plaintext highlighter-rouge">||</code> also works as logical AND and OR operators:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="o">||</span> <span class="nb">echo </span>foo                   <span class="c"># Doesn't echo anything.</span>
+<span class="nb">false</span> <span class="o">||</span> <span class="nb">echo </span>foo                  <span class="c"># Echos foo.</span>
+<span class="nb">true</span> <span class="o">&amp;&amp;</span> <span class="nb">echo </span>foo                   <span class="c"># Echos foo.</span>
+<span class="nb">false</span> <span class="o">&amp;&amp;</span> <span class="nb">echo </span>foo                  <span class="c"># Doesn't echo anything.</span>
+</code></pre></div></div>
+
+<p>Below can be useful in a Makefile if you don’t care if the command was succesful. E.g. if you want to make sure something has been removed.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>some_command <span class="o">||</span> <span class="nb">true</span>
+</code></pre></div></div>
+
+<h4 id="change-directory-with-cd">Change directory with <code class="language-plaintext highlighter-rouge">cd</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>to/new/directory/
+<span class="nb">cd</span> -                               <span class="c"># Go back to previous directory.</span>
+</code></pre></div></div>
+
+<h4 id="clear-the-shell-with-clear">Clear the shell with <code class="language-plaintext highlighter-rouge">clear</code></h4>
+
+<p>Enough said.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clear
+</code></pre></div></div>
+
+<h4 id="remove-file-with-rm">Remove file with <code class="language-plaintext highlighter-rouge">rm</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>file.txt                        <span class="c"># Remove file.</span>
+<span class="nb">rm</span> <span class="nt">-rf</span> folder                      <span class="c"># Remove folder.</span>
+</code></pre></div></div>
+
+<h4 id="create-a-directory-with-mkdir">Create a directory with <code class="language-plaintext highlighter-rouge">mkdir</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>new_dir
+<span class="nb">mkdir</span> <span class="nt">-p</span> new_dir                   <span class="c"># New error if existing and create parent folders.</span>
+</code></pre></div></div>
+
+<h4 id="move-and-renmae-file-with-mv">Move and renmae file with <code class="language-plaintext highlighter-rouge">mv</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>file.txt other.txt              <span class="c"># Rename.</span>
+<span class="nb">mv </span>file.txt folder/file.txt        <span class="c"># Move to folder.</span>
+</code></pre></div></div>
+
+<h4 id="list-files-with-ls">List files with <code class="language-plaintext highlighter-rouge">ls</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls
+ls</span> <span class="nt">-l</span>                              <span class="c"># To view permissions.</span>
+</code></pre></div></div>
+
+<h4 id="kill-a-process-with-kill">Kill a process with <code class="language-plaintext highlighter-rouge">kill</code></h4>
+
+<p>You get the process id (<code class="language-plaintext highlighter-rouge">&lt;PID&gt;</code>) from <code class="language-plaintext highlighter-rouge">top</code> or <code class="language-plaintext highlighter-rouge">ps</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">kill</span> &lt;PID&gt;
+</code></pre></div></div>
+
+<h4 id="view-running-processes-with-top-and-htop">View running processes with <code class="language-plaintext highlighter-rouge">top</code> and <code class="language-plaintext highlighter-rouge">htop</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top
+top <span class="nt">-u</span> trol                        <span class="c"># Filter on a single user.</span>
+htop                               <span class="c"># Nicer UI and some extra stuff.</span>
+</code></pre></div></div>
+
+<h4 id="view-running-processes-with-ps">View running processes with <code class="language-plaintext highlighter-rouge">ps</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps
+ps <span class="nt">-u</span> trol                        <span class="c"># Filter on a single user.</span>
+</code></pre></div></div>
+
+<h4 id="file-system-disk-space-with-df">File System Disk Space with <code class="language-plaintext highlighter-rouge">df</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">df</span>
+</code></pre></div></div>
+
+<h4 id="pathname-of-the-current-working-directory-with-pwd">Pathname of the current working directory with <code class="language-plaintext highlighter-rouge">pwd</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>
+</code></pre></div></div>
+
+<h4 id="no-hang-up-with-nohup">No Hang Up with <code class="language-plaintext highlighter-rouge">nohup</code></h4>
+
+<p>Start a command in the background and exit the subshell.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">nohup</span> &lt;COMMAND&gt; &amp;
+<span class="nb">exit</span>
+</code></pre></div></div>
+
+<p>You can now view the job running here:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">jobs</span>
+</code></pre></div></div>
+
+<h4 id="disk-usage-with-du">Disk Usage with <code class="language-plaintext highlighter-rouge">du</code></h4>
+
+<p>View the disk usage in the current directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">du</span> <span class="nt">-h</span> <span class="nt">-s</span>
+</code></pre></div></div>
+
+<p>To go a bit deeper use.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">du</span> <span class="nt">-h</span> <span class="nt">-d</span> 2
+</code></pre></div></div>
+
+<p>etc.</p>
+
+<h4 id="file-tree-with-tree">File Tree with <code class="language-plaintext highlighter-rouge">tree</code></h4>
+
+<p>View the file tree in the terminal up to a certain level.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tree <span class="nt">-L</span> 2
+</code></pre></div></div>
+
+<h4 id="run-scheduled-jobs-with-cron">Run scheduled jobs with <code class="language-plaintext highlighter-rouge">cron</code></h4>
+
+<p>A time based scheduler in unix. An hourly <strong>cronjob</strong> can look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>crontab <span class="nt">-l</span>
+0 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> /bin/python /path/to/this/file.py
+</code></pre></div></div>
+
+<h4 id="create-a-tarball-with-tar">Create a tarball with <code class="language-plaintext highlighter-rouge">tar</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-cvf</span> foo.tar file1 file2  <span class="c"># Compress, verbose, file</span>
+<span class="nb">tar</span> <span class="nt">-xvf</span> foo.tar              <span class="c"># Extract, verbose, file</span>
+</code></pre></div></div>
+
+<h4 id="transfer-data-from-a-url-with-curl">Transfer data from a URL with <code class="language-plaintext highlighter-rouge">curl</code></h4>
+
+<p>Below will get you the HTML for Google:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl www.google.com
+</code></pre></div></div>
+
+<h4 id="transfer-data-with-wget">Transfer data with <code class="language-plaintext highlighter-rouge">wget</code></h4>
+
+<p>Below will get you the index file for Google:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget www.google.com
+</code></pre></div></div>
+<p>It has a useful option to mirror an external source, could be an FTP server or similar.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-m</span> url
+</code></pre></div></div>
+
+<h4 id="split-and-combine-files-with-split-and-cat">Split and combine files with <code class="language-plaintext highlighter-rouge">split</code> and <code class="language-plaintext highlighter-rouge">cat</code></h4>
+
+<p><code class="language-plaintext highlighter-rouge">split</code> and <code class="language-plaintext highlighter-rouge">cat</code> can be used to split a file and concatentate it again.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># file.txt</span>
+a
+b
+c
+d
+e
+f
+g
+</code></pre></div></div>
+
+<p>Then use:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">split</span> <span class="nt">-l</span> 1 combined.txt splitted
+<span class="nb">cat </span>splitted<span class="k">*</span> <span class="o">&gt;</span> combined.txt
+</code></pre></div></div>
+
+<p>You can actually split a tarball and combine it again afterwards:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">split </span>combined.tar.gz splitted
+<span class="nb">cat </span>splitted<span class="k">*</span> <span class="o">&gt;</span> combined.tar.gz
+</code></pre></div></div>
+
+<p>Can be useful for file transfer if you have a very big tarball.</p>
+
+<h4 id="global-regular-expression-print-with-grep">Global regular expression print with <code class="language-plaintext highlighter-rouge">grep</code></h4>
+
+<p>Awesome tool for searching for text in files.</p>
+
+<p>Search for a pattern in the current folder and optionally sub-directories.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> &lt;PATTERN&gt; <span class="k">*</span>
+<span class="nb">grep</span> <span class="nt">-r</span> &lt;PATTERN&gt; <span class="k">*</span>
+</code></pre></div></div>
+<p>It can often be useful to grep from your bash history.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">history</span> | <span class="nb">grep </span>foo
+</code></pre></div></div>
+
+<h4 id="find-and-replace-with-sed">Find and replace with <code class="language-plaintext highlighter-rouge">sed</code></h4>
+
+<p>Replace all occurences of bash with linux in file.txt and redirect the output to <code class="language-plaintext highlighter-rouge">new_file.txt</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="s1">'s/bash/linux/g'</span> file.txt <span class="o">&gt;</span> new_file.txt
+</code></pre></div></div>
+
+<p>You can use another seperator, in below I use <code class="language-plaintext highlighter-rouge">:</code> instead of <code class="language-plaintext highlighter-rouge">/</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s:&lt;title&gt;slides slides&lt;/title&gt;:&lt;title&gt;Slides&lt;/title&gt;:g'</span>
+</code></pre></div></div>
+
+<h4 id="find-files-with-find">Find files with <code class="language-plaintext highlighter-rouge">find</code></h4>
+
+<p>Below will find all shell scripts.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="k">*</span>.sh
+</code></pre></div></div>
+<p>Below will find and delete files created by R and Python.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">"*.py[co]"</span> <span class="nt">-delete</span>
+find <span class="nb">.</span> <span class="nt">-type</span> d <span class="nt">-name</span> <span class="s2">"__pycache__"</span> <span class="nt">-delete</span>
+find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">".Rhistory"</span> <span class="nt">-delete</span>
+find <span class="nb">.</span> <span class="nt">-type</span> f <span class="nt">-name</span> <span class="s2">".RData"</span> <span class="nt">-delete</span>
+</code></pre></div></div>
+<p>Find and execute a command. Below will extract all tarballs in <code class="language-plaintext highlighter-rouge">./folder/with/tarballs</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find ./folder/with/tarballs <span class="se">\</span>
+  <span class="nt">-name</span> <span class="s1">'*.tgz'</span> <span class="se">\</span>
+  <span class="nt">-type</span> f <span class="se">\</span>
+  <span class="nt">-exec</span> <span class="se">\</span>
+  <span class="nb">tar</span> <span class="nt">--one-top-level</span> <span class="nt">-C</span> ./folder/with/tarballs <span class="nt">-zxvf</span> <span class="o">{}</span>  <span class="se">\;</span>
+</code></pre></div></div>
+
+<p>Using -exec with a semicolon (<code class="language-plaintext highlighter-rouge">find . -exec ls '{}' \;</code>), will execute</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>file1
+<span class="nb">ls </span>file2
+<span class="nb">ls </span>file3
+</code></pre></div></div>
+
+<p>But if you use a plus sign instead (<code class="language-plaintext highlighter-rouge">find . -exec ls '{}' \+</code>), as many filenames as possible are passed as arguments to a single command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>file1 file2 file3
+</code></pre></div></div>
+
+<p>The number of filenames is only limited by the system’s maximum command line length. If the command exceeds this length, the command will be called multiple times.</p>
+
+<h4 id="secure-shell-to-a-remote-machine-with-ssh">Secure shell to a remote machine with <code class="language-plaintext highlighter-rouge">ssh</code></h4>
+
+<p><code class="language-plaintext highlighter-rouge">ssh</code> is useful for logging into a remote machine and execute commands on it.</p>
+
+<p>I’ve found it useful to create a SSH tunnel when developing a <code class="language-plaintext highlighter-rouge">bokeh</code> server on a remote host.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-NfL</span> localhost:5006:localhost:5006 user@remote.host
+</code></pre></div></div>
+
+<h4 id="create-a-checksum-with-sha256sum-and-md5sum">Create a checksum with <code class="language-plaintext highlighter-rouge">sha256sum</code> and <code class="language-plaintext highlighter-rouge">md5sum</code></h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sha256sum</span> /path/to/file
+<span class="nb">sha256sum</span> /path/to/files/<span class="k">*</span>
+<span class="nb">md5sum</span> /path/to/file
+<span class="nb">md5sum</span> /path/to/files/<span class="k">*</span>
+</code></pre></div></div>
+
+<p>And check the checksums with.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sha256sum</span> /path/to/files/<span class="k">*</span> <span class="o">&gt;</span> checksums.sha256
+<span class="nb">sha256sum</span> <span class="nt">--check</span> checksums.sha256
+</code></pre></div></div>
+<p>and</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">md5sum</span> /path/to/files/<span class="k">*</span> <span class="o">&gt;</span> checksums.md5
+<span class="nb">md5sum</span> <span class="nt">--check</span> checksums.md5
+</code></pre></div></div>
+<h4 id="scp-for-secure-transfer-of-files-via-ssh"><code class="language-plaintext highlighter-rouge">scp</code> for secure transfer of files via <code class="language-plaintext highlighter-rouge">ssh</code>.</h4>
+
+<p>Enough said.</p>
+
+<h4 id="change-usergroup-with-chown-and-permissions-with-chmod">Change user/group with <code class="language-plaintext highlighter-rouge">chown</code> and permissions with <code class="language-plaintext highlighter-rouge">chmod</code></h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">chmod</code> (short for change mode) command is used to manage file system access permissions on Unix and Unix-like systems. There are three basic file system permissions, or modes, to files and directories, see [2]:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">read (r)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">write (w)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">execute (x)</code> Can i do a <code class="language-plaintext highlighter-rouge">ls</code> in a directory as an example.</li>
+  <li>
+    <p>Each mode can be applied to these classes:</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">user (u)</code> The user is the account that owns the file.</li>
+  <li><code class="language-plaintext highlighter-rouge">group (g)</code> The group that owns the file may have other accounts on the system as members.</li>
+  <li><code class="language-plaintext highlighter-rouge">other (o)</code> The remaining class, other (sometimes referred to as world), means all other accounts on the system.</li>
+</ul>
+
+<p>From <code class="language-plaintext highlighter-rouge">man chmod</code>: <code class="language-plaintext highlighter-rouge">Each MODE is of the form '[ugoa]*([-+=]([rwxXst]*|[ugo]))+|[-+=][0-7]+'.</code></p>
+
+<p>The references are shorthand (u, g, or o) for each class. The operator determines whether to add (+), remove (-) or explicitly set (=) the particular permissions. The modes are read (r), write (w), or execute (x).</p>
+
+<p>You can combine multiple references and modes to set the desired access all at once. For example, to explicitly make file3 readable and executable to everyone:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span><span class="nv">ugo</span><span class="o">=</span>rx file3   <span class="c"># user(u),group(g),other(o)=read(r),execute(x)</span>
+</code></pre></div></div>
+
+<p><strong>Example:</strong> The <code class="language-plaintext highlighter-rouge">chown</code> changes the ownership of all files and folders to user: tlg and group: users. The <code class="language-plaintext highlighter-rouge">chmod</code> changes changes the permissions to to read, write for user and groups.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chown </span>tlg:users <span class="nt">-R</span> <span class="nb">.</span>
+<span class="nb">sudo chmod </span><span class="nv">ug</span><span class="o">=</span>rwx <span class="nt">-R</span> <span class="nb">.</span>
+ll
+</code></pre></div></div>
+
+<h4 id="sync-data-with-rsync">Sync data with <code class="language-plaintext highlighter-rouge">rsync</code></h4>
+
+<h4 id="mount-a-folder-with-nfs">Mount a folder with <code class="language-plaintext highlighter-rouge">nfs</code></h4>
+
+<h4 id="json-processing-with-jq">JSON processing with <code class="language-plaintext highlighter-rouge">jq</code></h4>
+
+<h4 id="download-data-from-ftp-server-with-lftp">Download data from FTP server with <code class="language-plaintext highlighter-rouge">lftp</code></h4>
+
+<h4 id="get-the-current-user-with-whoami">Get the current user with <code class="language-plaintext highlighter-rouge">whoami</code></h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whoami                                      # Outputs: troels (or whatever username you have).
+</code></pre></div></div>
+
+<h1 id="references">References</h1>
+
+<p>[1] https://stedolan.github.io/jq/</p>
+
+<p>[2] https://cets.seas.upenn.edu/answers/chmod.html</p>
+
+<p>[3] https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Lists</p>
+:ET

@@ -1,0 +1,223 @@
+I"×\<p>Hodrick-Prescott filtering is a filtering method. A <em>filtering method</em> can be used to find $x_t$ given $x_1,\dots,x_t$. In this post we will go through a simple filtering example with Hodrick-Prescott filtering. <!--more--></p>
+
+<p>However Hodrick-Prescott filtering seems most useful as an offline <em>smoothing method</em> e.g. for finding $x_t$ given $x_1,\dots,x_T$ for $1\leq t\leq T$.</p>
+
+<p>A good article about the related $l_1$ trend filtering and this filtering method is found in [1].</p>
+
+<p>In Hodrick-Prescott filtering, the trend estimate $x_t$ is chosen to minimize the objective function:</p>
+
+\[\begin{aligned}
+L(x) 
+&amp;= \frac{1}{2}\sum_{t=1}^{n}(y_t - x_t)^2 + \lambda \sum_{t=1}^{n-1}(x_{t-1} - 2x_t + x_{t+1})^2 \\
+&amp;= \frac{1}{2}\lVert y - x \rVert_2 ^ 2 + \lambda \lVert Dx \rVert_2 ^ 2 \\
+&amp;= \frac{1}{2} (y - x) ^ T (y - x) + \lambda x^TD^TDx \\
+&amp;= \frac{1}{2} (y^Ty + x^Tx - 2x^ Ty) + \lambda x^TD^TDx
+\end{aligned}\]
+
+<p>Where</p>
+
+\[D = 
+\begin{bmatrix}
+1&amp;-2&amp;1\cr
+&amp;1&amp;-2&amp;1\cr
+&amp;&amp;\ddots&amp;&amp;\ddots\cr
+&amp;&amp;&amp;1&amp;-2&amp;1\cr
+&amp;&amp;&amp;&amp;1&amp;-2&amp;1\cr
+\end{bmatrix}\]
+
+<p>The second part of the objective function:</p>
+
+\[\lambda \sum_{t=1}^{n-1}(x_{t-1} - 2x_t + x_{t+1})^2\]
+
+<p>Is a term penalizing the central difference estimate of the second derivative:</p>
+
+\[x_{t-1} - 2x_t + x_{t+1} = \frac{\frac{x_{t-1} - x_t}{1} - \frac{x_t - x_{t+1}}{1}}{1}\]
+
+<p>Assuming a constant difference of $1$ between the observations. If the difference between the observations is a different, but still constant value, $h$ then</p>
+
+\[\frac{\frac{x_{t-1} - x_t}{h} - \frac{x_t - x_{t+h}}{h}}{h} = \frac{1}{h^2}(x_{t-1} - 2x_t + x_{t+1})\]
+
+<p>The $h$ be factored to the regularization parameter $\lambda$ e.g.</p>
+
+\[\begin{aligned}
+\frac{1}{2}\sum_{t=1}^{n}(y_t - x_t)^2 + \eta \sum_{t=1}^{n-1}(\frac{1}{h^2}(x_{t-1} - 2x_t + x_{t+1}))^2 
+&amp;= \frac{1}{2}\sum_{t=1}^{n}(y_t - x_t)^2 + \frac{\eta}{h^4} \sum_{t=1}^{n-1}(x_{t-1} - 2x_t + x_{t+1})^2 \\
+&amp;= \frac{1}{2}\sum_{t=1}^{n}(y_t - x_t)^2 + \lambda \sum_{t=1}^{n-1}(x_{t-1} - 2x_t + x_{t+1})^2
+\end{aligned}\]
+
+<p>If $\lambda = \frac{\eta}{h^4}$. The right hand side is now the same objective function but wrt. a central difference estimate with constant difference $h$ between the observations.</p>
+
+<p>The optimal value can be find by setting the derivative to $0$, because the objective is strictly convex.</p>
+
+\[\begin{aligned}
+\frac{\partial}{\partial x} L(x)
+&amp;= \frac{\partial}{\partial x} (\frac{1}{2} (y^Ty + x^Tx - 2x^ Ty) + \lambda x^TD^TDx) \\
+&amp;= \frac{1}{2} \frac{\partial}{\partial x} ( x^Tx - 2x^ Ty) + \lambda \frac{\partial}{\partial x} x^TD^TDx \\
+&amp;= \frac{1}{2}( 2 x - 2y) + \lambda 2 D^TDx \\
+&amp;= x - y + \lambda 2 D^TDx \\
+&amp;= 0 \\
+&amp;\Downarrow \\
+y
+&amp;= x + \lambda 2 D^TDx \\
+&amp;= (I + \lambda 2 D^TD) x \\
+&amp;\Downarrow \\
+x &amp;= (I + \lambda 2 D^TD)^{-1}y
+\end{aligned}\]
+
+<p>Lets test the filtering method out in a simulation experiment.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Standard deviation of the gaussian noise.
+</span><span class="n">EPS</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="c1"># Number of observations
+</span><span class="n">N</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="c1"># Regularization parameter.
+</span><span class="n">ETA</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="c1"># The size of the interval from [0, B].
+</span><span class="n">B</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">eps</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'.'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s">'-'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"A Time Series with Noise"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/2021-04-16-hodrick-prescott-filtering_files/2021-04-16-hodrick-prescott-filtering_2_0.png" alt="png" /></p>
+
+<p>Lets start by creating the matrix $D$.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">D</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[ 1., -2.,  1., ...,  0.,  0.,  0.],
+       [ 0.,  1., -2., ...,  0.,  0.,  0.],
+       [ 0.,  0.,  1., ...,  0.,  0.,  0.],
+       ...,
+       [ 0.,  0.,  0., ...,  1.,  0.,  0.],
+       [ 0.,  0.,  0., ..., -2.,  1.,  0.],
+       [ 0.,  0.,  0., ...,  1., -2.,  1.]])
+</code></pre></div></div>
+
+<p>We can now calculate what we will call the <em>projection matrix</em> $P = (I + \lambda 2 D^TD)^{-1}$, because it is very similar to the projection matrix in linear regression (probably the same in some sense).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ETA</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">D</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+<span class="n">P</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[9.59020654e-02, 9.10718484e-02, 8.62649624e-02, ...,
+        2.16669024e-12, 2.15885073e-12, 2.15095572e-12],
+       [9.10718484e-02, 8.67281902e-02, 8.23821818e-02, ...,
+        2.15001117e-12, 2.15445881e-12, 2.15885073e-12],
+       [8.62649624e-02, 8.23821818e-02, 7.84971751e-02, ...,
+        2.13327619e-12, 2.15001117e-12, 2.16669024e-12],
+       ...,
+       [2.16669024e-12, 2.15001117e-12, 2.13327619e-12, ...,
+        7.84971751e-02, 8.23821818e-02, 8.62649624e-02],
+       [2.15885073e-12, 2.15445881e-12, 2.15001117e-12, ...,
+        8.23821818e-02, 8.67281902e-02, 9.10718484e-02],
+       [2.15095572e-12, 2.15885073e-12, 2.16669024e-12, ...,
+        8.62649624e-02, 9.10718484e-02, 9.59020654e-02]])
+</code></pre></div></div>
+
+<p>Now we project our observed values to get the <em>smoothed</em> values $x^{hp}$.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_hp</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'.'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_hp</span><span class="p">,</span> <span class="s">'-'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"A Time Series with Hodrick-Prescott filtering"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/2021-04-16-hodrick-prescott-filtering_files/2021-04-16-hodrick-prescott-filtering_9_0.png" alt="png" /></p>
+
+<p>As the regularization parameter is increased the line becomes more smooth.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">eta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">9</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eta</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">D</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+    <span class="n">x_hp</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'.'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_hp</span><span class="p">,</span> <span class="s">'-'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s">"Lambda: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/2021-04-16-hodrick-prescott-filtering_files/2021-04-16-hodrick-prescott-filtering_11_0.png" alt="png" /></p>
+
+<p>In the limit it is a straight line.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1e10</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">D</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+<span class="n">x_hp</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_hp</span><span class="p">,</span> <span class="s">'-'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'.'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s">"Lambda: </span><span class="si">{</span><span class="mf">1e10</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/2021-04-16-hodrick-prescott-filtering_files/2021-04-16-hodrick-prescott-filtering_13_0.png" alt="png" /></p>
+
+<h1 id="online-version">Online Version</h1>
+
+<p>Below is my take on an online version of this filtering method.</p>
+
+<p>In this online version one fixes the size of the projection matrix and iterativly applies it to a fixed sized fifo queue of the signal $y$ taking the midpoint in each iteration of the projected values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Number of observations
+</span><span class="n">N_ONLINE</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Regularization parameter.
+</span><span class="n">ETA_ONLINE</span> <span class="o">=</span> <span class="mf">0.05</span>
+</code></pre></div></div>
+
+<p>Construct an online version on the projection matrix with a fixed size.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D_online</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N_ONLINE</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">N_ONLINE</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_ONLINE</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">D_online</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">P_online</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N_ONLINE</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ETA_ONLINE</span> <span class="o">/</span> <span class="n">h</span> <span class="o">**</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">D_online</span><span class="p">.</span><span class="n">T</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">D_online</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Run the projection online and use the midpoint as the filtered value, will result in a shifted time series.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x_hp_online</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_ONLINE</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+    <span class="n">x_new</span> <span class="o">=</span> <span class="n">P_online</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">N_ONLINE</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">x_hp_online</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_new</span><span class="p">[</span><span class="n">N_ONLINE</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">x_hp_online</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_hp_online</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The result is less smooth.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">N_ONLINE</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="n">N_ONLINE</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="p">,</span> <span class="n">x_hp_online</span><span class="p">,</span> <span class="s">'-'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">'.'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"A Time Series with Hodrick-Prescott filtering, online"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/2021-04-16-hodrick-prescott-filtering_files/2021-04-16-hodrick-prescott-filtering_21_0.png" alt="png" /></p>
+
+<h1 id="references">References</h1>
+
+<p>[1] http://www.optimization-online.org/DB_FILE/2007/09/1791.pdf</p>
+:ET

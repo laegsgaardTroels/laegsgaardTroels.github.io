@@ -1,0 +1,14 @@
+{
+    "title": "Vim",
+    "date": "2021-08-29",
+    "year": "2021",
+    "month": "08",
+    "day": "29",
+    "content": "",
+    "excerpt": "Commands i find useful in Vim. [...]",
+    "url": "/posts/2021-08-29-vim.html",
+    "image": "/assets/images/base/vim.svg",
+    "category": "Text Editor",
+    "code": "https://github.com/laegsgaardTroels/dotfiles",
+    "author": "Troels L\u00e6gsgaard"
+}

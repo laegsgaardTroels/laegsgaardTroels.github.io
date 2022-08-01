@@ -1,0 +1,40 @@
+I"½<p>Commands to run a minimal docker container.<!--more--></p>
+
+<p>cname is the name of our image and its tag. Stop and remove a container.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker stop cname
+docker container <span class="nb">rm </span>cname
+</code></pre></div></div>
+
+<p>Build a container in the current directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">--tag</span> cname <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Run a container.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PORT</span><span class="o">=</span>8080
+docker run <span class="nt">-d</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">PORT</span><span class="k">}</span>:<span class="k">${</span><span class="nv">PORT</span><span class="k">}</span> <span class="nt">--name</span> cname cname
+</code></pre></div></div>
+
+<p>Run an image with an interactive shell.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-it</span> cname bash
+</code></pre></div></div>
+
+<h4 id="makefile">Makefile</h4>
+
+<p>It is convinient to organize this shit in a Makefile.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PORT :<span class="o">=</span> 8080
+
+dev:
+  docker run <span class="nt">-it</span> cname bash
+
+run:
+  docker run <span class="nt">-d</span> <span class="nt">-p</span> <span class="k">${</span><span class="nv">PORT</span><span class="k">}</span>:<span class="k">${</span><span class="nv">PORT</span><span class="k">}</span> <span class="nt">--name</span> cname cname
+  
+build:
+  docker build <span class="nt">--tag</span> cname <span class="nb">.</span>
+</code></pre></div></div>
+:ET

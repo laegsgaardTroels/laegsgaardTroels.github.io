@@ -1,0 +1,99 @@
+I"�<p>Giving an estimate of generalization error in Machine Learning is vital.<!--more--></p>
+
+<p>This is to minimize <em>risk</em> given a hypothesis space $\mathcal{H}$. To simplyfy matters assume the hypothesis space consists of a finilite set of estimators \(\mathcal{H}=\{h_1,h_2,\dots,h_M\}\). Given a <em>loss function</em> $L$ which we for simplicity assume is the 0-1 loss \(L(\hat{y},y)=1_{\{\hat{y}\neq y\}}(\hat{y},y)\). Risk is then defined as</p>
+
+\[\begin{aligned}
+R(h)&amp;=\mathbb{E}[L(h(X),Y)] \\
+&amp;=\int L(h(x),y)d\mathbb{P}_{X,Y}(dx,dy)
+\end{aligned}\]
+
+<p>The main objective is to solve</p>
+
+\[\underset{h\in\mathcal{H}}{\text{argmin}} \ R(h)\]
+
+<p>That is, the expected loss over over the hypothesis space. We don’t have this distribution $\mathbb{P}_{X,Y}$ but we have samples from it. We therefore approximate this risk in practice using the samples. One way is to use the <em>empirical risk</em>:</p>
+
+\[\begin{aligned}
+\hat{R}(h)=\sum_{i=1}^NL(h(x_i),y_i)
+\end{aligned}\]
+
+<p>and then try to minimize</p>
+
+\[\underset{h\in\mathcal{H}}{\text{argmin}} \ \hat{R}(h)\]
+
+<p>This is known as <em>Empirical Risk Mimimization</em> (ERM).</p>
+
+<h2 id="theory">Theory</h2>
+
+<p>Lets first go through a <em>learning bound</em> which can be used to justify the training validation split given the above objective.</p>
+
+<p><em>Assume $H&lt;\infty$ and \(1_{\{\hat{y}\neq y\}}(\hat{y},y)\), then</em></p>
+
+\[\forall\epsilon&gt;0:\mathbb{P}\left(\max_{h\in\mathcal{H}}\vert R(h)-\hat{R}(h)\vert&gt;\epsilon\right)\leq 2\vert \mathcal{H}\vert e^{-2N\epsilon^2}\]
+
+<p><em>or equivalently</em></p>
+
+\[\forall\delta&gt;0:\mathbb{P}\left(\max_{h\in\mathcal{H}}\vert R(h)-\hat{R}(h)\vert &gt;\sqrt{\frac{\log(\vert \mathcal{H}\vert )+\log(\frac{2}{\delta})}{2N}}\right)\leq\delta\]
+
+<p><em>Proof.</em> Let $\epsilon&gt;0$ use the <a href="https://en.wikipedia.org/wiki/Boole%27s_inequality">Union Bound</a> and <a href="https://en.wikipedia.org/wiki/Hoeffding%27s_inequality">Hoeffding’s Inequality</a></p>
+
+\[\begin{aligned}
+\mathbb{P}\left(\max_{h\in\mathcal{H}}\vert R(h)-\hat{R}(h)\vert &gt;\epsilon\right)&amp;=\mathbb{P}\left(\bigcup_{h\in\mathcal{H}}\vert R(h)-\hat{R}(h)\vert &gt;\epsilon\right)\\
+&amp;\leq\sum_{h\in\mathcal{H}} \mathbb{P}\left(\vert R(h)-\hat{R}(h)\vert &gt;\epsilon\right) \\
+&amp;\leq 2\vert \mathcal{H}\vert e^{-2N\epsilon^2}
+\end{aligned}\]
+
+<p>Observing that</p>
+
+\[\delta=2\vert \mathcal{H}\vert e^{-2N\epsilon^2}\Leftrightarrow \epsilon=\sqrt{\frac{\log(\vert \mathcal{H}\vert )+\log(\frac{2}{\delta})}{2N}}\]
+
+<p>one sees the equivalent statement. QED.</p>
+
+<p>The above theorem states a learning bound. If $\vert\mathcal{H}\vert&lt;\infty$ then with probability less than or equal to $1-\delta$</p>
+
+\[\forall h\in\mathcal{H}:R(h)\leq\hat{R}(h)+\sqrt{\frac{\log{\vert \mathcal{H}\vert +\log\frac{2}{\delta}}}{2N}}\]
+
+<h2 id="practice">Practice</h2>
+<p>In practice one usually splits the entire dataset into three datasets: A Training dataset which is used for training the models, $\sim50\%$ of the data, and a validation- and test-dataset, $\sim25\%$ each, which is used for validating and testing the models.</p>
+
+<p><img src="/assets/images/2018-11-09-model-evaluation-part-1/train_validation_test.png" /></p>
+
+<p>The models are trained on the training dataset, using an algorithm, the performance of this trained model is then evaluated by predicting onto the validation dataset. One does this for multiple models and then selects the best performing one.</p>
+
+<p><img src="/assets/images/2018-11-09-model-evaluation-part-1/train_validation.png" /></p>
+
+<p>To theoretically justify this approach one can use the above generalization bound. Assume we have tried our luck and fitted $1$ mio. different models \(\mathcal{H}=\{h_1,h_2,\dots,h_{1000000}\}\) on the training dataset. These models could consist of KNN for different $k$, classification trees for different depths, random forests for different number of trees and depths for each tree and so on.</p>
+
+<p>The above generalization bound gives a worst case performance with some probability. Assume we want to be sure that our model performs well with a probability of $0.95$, in above $\delta=0.05$, and that we have a validation sample of size $1$ mio.</p>
+
+<p>We find a classifier which has an error rate of only $0.001$, how well will it then peform with 95% probability on new data? Answer:</p>
+
+\[0.001+\sqrt{\frac{\log 10^6 + \log\frac{2}{0.05}}{2
+\cdot 10^6}} = 0.003539520\]
+
+<p>Thats pretty close with a high probability. Varying the size on the hypothesis space has only a small effect on the bound which is quite remarkable.</p>
+
+<p><img src="/assets/images/2018-11-09-model-evaluation-part-1/Generalization_bound.png" /></p>
+
+<p>The bound can be stated more loosly as: With probability $1-\delta$</p>
+
+\[\begin{aligned}
+R(h)&amp;\leq\hat{R}(h)+O(\sqrt{\frac{\log_2\vert \mathcal{H}\vert}{N}})\\
+&amp;=\hat{R}(h)+\Omega(\mathcal{H},N)
+\end{aligned}\]
+
+<p>The</p>
+
+\[\log_2\vert\mathcal{H}\vert\]
+
+<p>has a nice representation as the number of bits needed to represent $\mathcal{H}$, which seems like a natural measure to measure the complexity of a finite hypothesis space.</p>
+
+<p>Similar bound holds on the testing dataset, which is used give to the user of the model as an assesment of performance, the complexity term $\Omega(\mathcal{H},N)$ is then much smaller, because one usually only selects one model to test in practice: The best one on the validation set.</p>
+
+<p>Above is some of my interpretations of chapter 1 in  [1].</p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Foundations of Machine Learning (Adaptive Computation and Machine Learning series), 2012. Mehryar Mohri, Afshin Rostamizadeh, Ameet Talwalkar<br />
+by Mehryar Mohri, Afshin Rostamizadeh, Ameet Talwalkar.</p>
+:ET

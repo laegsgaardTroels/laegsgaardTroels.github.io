@@ -1,0 +1,32 @@
+{
+    "post": [
+        {
+            "title": "Applied Data Science With Pyspark",
+            "date": "2020-01-01",
+            "year": "2020",
+            "month": "01",
+            "day": "01",
+            "content": "",
+            "excerpt": "Spark er et popul\u00e6rt framework til processering af enorme m\u00e6ngder data, brugt bredt i industrien. Dette kursus vil give dig en kort introduktion til den popul\u00e6re Python API til Spark frameworket gennem brug af Azure Databricks Notebooks. [...]",
+            "url": "/posts/2020-01-01-applied-data-science-with-pyspark.html",
+            "image": "/assets/images/base/apache_spark.svg",
+            "category": "Course",
+            "code": "https://github.com/laegsgaardTroels/applied-data-science-with-pyspark-slides",
+            "author": "Troels L\u00e6gsgaard"
+        },
+        {
+            "title": "Applied Data Science With R",
+            "date": "2019-08-11",
+            "year": "2019",
+            "month": "08",
+            "day": "11",
+            "content": "",
+            "excerpt": "Learn how to solve many commonly faced problems when applying R for Data Science and become an even more important part of your company. This course will introduce you to the most important Data Science tools in R to effectively solve many real life problems. [...]",
+            "url": "/posts/2019-08-11-applied-data-science-with-r.html",
+            "image": "/assets/images/base/r.svg",
+            "category": "Course",
+            "code": "https://github.com/laegsgaardTroels/applied-data-science-with-r-slides",
+            "author": "Troels L\u00e6gsgaard"
+        }
+    ]
+}

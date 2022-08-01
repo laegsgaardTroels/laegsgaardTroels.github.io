@@ -121,7 +121,7 @@
                 <!-- Font Awesome CSS -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
-    <title>About</title>
+    <title>The Unsupervised Learning Trick</title>
   </head>
   <body>
 
@@ -143,13 +143,18 @@
         <br>
         <div class="page-header">
             <div class="pull-left">
-                <h1>About</h1>
-                <strong></strong>
-                <div class="text-muted"></div>
+                <h1>The Unsupervised Learning Trick</h1>
+                <strong>Algorithm</strong>
+                <div class="text-muted">2022-06-05</div>
             </div>
             
             <div class="pull-right">
 
+                                <div class="text-right">
+                    <a href="https://github.com/laegsgaardTroels/the-unsupervised-learning-trick">
+                        [<i>View code on Github</i> <span class="fa fa-github"></span>]
+                    </a>
+                </div>
                 
             </div>
             <div class="clearfix"></div>
@@ -157,22 +162,38 @@
         
 
         <br>
-        <h3>
-        Troels Lægsgaard
-        </h3>
-        <p>
-        This blog consists of notes created by me, Troels Lægsgaard. The
-        notes on the site are collected from my work as a data scientist
-        in various places in Denmark. If you find the notes interesting
-        then please write a comment in the chat. If you or your company
-        would be interested in a course then please reach out with an
-        e-mail.
-        </p>
-        <p><a href="mailto:laegsgaardtroels@gmail.com" target="_blank">
-        [<i>e-mail: laegsgaardtroels@gmail.com</i> <span
-        class="fa fa-envelope"></span>] </a>  
-        <a href="https://github.com/laegsgaardTroels" target="_blank">
-        [<i>View repos</i> <span class="fa fa-github"></span>] </a></p>
+        <p>In this git repository I show the unsupervised learning trick
+        on the mnist data using a Random Forest. It works sorta
+        ok.<!--more--></p>
+        <p>The unsupervised learning trick is done by creating a new
+        class in a classification problem using simulated data.</p>
+        <p>The data is simulated by randomly sampling from the
+        <strong>univariate empirical distribution</strong> for each
+        feature (not the <strong>multivariate empirical
+        distribution</strong>). For this new class each feature is
+        independent wrt. the empirical distribution:</p>
+        <p><span class="math display">\[\mathbb{P}(X_1, \dots, X_n) =
+        \mathbb{P}(X_1) \cdots \mathbb{P}(X_n)\]</span></p>
+        <p>As explained by Adele Cutler in [1]:</p>
+        <p>The Unsupervised Learning Trick. Label the “real” data as
+        class 1. Construct cases from a synthetic second class as
+        follows:</p>
+        <ol type="1">
+        <li>Randomly select the value for variable 1 from all the
+        observed values of variable 1.</li>
+        <li>Independently, randomly select the value for variable 2 from
+        all the observed values of variable 2.</li>
+        <li>Similarly for variables 3,…,M.</li>
+        </ol>
+        <p>The Synthetic Second Class. The synthetic second class has
+        the same marginal distributions as the “real” data, but we have
+        destroyed all the dependencies between the variables. Now we
+        have a 2-class classification problem.</p>
+        <p>Run random forests !</p>
+        <h2 id="references">References</h2>
+        <p>[1] Slide 57-58.
+        state-of-the-art-data-mining-using-random-forest-leo-breiman-adele-cutler.pdf</p>
+        <p>[2] http://yann.lecun.com/exdb/mnist/</p>
         <br>
         <br>
     </div>

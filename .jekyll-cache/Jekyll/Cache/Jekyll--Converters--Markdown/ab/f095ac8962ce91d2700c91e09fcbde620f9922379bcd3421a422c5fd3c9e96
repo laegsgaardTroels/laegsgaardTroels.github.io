@@ -1,0 +1,74 @@
+I"�$<p>Broadcasting a variable is useful for repeatedly used read-only variables in an application<!--more-->, like large lookup tables or similar. Spark automatically sends all variables referenced in your closures to the worker nodes. While this is convenient, it can also be inefficient because (1) the default task launching mechanism is optimized for small task sizes, and (2) you might, in fact, use the same variable in multiple parallel operations, but Spark will send it separately for each
+operation [1, page 104]. A broadcast variable in is an object of type <code class="language-plaintext highlighter-rouge">spark.broadcast.Broadcast[T]</code>, it wraps a Serializable value of type <code class="language-plaintext highlighter-rouge">T</code>. This value can be accessed by calling the <code class="language-plaintext highlighter-rouge">value</code> property. The variable will be sent to each node once and should be treated as read-only (updates will not be propagated to other nodes)[1, page 104-106]. If you broadcast the variable it will be distributed efficiently once per node.</p>
+
+<p>Example by [2]: If you have huge array that is accessed from Spark Closures, for example some reference data, this array will be shipped to each spark node with closure. If you for example if you have 10 nodes cluster with 100 partitions (10 partitions per node), this Array will be distributed at least 100 times (10 times to each node).</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">array</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span> <span class="c1">// some huge array</span>
+<span class="k">val</span> <span class="nv">broadcasted</span> <span class="k">=</span> <span class="nv">sc</span><span class="o">.</span><span class="py">broadcast</span><span class="o">(</span><span class="n">array</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>And some RDD</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">rdd</span><span class="k">:</span> <span class="kt">RDD</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+</code></pre></div></div>
+
+<p>In this case array will be shipped with closure each time</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">rdd</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="nv">array</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>and with broadcast you’ll get huge performance benefit</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">rdd</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="nv">broadcasted</span><span class="o">.</span><span class="py">value</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="n">i</span><span class="o">))</span>
+</code></pre></div></div>
+
+<h2 id="example">Example</h2>
+
+<p>In below assume <code class="language-plaintext highlighter-rouge">df</code> is a <code class="language-plaintext highlighter-rouge">pyspark.sql.DataFrame</code> the broadcast variable can be used in a udf.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">F</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">types</span> <span class="k">as</span> <span class="n">T</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="n">training</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="n">validation</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">neigh</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">neigh</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+<span class="n">bc_neigh</span> <span class="o">=</span> <span class="n">sc</span><span class="p">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">neigh</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">kneighbors</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="s">"""Returns the two closest neighbours.
+  """</span>
+  <span class="k">return</span> <span class="nb">list</span><span class="p">(</span>
+    <span class="n">bc_neigh</span>
+    <span class="p">.</span><span class="n">value</span>
+    <span class="p">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">udf_kneighbors</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="n">udf</span><span class="p">(</span><span class="n">kneighbors</span><span class="p">,</span> <span class="n">T</span><span class="p">.</span><span class="n">ArrayType</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">DoubleType</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">sc</span>
+  <span class="p">.</span><span class="n">parallelize</span><span class="p">([</span><span class="n">Row</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">validation</span><span class="p">])</span>
+  <span class="p">.</span><span class="n">toDF</span><span class="p">()</span>
+  <span class="p">.</span><span class="n">withColumn</span><span class="p">(</span>
+        <span class="s">"knn"</span><span class="p">,</span>
+        <span class="n">udf_kneighbors</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>In this small example we fit a NN model to the training data on the master node and then broadcast it out to each worker node to find the nearest neighbours for the samples in validation.</p>
+
+<h2 id="references">References</h2>
+
+<p>[1] Holden Karau, Andy Konwinski, Patrick Wendell, Matei Zaharia, <em>Learning Spark: Lightning-Fast Big Data Analysis</em>. O’Reilly Media, 2015.</p>
+
+<p>[2] <a href="https://stackoverflow.com/questions/26884871/what-are-broadcast-variables-what-problems-do-they-solve">Ramana, What are broadcast variables? What problems do they solve?. Stackoverflow question 2014</a></p>
+
+<p>[3] <a href="https://umbertogriffo.gitbooks.io/apache-spark-best-practices-and-tuning/content/when_to_use_broadcast_variable.html">Umberto Griffo, When to use Broadcast variable. Blog Post.</a></p>
+:ET

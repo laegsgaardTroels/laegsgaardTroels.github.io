@@ -1,0 +1,3 @@
+I"ä<p>The pipeline object in sklearn makes it easy to sequentially apply a list of transforms and a final estimator [1]. This makes it easy to organize models.
+PySpark has a similar pipeline API but there are some differences.</p>
+:ET

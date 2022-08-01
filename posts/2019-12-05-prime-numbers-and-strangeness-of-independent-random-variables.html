@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+      <style>
+        img {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        figcaption {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        code {
+          font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+          background-color: #f5f5f5;
+          padding: .2em .4em;
+          font-size: 85%;
+          margin: 0;
+        }
+        pre {
+          margin: 1em 0;
+          background-color: #f5f5f5;
+          padding: 1em;
+          overflow: auto;
+        }
+        pre code {
+          padding: 0;
+          overflow: visible;
+          overflow-wrap: normal;
+        }
+        .sourceCode {
+         background-color: #f5f5f5;
+         overflow: visible;
+        }
+        hr {
+          background-color: #1a1a1a;
+          border: none;
+          height: 1px;
+          margin: 1em 0;
+        }
+        table {
+          margin: 1em 0;
+          border-collapse: collapse;
+          width: 100%;
+          overflow-x: auto;
+          display: block;
+          font-variant-numeric: lining-nums tabular-nums;
+        }
+        table caption {
+          margin-bottom: 0.75em;
+        }
+        tbody {
+          margin-top: 0.5em;
+          border-top: 1px solid #1a1a1a;
+          border-bottom: 1px solid #1a1a1a;
+        }
+        th {
+          border-top: 1px solid #1a1a1a;
+          padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+        td {
+          padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+        header {
+          margin-bottom: 4em;
+          text-align: center;
+        }
+        #TOC li {
+          list-style: none;
+        }
+        #TOC ul {
+          padding-left: 1.3em;
+        }
+        #TOC > ul {
+          padding-left: 0;
+        }
+        #TOC a:not(:hover) {
+          text-decoration: none;
+        }
+        code{white-space: pre-wrap;}
+        span.smallcaps{font-variant: small-caps;}
+        span.underline{text-decoration: underline;}
+        div.column{display: inline-block; vertical-align: top; width: 50%;}
+        div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+        ul.task-list{list-style: none;}
+      </style>
+              <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+      
+                <!-- Using Bootstrap starter template: https://getbootstrap.com/docs/4.0/getting-started/introduction/-->
+                <!-- Required meta tags -->
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="shortcut icon" type="image/png" href="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png">
+
+                <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css">Bootstrap CSS -->
+
+
+                <!-- 
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({
+                    jax: ["input/TeX", "output/HTML-CSS"],
+                    tex2jax: {
+                      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+                      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+                      processEscapes: true,
+                      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                    }
+                    //,
+                    //displayAlign: "left",
+                    //displayIndent: "2em"
+                  });
+                </script>
+                <script type="text/javascript" async
+                        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+                </script>
+                MathJax -->
+
+                <!-- Font Awesome CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+    <title>Prime Numbers And Strangeness Of Independent Random Variables</title>
+  </head>
+  <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">ML-Notes</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/courses.html"> Courses </a>
+                    <a class="nav-link" href="/about.html"> About </a>
+                </div>
+            </div>
+        </nav>
+
+    
+    <div class="container">
+        <br>
+        <div class="page-header">
+            <div class="pull-left">
+                <h1>Prime Numbers And Strangeness Of Independent Random
+Variables</h1>
+                <strong>Thoughts</strong>
+                <div class="text-muted">2019-12-05</div>
+            </div>
+            
+            <div class="pull-right">
+
+                
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        
+
+        <br>
+        <p>Random variables have an intuitive definition, but might not
+        fully cover the intuitive concept of independence.
+        <!--more--></p>
+        <p>Assume a probability space <span
+        class="math inline">\((\Omega, \mathcal{F},
+        \mathbb{P})\)</span>. Where the sample space is finite <span
+        class="math inline">\(\vert\Omega\vert=N\)</span>, the events
+        are the powerset of <span class="math inline">\(\Omega\)</span>
+        e.g. <span
+        class="math inline">\(\mathcal{F}=\mathcal{P}(\Omega)\)</span>
+        and the probability is the discrete uniform distribution <span
+        class="math inline">\(\mathbb{P}(A)=\frac{\rvert A
+        \rvert}{N}\)</span>.</p>
+        <p>This is how one can model a lottery. The fun thing is now
+        when <span class="math inline">\(N\)</span> is a <strong>prime
+        number</strong>.</p>
+        <p>Assume <span class="math inline">\(A,B\in\mathcal{F}\)</span>
+        are two independent events, <span
+        class="math display">\[A,B\notin\{\Omega, \emptyset \}\]</span>,
+        <span class="math inline">\(m=\rvert A\rvert\)</span>, <span
+        class="math inline">\(k=\rvert B\rvert\)</span>, <span
+        class="math inline">\(n=\rvert A\cap B \rvert\)</span> then</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        \frac{n}{N} = \mathbb{P}(A\cap B) &amp;= \mathbb{P}(A)
+        \mathbb{P}(B) = \frac{m}{N}\frac{k}{N} \\
+        &amp;\Downarrow \\
+        n\cdot N &amp;= m \cdot k
+        \end{aligned}
+        \]</span></p>
+        <p>Let</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        n&amp;=\prod_{i}p^n_i \quad k=\prod_{i}p^k_i \\
+        m&amp;=\prod_{i}p^m_i
+        \end{aligned}
+        \]</span></p>
+        <p>Be their unique prime factorization. Then</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        \prod_i p^n_i \cdot N = n\cdot N &amp;= m \cdot k = \prod_i
+        p^m_i \prod_j p^k_j \\
+        &amp;\Downarrow \\
+        N \in \{p^m_1, p^m_2,&amp;\dots,p^k_1, p^m_2, \dots\}
+        \end{aligned}
+        \]</span></p>
+        <p>Because the prime factorization is unique.</p>
+        <p>But <span class="math inline">\(\forall i,j:\)</span> <span
+        class="math inline">\(p^m_i\leq m&lt;N\)</span> and <span
+        class="math inline">\(p^k_j\leq k&lt;N\)</span>. This is a
+        contradiction.</p>
+        <p>Hence if <span class="math inline">\(N\)</span> is a prime
+        number and <span class="math inline">\(A,B\)</span> are
+        independent then <span class="math display">\[A,B\in\{\Omega,
+        \emptyset \}\]</span>, <em>the trivial independent events</em>.
+        But if <span class="math inline">\(N\)</span> is not a prime
+        number then <span class="math inline">\(N=k\cdot m\)</span> for
+        some integers, assume <span class="math inline">\(k,m\geq
+        2\)</span>. Let <span
+        class="math display">\[A=\{1,\dots,m\}\]</span> and <span
+        class="math display">\[B=\{m,2m\dots,km\}\]</span> implies</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        \mathbb{P}(A) = \frac{1}{m}, \quad \mathbb{P}(B) = \frac{1}{k},
+        \quad \mathbb{P}(A\cap B) = \frac{1}{N} =
+        \mathbb{P}(A)\mathbb{P}(B)
+        \end{aligned}
+        \]</span></p>
+        <p>Many other <em>nontrivial pairs of events</em> can be
+        constructed in similar ways.</p>
+        <p>Above is a rewritten proof and example from 2.15 in [1]. As
+        state in this book this implies that when</p>
+        <p><span class="math display">\[
+        N=2^{127}-1=170141183460469231731687303715884105727
+        \]</span></p>
+        <p>A prime number. Then there are <strong>no</strong> nontrivial
+        pairs of independent events, and if</p>
+        <p><span class="math display">\[
+        N=2^{127}=170141183460469231731687303715884105728
+        \]</span></p>
+        <p>Then there are lots of nontrivial pairs of independent
+        events. This example does not imply that the definition of
+        independence is wrong, but in my view that the mathematical
+        definition of independence wrong, but it does seem
+        unintuitive.</p>
+        <h2 id="example-a-dice">Example: A Dice</h2>
+        <p>A thought of mine. An example of above would be a single dice
+        <span class="math inline">\(X\)</span> defined on <span
+        class="math inline">\((\\{1,2,3,4,5,6\\}, \mathcal{F},
+        \mathbb{P})\)</span> where <span
+        class="math inline">\(\mathcal{F}=\mathcal{P}(\Omega)\)</span>
+        and the probability is the discrete uniform distribution <span
+        class="math inline">\(\mathbb{P}(A)=\frac{\rvert A
+        \rvert}{N}\)</span> as above.</p>
+        <p>Now 6 is not a prime number. Its unique prime factorization
+        is <span class="math inline">\(6=2\cdot3\)</span>. Now each
+        outcome can be mapped 1-1 with an index consisting of two random
+        numbers <span class="math inline">\(I\in\{1,2\}\)</span> and
+        <span class="math inline">\(J\in\{1,2,3\}\)</span> with uniform
+        distribution e.g. <span
+        class="math inline">\(\mathbb{P}(I=i)=\frac{1}{2}\)</span> and
+        <span class="math inline">\(\mathbb{P}(J=j)=\frac{1}{3}\)</span>
+        for <span class="math inline">\(i=1,2\)</span> and <span
+        class="math inline">\(j=1,2,3\)</span>.</p>
+        <p>As an example:</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+            I = 1, J = 1 \Rightarrow X = 1 \\
+            I = 1, J = 2 \Rightarrow X = 2 \\
+            I = 1, J = 3 \Rightarrow X = 3 \\
+            I = 2, J = 1 \Rightarrow X = 4 \\
+            I = 2, J = 2 \Rightarrow X = 5 \\
+            I = 2, J = 6 \Rightarrow X = 6
+        \end{aligned}
+        \]</span></p>
+        <p>The mapping is not really that important in my view. What is
+        interesting now is that <span class="math inline">\(I\)</span>
+        has 2 outcomes and <span class="math inline">\(J\)</span> has 3
+        outcomes both <strong>prime</strong> therefore <span
+        class="math inline">\(\mathbb{P}_I\)</span> and <span
+        class="math inline">\(\mathbb{P}_J\)</span> has no independent
+        events. In addition it can be seen that <span
+        class="math inline">\(I\)</span> and <span
+        class="math inline">\(J\)</span> are independent because <span
+        class="math inline">\(\mathbb{P}(I=i,
+        J=j)=\frac{1}{6}=\frac{1}{2}\frac{1}{3}=\mathbb{P}(I=i)\mathbb{P}(J=j)\)</span>
+        per construction.</p>
+        <p>So you can view a roll of this theoretical die as two
+        independent outcomes from <span class="math inline">\(I\)</span>
+        and <span class="math inline">\(J\)</span> that determines the
+        index of the die.</p>
+        <h2 id="references">References</h2>
+        <p>[1] Probability With a View Towards Statistics, Two Volume
+        Set: Probability With a View Towards Statistics, Volume I
+        (Chapman &amp; Hall/CRC Probability Series) (Volume 1) 1st
+        Edition. J. Hoffmann-Jørgensen</p>
+        <br>
+        <br>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- dynamically load mathjax for compatibility with self-contained -->
+    <script>
+        (function () {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+                    document.getElementsByTagName("head")[0].appendChild(script);
+                })();
+    </script>
+      </body>
+</html>

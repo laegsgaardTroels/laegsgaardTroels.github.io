@@ -1,0 +1,14 @@
+{
+    "title": "Broadcast Variable Pyspark Example",
+    "date": "2019-03-18",
+    "year": "2019",
+    "month": "03",
+    "day": "18",
+    "content": "",
+    "excerpt": "Broadcasting a variable is useful for repeatedly used read-only variables in an application [...]",
+    "url": "/posts/2019-03-18-broadcast-variable-pyspark-example.html",
+    "image": "assets/images/base/apache_spark.svg",
+    "category": "Programming",
+    "code": "",
+    "author": "Troels L\u00e6gsgaard"
+}

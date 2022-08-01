@@ -1,0 +1,106 @@
+I"/3<p>The haversine distance can be used to calculate the distance between two points on a sphere. Here is my derivation of it.<!--more--> Assume you have two points $p_1 = (r, \theta_1, \varphi_1)$ and $p_2=(r, \theta_2, \varphi_2)$ in spherical coordinates.</p>
+
+<p>$r$ is the radius of the sphere. $\theta_1, \theta_2\in(-\frac{\pi}{2}, \frac{\pi}{2}]$ is the latitude. $\varphi_1, \varphi_2\in(-\pi, \pi]$ is the longitude.</p>
+
+<p>You can convert spherical coordinates to cartesian coordinates (vectors) using:</p>
+
+\[\begin{aligned}
+x &amp;= r \cdot \cos(\theta)\cos(\varphi) \\
+y &amp;= r \cdot \cos(\theta)\sin(\varphi) \\
+z &amp;= r \cdot \sin(\theta)
+\end{aligned}\]
+
+<p>$z = r \cdot \sin(\theta)$ is north/south, $x = r \cdot \cos(\theta)\cos(\varphi)$ and $y = r \cdot \cos(\theta)\sin(\varphi)$ defines a plane orthogonal to north/south.</p>
+
+<p>Remember the dot product between two points is:</p>
+
+\[\begin{aligned}
+    v_1 \cdot v_2 = \lVert v_1 \rVert \lVert v_2 \rVert \cos(\angle(v_1, v_2))
+\end{aligned}\]
+
+<p>Where $\angle(v_1, v_2)$ is the angle between the two vectors. Let $v_1 = (x_1, y_1, z_1)^T$ and $v_2 = (x_2, y_2, z_2)^T$ where $\lVert v_1 \rVert = \lVert v_2 \rVert = r$. You can now calculate this angle by:</p>
+
+\[\begin{aligned}
+\angle(v_1, v_2) 
+&amp;= \arccos[\frac{v_1}{\lVert v_1 \rVert} \frac{v_2}{\lVert v_2 \rVert}] \\
+&amp;= \arccos[\cos(\theta_1)\cos(\varphi_1) \cos(\theta_2)\cos(\varphi_2) + \cos(\theta_1)\sin(\varphi_1)\cos(\theta_2)\sin(\varphi_2) + \sin(\theta_1) \sin(\theta_2)]
+\end{aligned}\]
+
+<p>You can calculate the distance between two points with angle $\angle(v_1, v_2)$ on a circle with radius $r$ as:</p>
+
+\[d = r \cdot \angle(v_1, v_2)\]
+
+<p>To show that this is the haversine:</p>
+
+\[\begin{aligned}
+d &amp;= r \cdot \arccos[\cos(\theta_1)\cos(\varphi_1) \cos(\theta_2)\cos(\varphi_2) + \cos(\theta_1)\sin(\varphi_1)\cos(\theta_2)\sin(\varphi_2) + \sin(\theta_1) \sin(\theta_2)] \\
+&amp; = r \cdot \arccos[\cos(\theta_1)\cos(\theta_2) [\cos(\varphi_1) \cos(\varphi_2) + \sin(\varphi_1)\sin(\varphi_2)] + \sin(\theta_1) \sin(\theta_2)] \\
+&amp; = r \cdot \arccos[\cos(\theta_1)\cos(\theta_2) \cos(\varphi_2 - \varphi_1) + \sin(\theta_1) \sin(\theta_2)] \\
+&amp; = 2r \cdot \arcsin[(\frac{1 -[\cos(\theta_1)\cos(\theta_2) \cos(\varphi_2 - \varphi_1) + \sin(\theta_1) \sin(\theta_2)]}{2})^{0.5}] \\
+&amp; = 2r \cdot \arcsin[(\frac{1 -\cos(\theta_1)\cos(\theta_2) \cos(\varphi_2 - \varphi_1) - \sin(\theta_1) \sin(\theta_2)]}{2})^{0.5}] \\
+&amp; = 2r \cdot \arcsin[(\frac{1 -\cos(\theta_1)\cos(\theta_2) \cos(\varphi_2 - \varphi_1) - (\cos(\theta_2 - \theta_1) - \cos(\theta_1) \cos(\theta_2))}{2})^{0.5}] \\
+&amp; = 2r \cdot \arcsin[(\frac{1 -\cos(\theta_1)\cos(\theta_2) \cos(\varphi_2 - \varphi_1) - \cos(\theta_2 - \theta_1) + \cos(\theta_1) \cos(\theta_2)}{2})^{0.5}] \\
+&amp; = 2r \cdot \arcsin[(\frac{1 - \cos(\theta_2 - \theta_1) + \cos(\theta_1)\cos(\theta_2) (1 - \cos(\varphi_2 - \varphi_1))}{2})^{0.5}] \\
+&amp; = 2r \cdot \arcsin[(\sin^2(\frac{\theta_2 - \theta_2}{2}) + \cos(\theta_1)\cos(\theta_2)\sin^2(\frac{\varphi_2 - \varphi_1}{2}))^{0.5}] \\
+\end{aligned}\]
+
+<p>For the first equality we expand on the equality above. For the second we refactor $\cos(\theta_1)\cos(\theta_2)$. For the third equality it is used that: $\cos(\varphi_2 - \varphi_1) = \cos(\varphi_1) \cos(\varphi_2) + \sin(\varphi_1)\sin(\varphi_2)$. For the fourth we ues that $\arccos(x)=2\arcsin[(\frac{1-x}{2})^{0.5})$. For the fifth we multiply $-1$ into the parenthesis. For the sixth we use $ \sin(\theta_1)\sin(\theta_2) = \cos(\theta_2 - \theta_1) - \cos(\theta_1) \cos(\theta_2)$. For the seventh we multiply $-1$ into the parenthesis. For the ninth we rearrange. For the eigth we use $\sin^2(\frac{x}{2}) = \frac{1-\cos(x)}{2}$</p>
+
+<p>The righthand side is now the haversine, see [1]. And voila done.</p>
+
+<h2 id="example-ais-data">Example: AIS Data</h2>
+
+<p>Here is a small example in Python with AIS data for one vessel. I calculate the distance between each point and compare two of above calculations.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="c1"># Radius of the earth in meters.
+</span><span class="n">EARTH_RADIUS_METERS</span> <span class="o">=</span> <span class="mf">6378137.00</span>
+
+<span class="n">ais</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="s">'ais.csv'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">','</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> 
+
+<span class="k">def</span> <span class="nf">haversine</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">):</span>
+    <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">radians</span><span class="p">,</span> <span class="p">[</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">])</span>
+    <span class="n">dlat</span> <span class="o">=</span> <span class="n">lat2</span> <span class="o">-</span> <span class="n">lat1</span>
+    <span class="n">dlon</span> <span class="o">=</span> <span class="n">lon2</span> <span class="o">-</span> <span class="n">lon1</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlat</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dlon</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">EARTH_RADIUS_METERS</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">other_haversine</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">):</span>
+    <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">radians</span><span class="p">,</span> <span class="p">[</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">])</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">z1</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">)</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">(</span><span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">x1</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">y1</span> <span class="o">*</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">z1</span> <span class="o">*</span> <span class="n">z2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">EARTH_RADIUS_METERS</span>
+
+
+<span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> 
+</code></pre></div></div>
+
+<p>They’re equal up to 1 cm e.g. 0.01 meter.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lat1</span> <span class="o">=</span> <span class="n">ais</span><span class="p">[</span><span class="s">'latitude'</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">lon1</span> <span class="o">=</span> <span class="n">ais</span><span class="p">[</span><span class="s">'longitude'</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">lat2</span> <span class="o">=</span> <span class="n">ais</span><span class="p">[</span><span class="s">'latitude'</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lon2</span> <span class="o">=</span> <span class="n">ais</span><span class="p">[</span><span class="s">'longitude'</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">np</span><span class="p">.</span><span class="nb">all</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">other_haversine</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">)</span> <span class="o">-</span> <span class="n">haversine</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<h1 id="references">References</h1>
+
+<p>[1] https://en.wikipedia.org/wiki/Haversine_formula</p>
+
+<p>[2] https://en.wikipedia.org/wiki/Circular_arc</p>
+:ET

@@ -1,0 +1,24 @@
+I"w	<p>Logging is a nice debugging tool in Python. <!--more--> A mimimal example would be:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+  <span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s">'Beginning download of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+  
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">logging</span><span class="p">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s">'%(asctime)s - %(message)s'</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s">'download.log'</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span><span class="p">,</span>
+        <span class="n">datefmt</span><span class="o">=</span><span class="s">'%d-%b-%y %H:%M:%S'</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">]:</span>
+        <span class="n">download</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The loggers are instantiated using <code class="language-plaintext highlighter-rouge">logging.getLogger(__name__)</code> in each script. You can then configure the log in a main script using <code class="language-plaintext highlighter-rouge">logging.basicConfig(...)</code>.</p>
+:ET

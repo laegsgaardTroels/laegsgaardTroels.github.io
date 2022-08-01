@@ -121,7 +121,7 @@
                 <!-- Font Awesome CSS -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
-    <title>About</title>
+    <title>Lazy Proof Of Monty Hall</title>
   </head>
   <body>
 
@@ -143,9 +143,9 @@
         <br>
         <div class="page-header">
             <div class="pull-left">
-                <h1>About</h1>
-                <strong></strong>
-                <div class="text-muted"></div>
+                <h1>Lazy Proof Of Monty Hall</h1>
+                <strong>Riddle</strong>
+                <div class="text-muted">2019-07-28</div>
             </div>
             
             <div class="pull-right">
@@ -157,22 +157,73 @@
         
 
         <br>
-        <h3>
-        Troels Lægsgaard
-        </h3>
-        <p>
-        This blog consists of notes created by me, Troels Lægsgaard. The
-        notes on the site are collected from my work as a data scientist
-        in various places in Denmark. If you find the notes interesting
-        then please write a comment in the chat. If you or your company
-        would be interested in a course then please reach out with an
-        e-mail.
-        </p>
-        <p><a href="mailto:laegsgaardtroels@gmail.com" target="_blank">
-        [<i>e-mail: laegsgaardtroels@gmail.com</i> <span
-        class="fa fa-envelope"></span>] </a>  
-        <a href="https://github.com/laegsgaardTroels" target="_blank">
-        [<i>View repos</i> <span class="fa fa-github"></span>] </a></p>
+        <p>The <a
+        href="https://en.wikipedia.org/wiki/Monty_Hall_problem">Monty
+        Hall problem</a> is an awesome brain teaser<!--more-->:</p>
+        <p>” <em>Suppose you’re on a game show, and you’re given the
+        choice of three doors: Behind one door is a car; behind the
+        others, goats. You pick a door, say No. 1, and the host, who
+        knows what’s behind the doors, opens another door, say No. 3,
+        which has a goat. He then says to you, “Do you want to pick door
+        No. 2?” Is it to your advantage to switch your choice?</em>
+        ”</p>
+        <p>The suprising result is that the contestants who stick to
+        their original choice only have a <span
+        class="math inline">\(\frac{1}{3}\)</span> probability of
+        winning. But if you switch you will have <span
+        class="math inline">\(\frac{2}{3}\)</span>.</p>
+        <p><img src="/assets/images/2019-07-28-lazy-proof-of-monty-hall/goat.png"></p>
+        <h2 id="proof">Proof</h2>
+        <p>A lazy proof of this goes as follows: Assume <span
+        class="math inline">\(X_1, X_2, X_3\in\{1,2,3\}\)</span> are
+        random variables representing the door chosen first <span
+        class="math inline">\(X_1\)</span>, the door which the host
+        opens <span class="math inline">\(X_2\)</span> and the last door
+        one can select <span class="math inline">\(X_3\)</span> instead
+        of the first door <span class="math inline">\(X_1\)</span>.
+        Assume the car is behind door <span
+        class="math inline">\(C\)</span>.</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        \mathbb{P}(X_3=C)
+          &amp; = \overset{\leq \mathbb{P}(X_3=X_1)=0}{\mathbb{P}(X_3=C,
+        X_1 = C)} +
+              \mathbb{P}(X_3=C, X_1 \neq C) \\
+          &amp; = \mathbb{P}(X_3=C, X_1 \neq C) \\
+          &amp; = \mathbb{P}(X_3=C, X_1 \neq C) +
+              \overset{=\mathbb{P}(X_2=C)=0}{\mathbb{P}(X_3 \neq C, X_1
+        \neq C)}\\
+          &amp; = \mathbb{P}(X_1 \neq C) \\
+          &amp; = \frac{2}{3}
+        \end{aligned}
+        \]</span></p>
+        <p>For the first equal sign one uses the law of total
+        probability. For the second equal sign one observes that if door
+        3 has the car and door 1 has the car then door 1 and door 3 are
+        the same, but this has 0 probability. For the third equal sign
+        one observes that door 1 and door 3 is not the car iff door two
+        is the car, which has 0 probability. For the fourth equal sign
+        one uses the law of total probability. And the fifth equal sign
+        is simply the probability that the first door chosen is not the
+        car.</p>
+        <h2 id="intuition">Intuition</h2>
+        <p>To understand <em>why</em> this is so one can think what
+        happens if one repick: Assume you hit a goat in the first pick
+        then the host will show the goat behind the other door and you
+        will get the car i.e. if you repick then you win if your first
+        pick is a goat, which is <span
+        class="math inline">\(\frac{2}{3}\)</span>!</p>
+        <p>This is even more obvious if there were 100 doors: Assume
+        there is a car behind one of the 100 doors and goats behind the
+        rest. The game host then opens 98 doors with goats behind them,
+        and asks if you want to repick to the last unopen door. Now you
+        still win if you pick a goat at first and loses if you don’t, so
+        if you repick you now have a <span
+        class="math inline">\(\frac{99}{100}\)</span> probability of
+        winning.</p>
+        <h2 id="references">References</h2>
+        <p>[1] <a
+        href="https://en.wikipedia.org/wiki/Monty_Hall_problem">wikipedia</a></p>
         <br>
         <br>
     </div>

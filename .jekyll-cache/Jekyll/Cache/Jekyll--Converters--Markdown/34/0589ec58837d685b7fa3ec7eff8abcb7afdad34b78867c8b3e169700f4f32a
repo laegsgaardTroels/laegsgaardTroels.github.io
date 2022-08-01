@@ -1,0 +1,2 @@
+I"¤<p>While working at Maersk there was a power-to-speed model used for planning, basically a polynomial inferred from a regression, taking in some extra inputs besides power and outputting speed. For this model there was defined valid input power levels. In this post I will talk about my thoughts on why it seems useful to define the operational range AND data type of an inferred function in an operational setting.</p>
+:ET

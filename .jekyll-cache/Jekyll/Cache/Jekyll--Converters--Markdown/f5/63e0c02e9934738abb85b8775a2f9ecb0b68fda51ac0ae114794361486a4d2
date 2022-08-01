@@ -1,0 +1,49 @@
+I"¼
+<p>Commands i find useful in Vim.<!--more--></p>
+
+<p>A good place to start using vim is to go through the guide in:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vimtutor
+</code></pre></div></div>
+
+<p>To read more about below commands use <code class="language-plaintext highlighter-rouge">:help</code> in vim.</p>
+
+<h2 id="goto-file-with-gf">Goto file with <code class="language-plaintext highlighter-rouge">:gf</code></h2>
+
+<p>Super useful, when you hover over a path or something in your <code class="language-plaintext highlighter-rouge">PATH</code> then vim will goto the file.</p>
+
+<h2 id="explore-files-with-vexplore-and-sexplore">Explore files with <code class="language-plaintext highlighter-rouge">:Vexplore</code> and <code class="language-plaintext highlighter-rouge">:Sexplore</code></h2>
+
+<p>Will split the text editor s.t. you can jump in a new window to something different.</p>
+
+<h2 id="jump-back-and-forth-with-ctrl-i-and-ctrl-o">Jump back and forth with <code class="language-plaintext highlighter-rouge">CTRL-I</code> and <code class="language-plaintext highlighter-rouge">CTRL-O</code></h2>
+
+<p>When you have jumped somewhere you can use these two to jump back and forth.</p>
+
+<p>I often type</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>And then <code class="language-plaintext highlighter-rouge">CTRL-O</code> to jump to the file I had just been editing.</p>
+
+<h2 id="search-and-replace">Search and Replace</h2>
+
+<p>You can search and replace with <code class="language-plaintext highlighter-rouge">:%s/from/go/gc</code>. The c option gives a prompt which is great.</p>
+
+<h2 id="sort">Sort</h2>
+
+<p>Mark stuff in visual mode and then type <code class="language-plaintext highlighter-rouge">:sort</code> and you will sort stuff.</p>
+
+<h2 id="find-and-till-a-word">Find and till a word.</h2>
+
+<p>Used <code class="language-plaintext highlighter-rouge">:f</code> find a word and <code class="language-plaintext highlighter-rouge">:t</code> to find a word but put the cursor before it. Useful in visual mode.</p>
+
+<h2 id="find-closing-bracket-with-">Find closing bracket with <code class="language-plaintext highlighter-rouge">%</code></h2>
+
+<p>If you have the cursor on a bracket typing <code class="language-plaintext highlighter-rouge">%</code> will jump to the closing bracket.</p>
+
+<h2 id="run-stuff-in-terminal-emulator">Run stuff in terminal emulator</h2>
+
+<p>Type <code class="language-plaintext highlighter-rouge">:terminal</code> and you will get a terminal emulator. You can copy from this terminal emulator by going into normal mode in it.</p>
+:ET

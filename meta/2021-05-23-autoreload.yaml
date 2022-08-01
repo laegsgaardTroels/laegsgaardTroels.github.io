@@ -1,0 +1,14 @@
+{
+    "title": "Autoreload",
+    "date": "2021-05-23",
+    "year": "2021",
+    "month": "05",
+    "day": "23",
+    "content": "",
+    "excerpt": "When making stuff in a Jupyter Notebook I often find it usefull to refactor stuff I use across notebooks into a Python module. To do this smoothly I install the module in editable mode and use the awesome Jupyter autoreload magic. [...]",
+    "url": "/posts/2021-05-23-autoreload.html",
+    "image": "/assets/images/base/python.svg",
+    "category": "Python",
+    "code": "https://github.com/laegsgaardTroels/autoreload",
+    "author": "Troels L\u00e6gsgaard"
+}

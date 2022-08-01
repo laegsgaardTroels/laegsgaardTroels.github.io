@@ -1,0 +1,14 @@
+{
+    "title": "Model Evaluation",
+    "date": "2018-11-09",
+    "year": "2018",
+    "month": "11",
+    "day": "09",
+    "content": "",
+    "excerpt": "Giving an estimate of generalization error in Machine Learning is vital. [...]",
+    "url": "/posts/2018-11-09-model-evaluation.html",
+    "image": "/assets/images/2018-11-09-model-evaluation-part-1/Generalization_bound.png",
+    "category": "Statistical Learning",
+    "code": "",
+    "author": "Troels L\u00e6gsgaard"
+}

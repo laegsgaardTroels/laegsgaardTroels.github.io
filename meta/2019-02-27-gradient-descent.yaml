@@ -1,0 +1,14 @@
+{
+    "title": "Gradient Descent",
+    "date": "2019-02-27",
+    "year": "2019",
+    "month": "02",
+    "day": "27",
+    "content": "",
+    "excerpt": "The gradient descent algorithm and its variants are some of the most widely used optimization algorithms in machine learning today. In this post a super simple example of gradient descent will be implemented. [...]",
+    "url": "/posts/2019-02-27-gradient-descent.html",
+    "image": "/assets/images/2019-02-27-gradient-descent_files/gradient_descent.svg",
+    "category": "Algorithm",
+    "code": "https://github.com/laegsgaardTroels/gradient-descent",
+    "author": "Troels L\u00e6gsgaard"
+}

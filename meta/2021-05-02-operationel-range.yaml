@@ -1,0 +1,14 @@
+{
+    "title": "Operationel Range",
+    "date": "2021-05-02",
+    "year": "2021",
+    "month": "05",
+    "day": "02",
+    "content": "",
+    "excerpt": "While working at Maersk there was a power-to-speed model used for planning, basically a polynomial inferred from a regression, taking in some extra inputs besides power and outputting speed. For this model there was defined valid input power levels. In this post I will talk about my thoughts on why it seems useful to define the operational range AND data type of an inferred function in an operational setting. [...]",
+    "url": "/posts/2021-05-02-operationel-range.html",
+    "image": "/assets/images/2021-05-02-operationel-range/maersk-vessel.jpeg",
+    "category": "Thoughts",
+    "code": "",
+    "author": "Troels L\u00e6gsgaard"
+}

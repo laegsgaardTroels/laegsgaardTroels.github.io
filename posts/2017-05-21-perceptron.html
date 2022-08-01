@@ -121,7 +121,7 @@
                 <!-- Font Awesome CSS -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       
-    <title>About</title>
+    <title>Perceptron</title>
   </head>
   <body>
 
@@ -143,13 +143,18 @@
         <br>
         <div class="page-header">
             <div class="pull-left">
-                <h1>About</h1>
-                <strong></strong>
-                <div class="text-muted"></div>
+                <h1>Perceptron</h1>
+                <strong>Algorithm</strong>
+                <div class="text-muted">2017-05-21</div>
             </div>
             
             <div class="pull-right">
 
+                                <div class="text-right">
+                    <a href="https://github.com/laegsgaardTroels/perceptron">
+                        [<i>View code on Github</i> <span class="fa fa-github"></span>]
+                    </a>
+                </div>
                 
             </div>
             <div class="clearfix"></div>
@@ -157,22 +162,87 @@
         
 
         <br>
-        <h3>
-        Troels Lægsgaard
-        </h3>
-        <p>
-        This blog consists of notes created by me, Troels Lægsgaard. The
-        notes on the site are collected from my work as a data scientist
-        in various places in Denmark. If you find the notes interesting
-        then please write a comment in the chat. If you or your company
-        would be interested in a course then please reach out with an
-        e-mail.
-        </p>
-        <p><a href="mailto:laegsgaardtroels@gmail.com" target="_blank">
-        [<i>e-mail: laegsgaardtroels@gmail.com</i> <span
-        class="fa fa-envelope"></span>] </a>  
-        <a href="https://github.com/laegsgaardTroels" target="_blank">
-        [<i>View repos</i> <span class="fa fa-github"></span>] </a></p>
+        <p>The Perceptron by Rosenblat is one of the earliest machine
+        learning algorithms. It was proposed as a model of an artificial
+        neuron, and can be used for classification.<!--more--> The
+        Perceptron belongs to the class of models specified by,</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+            h(x) &amp; = f(\sum_{j=1}^{m}w_jx_j + b), \quad
+        w\in\mathbb{R}^d, b\in\mathbb{R}
+        \end{aligned}
+        \]</span></p>
+        <p>where <span class="math inline">\(f\)</span> is a non-linear
+        function, for the Perceptron <span
+        class="math inline">\(f=\text{sign}\)</span>. This class of
+        models is the basic building block for <strong>feedforward
+        neural networks</strong>.</p>
+        <p>The perceptron works like an artificial neuron, when fed an
+        <span class="math inline">\(x\in\mathbb{R}^d\)</span> to be
+        classified, the observations will be weighed using the weights:
+        <span
+        class="math inline">\(w_1,w_2,\dots,w_m\in\mathbb{R}\)</span>;
+        if the artificial neuron is stimulated enough, <span
+        class="math inline">\(\sum_jw_jx_j&gt;-b \Rightarrow
+        h(x)=1\)</span>, then the neuron fires.</p>
+        <p><img src="/assets/images/2017-05-21-perceptron/perceptron.svg" width="800" height="auto"></p>
+        <p>A problem with the perceptron is that the activation function
+        is not differentiable, making it unclear how to fit a multilayer
+        perceptron, defined below, with this choice of activation
+        function, instead one can choose a differentiable
+        activation-function like the sigmoid function: <span
+        class="math inline">\(f(x)=\sigma(x)=\frac{1}{1+e^{-x}}\)</span>,
+        used in logistic regression, which has the nice property that:
+        <span
+        class="math inline">\(\sigma&#39;(x)=\sigma(x)(1-\sigma(x))\)</span>,
+        making it easy to differentiate.</p>
+        <p>The Perceptron can be fit to data using the
+        <strong>perceptron learning algorithm</strong> which can be
+        derived from the <strong>stochastic gradient descent</strong>
+        (SGD) algorithm for optimization. SGD is a <strong>gradient
+        based optimization method</strong>. Gradient based optimization
+        methods are the main workhose in todays practice for fitting
+        neural networks.</p>
+        <p>To derive it use the loss function:</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        \mathcal{L}(w)
+        &amp;= - \sum_{i:h(x_i)\neq y_i}w&#39;x_i y_i\\
+        &amp;= - \sum_{i=1}^{N} \min(w&#39;x_i y_i,0)\\
+        &amp;= - \sum_{i=1}^{N} L_i(w)
+        \end{aligned}
+        \]</span></p>
+        <p>One notices that for a single observation <span
+        class="math inline">\((x_i, y_i)\)</span> that:</p>
+        <p><span class="math display">\[
+        \begin{cases}
+            \text{Correctly classified: }w&#39;x_iy_i&gt;0 \Rightarrow
+        L_i(w)=\min(w&#39;x_i y_i,0)=0 \Rightarrow
+        \frac{\partial}{\partial w} L_i(w) = 0\\
+            \text{Wrongly classified: } \  w&#39;x_iy_i&lt;0 \Rightarrow
+        L_i(w)=\min(w&#39;x_i y_i,0)&lt;0 \Rightarrow
+        \frac{\partial}{\partial w} L_i(w) = x_i y_i
+        \end{cases}
+        \]</span></p>
+        <p>So applying stochastic gradient descent with <span
+        class="math inline">\(\eta\in(0,1)\)</span> amounts to the
+        update rule:</p>
+        <p><span class="math display">\[
+        \begin{aligned}
+        w_{t+1}
+        &amp;= w_t - \eta \frac{\partial}{\partial w} L_i(w) \\
+        &amp;= \begin{cases}
+            \text{Correctly classified: } w_t \\
+            \text{Wrongly classified: } w_t - \eta x_i y_i
+        \end{cases}
+        \end{aligned}
+        \]</span></p>
+        <p>With a new observation <span class="math inline">\((x_i,
+        y_i)\)</span> in each iteration. That is basically the
+        perceptron learning algorithm.</p>
+        <h1 id="references">References</h1>
+        <p>[1] Rosenblatt. “The Perceptron: A probalistic model for
+        information storage and organization in the brain”. 1958.</p>
         <br>
         <br>
     </div>
