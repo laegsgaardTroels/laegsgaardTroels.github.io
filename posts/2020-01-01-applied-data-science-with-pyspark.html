@@ -120,6 +120,9 @@
 
                 <!-- Font Awesome CSS -->
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                <!-- Disqus -->
+                <script id="dsq-count-scr" src="//machinelearningnotes-1.disqus.com/count.js" async></script>
       
     <title>Applied Data Science With Pyspark</title>
   </head>
@@ -132,6 +135,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <a class="nav-link" href="/index.html"> Blog </a>
                     <a class="nav-link" href="/courses.html"> Courses </a>
                     <a class="nav-link" href="/about.html"> About </a>
                 </div>
@@ -162,55 +166,71 @@
         
 
         <br>
-        <p>Spark er et populært framework til processering af enorme
-        mængder data, brugt bredt i industrien. Dette kursus vil give
-        dig en kort introduktion til den populære Python API til Spark
-        frameworket gennem brug af Azure Databricks Notebooks.
-        <!--more--> Målet med kurset er at hjælpe deltageren i gang med
-        at anvende PySpark genenm interaktive lektioner i de dele af
-        PySpark, man anvender mest i praksis som Data Scientist.</p>
-        <p>Azure Databricks Notebooks vil derfor ikke være hovedemnet
-        men kun platformen, som øvelserne vil laves i gennem kurset.
-        Set-up og konfigurering af et cluster vil heller ikke være emnet
-        for kurset.</p>
+        <p>Spark is a popular framework for processing big data, widely
+        used in the industry. This course will give you a short
+        introduction to the popular Python API to the Spark
+        framework.<!--more--></p>
+        <p>The goal of the course is to get the participant started
+        using PySpark through interactive lession in the parts of
+        PySpark one uses the most as a Data Scientist.</p>
         <h4>
-        Deltagerprofil
+        Participant profile
         </h4>
-        <p>Du søger en introduktion til PySpark, så du kan starte med at
-        anvende dette i dit daglige arbejde. Forudsætninger</p>
-        <p>Du har erfaring med programmering gennem dit daglige arbejde
-        med data eller fra din uddannelse og har en grundlæggende
-        matematisk forståelse. Grundlæggende kendskab til Python eller
-        SQL vil også være nyttigt.</p>
+        <p>You have experience with programming from your daily work
+        with data or from your education and have a basic Mathematical
+        understanding. You seek an introduction to PySpark, so you can
+        start using it in your daily work.</p>
         <h4>
-        Indhold
+        Content
         </h4>
-        <p>Se slides her:</p>
+        <p>View the slides from the course here:</p>
         <ol>
         <li>
-        <a href="1_introduction.slides.html">Introduction</a>
+        <a href="applied-data-science-with-pyspark-slides/1_introduction.slides.html">Introduction</a>
         Introduction to the Course.
         </li>
         <li>
-        <a href="2_azure_databricks_notebooks.slides.html">Azure
+        <a href="applied-data-science-with-pyspark-slides/2_azure_databricks_notebooks.slides.html">Azure
         Databricks Notebooks</a> Introduktion til Spark Azure Databricks
         Notebooks.
         </li>
         <li>
-        <a href="3_spark.slides.html">Spark</a> Introduktion til Spark.
+        <a href="applied-data-science-with-pyspark-slides/3_spark.slides.html">Spark</a>
+        Introduktion til Spark.
         </li>
         <li>
-        <a href="4_spark_sql.slides.html">Spark SQL</a> DataFrame
-        API’en. Spark SQL. Data Aggregation. Window Functions. User
-        Defined Functions
+        <a href="applied-data-science-with-pyspark-slides/4_spark_sql.slides.html">Spark
+        SQL</a> DataFrame API’en. Spark SQL. Data Aggregation. Window
+        Functions. User Defined Functions
         </li>
         <li>
-        <a href="5_spark_ml.slides.html">Spark ML</a> Machine Learning
-        med pyspark.ml.
+        <a href="applied-data-science-with-pyspark-slides/5_spark_ml.slides.html">Spark
+        ML</a> Machine Learning med pyspark.ml.
         </li>
         </ol>
         <br>
         <br>
+
+        <!--- Disqus --->
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://machinelearningnotes-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 
 

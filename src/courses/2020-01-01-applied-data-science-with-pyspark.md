@@ -4,26 +4,22 @@ category: Course
 code: https://github.com/laegsgaardTroels/applied-data-science-with-pyspark-slides
 ---
 
-Spark er et populært framework til processering af enorme mængder data, brugt bredt i industrien. Dette kursus vil give dig en kort introduktion til den populære Python API til Spark frameworket gennem brug af Azure Databricks Notebooks. <!--more--> 
-Målet med kurset er at hjælpe deltageren i gang med at anvende PySpark genenm interaktive lektioner i de dele af PySpark, man anvender mest i praksis som Data Scientist. 
+Spark is a popular framework for processing big data, widely used in the industry. This course will give you a short introduction to the popular Python API to the Spark framework.<!--more-->
 
-Azure Databricks Notebooks vil derfor ikke være hovedemnet men kun platformen, som øvelserne vil laves i gennem kurset. Set-up og konfigurering af et cluster vil heller ikke være emnet for kurset.
+The goal of the course is to get the participant started using PySpark through interactive lession in the parts of PySpark one uses the most as a Data Scientist.
 
-<h4>Deltagerprofil</h4>
+<h4>Participant profile</h4>
 
-Du søger en introduktion til PySpark, så du kan starte med at anvende dette i dit daglige arbejde.
-Forudsætninger
+You have experience with programming from your daily work with data or from your education and have a basic Mathematical understanding. You seek an introduction to PySpark, so you can start using it in your daily work.
 
-Du har erfaring med programmering gennem dit daglige arbejde med data eller fra din uddannelse og har en grundlæggende matematisk forståelse. Grundlæggende kendskab til Python eller SQL vil også være nyttigt.
+<h4>Content</h4>
 
-<h4>Indhold</h4>
-
-Se slides her:
+View the slides from the course here:
 
 <ol>
-    <li><a href="1_introduction.slides.html">Introduction</a> Introduction to the Course.</li>
-    <li><a href="2_azure_databricks_notebooks.slides.html">Azure Databricks Notebooks</a> Introduktion til Spark Azure Databricks Notebooks.</li>
-    <li><a href="3_spark.slides.html">Spark</a> Introduktion til Spark.</li>
-    <li><a href="4_spark_sql.slides.html">Spark SQL</a> DataFrame API'en. Spark SQL. Data Aggregation. Window Functions. User Defined Functions</li>
-    <li><a href="5_spark_ml.slides.html">Spark ML</a> Machine Learning med pyspark.ml.</li>
+    <li><a href="applied-data-science-with-pyspark-slides/1_introduction.slides.html">Introduction</a> Introduction to the Course.</li>
+    <li><a href="applied-data-science-with-pyspark-slides/2_azure_databricks_notebooks.slides.html">Azure Databricks Notebooks</a> Introduktion til Spark Azure Databricks Notebooks.</li>
+    <li><a href="applied-data-science-with-pyspark-slides/3_spark.slides.html">Spark</a> Introduktion til Spark.</li>
+    <li><a href="applied-data-science-with-pyspark-slides/4_spark_sql.slides.html">Spark SQL</a> DataFrame API'en. Spark SQL. Data Aggregation. Window Functions. User Defined Functions</li>
+    <li><a href="applied-data-science-with-pyspark-slides/5_spark_ml.slides.html">Spark ML</a> Machine Learning med pyspark.ml.</li>
 </ol>

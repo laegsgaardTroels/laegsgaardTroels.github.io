@@ -5,7 +5,7 @@
     "month": "01",
     "day": "01",
     "content": "",
-    "excerpt": "Spark er et popul\u00e6rt framework til processering af enorme m\u00e6ngder data, brugt bredt i industrien. Dette kursus vil give dig en kort introduktion til den popul\u00e6re Python API til Spark frameworket gennem brug af Azure Databricks Notebooks. [...]",
+    "excerpt": "Spark is a popular framework for processing big data, widely used in the industry. This course will give you a short introduction to the popular Python API to the Spark framework. [...]",
     "url": "/posts/2020-01-01-applied-data-science-with-pyspark.html",
     "image": "/assets/images/base/apache_spark.svg",
     "category": "Course",
