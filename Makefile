@@ -6,8 +6,7 @@ PANDOC_OPTIONS := --include-in-header=templates/head.html \
 	--metadata=document-css:true \
 	--metadata=monobackgroundcolor:\#f5f5f5 \
 	--highlight-style templates/highlight_style.theme \
-	--mathjax \
-	--variable 'mathjax-url=https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+	--mathjax
 
 COMMON_TEMPLATES := templates/head.html templates/navigation.html templates/styles.html
 
@@ -49,10 +48,10 @@ $(POSTS_HTML): posts/%.html: src/posts/%.md meta/%.yaml $(COMMON_TEMPLATES) temp
 $(POSTS_META): meta/%.yaml: src/posts/%.md src/meta.py
 	python src/meta.py post -i $< -o $@
 
-about.html: src/about.md $(COMMON_TEMPLATES) templates/post.html 
+about.html: src/about.md $(COMMON_TEMPLATES) templates/about.html 
 	pandoc \
 		$(PANDOC_OPTIONS) \
-		--template=templates/post.html \
+		--template=templates/about.html \
 		--from markdown \
 		--to html \
 		-o $@ $<
@@ -70,7 +69,7 @@ index.html: src/index.md meta/index.json $(COMMON_TEMPLATES) templates/index.htm
 meta/index.json: src/meta.py $(POSTS_MD)
 	python src/meta.py index -i $(POSTS_MD) -o $@
 
-$(COURSES_HTML): posts/%.html: src/courses/%.md meta/%.yaml $(COMMON_TEMPLATES) templates/course.html 
+$(COURSES_HTML): posts/%.html: src/courses/%.md meta/%.yaml $(COMMON_TEMPLATES) templates/post.html 
 	echo "$< -> $@"
 	pandoc \
 		$(PANDOC_OPTIONS) \
