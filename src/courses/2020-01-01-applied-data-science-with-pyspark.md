@@ -17,9 +17,9 @@ You have experience with programming from your daily work with data or from your
 View the slides from the course here:
 
 <ol>
-    <li><a href="applied-data-science-with-pyspark-slides/1_introduction.slides.html">Introduction</a> Introduction to the Course.</li>
-    <li><a href="applied-data-science-with-pyspark-slides/2_azure_databricks_notebooks.slides.html">Azure Databricks Notebooks</a> Introduktion til Spark Azure Databricks Notebooks.</li>
-    <li><a href="applied-data-science-with-pyspark-slides/3_spark.slides.html">Spark</a> Introduktion til Spark.</li>
-    <li><a href="applied-data-science-with-pyspark-slides/4_spark_sql.slides.html">Spark SQL</a> DataFrame API'en. Spark SQL. Data Aggregation. Window Functions. User Defined Functions</li>
-    <li><a href="applied-data-science-with-pyspark-slides/5_spark_ml.slides.html">Spark ML</a> Machine Learning med pyspark.ml.</li>
+    <li><b>Introduction</b> Introduction to the Course.</li>
+    <li><b>Azure Databricks Notebooks</b> Introduktion til Spark Azure Databricks Notebooks.</li>
+    <li><b>Spark</b> Introduktion til Spark.</li>
+    <li><b>Spark SQL</b> DataFrame API'en. Spark SQL. Data Aggregation. Window Functions. User Defined Functions</li>
+    <li><b>Spark ML</b> Machine Learning med pyspark.ml.</li>
 </ol>
