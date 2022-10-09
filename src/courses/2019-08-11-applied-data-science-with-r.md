@@ -16,7 +16,7 @@ View the slides from the course here:
 <ol>
     <li><b>Introduction</b> Introduction to the RStudio IDE, the most popular IDE for R programming.</li>
     <li><b>Rmarkdown</b> Interactive reporting of results to colleagues and non-technicals with R Markdown. New knowledge about data is not worth much if you aren't able to communicate the findings with your colleagues. R Markdown is a strong tool for reporting.</li>
-    <li><b>Data Import</a> Importing data from flat files and databases. Data comes from a variety of sources, it is therefore important to know how to get data into R.</li>
+    <li><b>Data Import</b> Importing data from flat files and databases. Data comes from a variety of sources, it is therefore important to know how to get data into R.</li>
     <li><b>Data Manipulation</b> Manipulating data in R with a focus on the dplyr package. The dplyr package contains a grammar of data manipulation, this will help you solve the most common data manipulation challenges.</li>
     <li><b>Data Visualization</b> Plotting data in R with a focus on the ggplot2 package. The ggplot2 package contain similar grammar for plotting in R. To be able to plot is essential when new knowledge about data is to be shared with colleagues.</li>
     <li><b>HTMLWidgets</b> HTML Widgets are useful for an interactive view of your data.</li>
