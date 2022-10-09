@@ -1,7 +1,6 @@
 ---
 image: /assets/images/base/apache_spark.svg
 category: Course
-code: https://github.com/laegsgaardTroels/applied-data-science-with-pyspark-slides
 ---
 
 Spark is a popular framework for processing big data, widely used in the industry. This course will give you a short introduction to the popular Python API to the Spark framework.<!--more-->

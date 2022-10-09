@@ -23,7 +23,7 @@ all: index.html about.html courses.html $(POSTS_HTML) $(COURSES_HTML)
 
 .PHONY: serve
 serve:
-	python -m http.server --directory $(shell pwd)
+	python -m http.server --directory $(shell pwd) --bind 127.0.0.1
 
 .PHONY: clean
 clean:

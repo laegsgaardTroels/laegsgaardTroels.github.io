@@ -1,7 +1,6 @@
 ---
 image: /assets/images/base/r.svg
 category: Course
-code: https://github.com/laegsgaardTroels/applied-data-science-with-r-slides
 ---
 Learn how to solve many commonly faced problems when applying R for Data Science and become an even more important part of your company. This course will introduce you to the most important Data Science tools in R to effectively solve many real life problems.<!--more-->
 
