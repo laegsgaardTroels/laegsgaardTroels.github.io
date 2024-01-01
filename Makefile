@@ -36,7 +36,6 @@ clean:
 	rm -f meta/index.json
 
 $(POSTS_HTML): posts/%.html: src/posts/%.md meta/%.yaml $(COMMON_TEMPLATES) src/templates/post.html
-	echo "$< -> $@"
 	pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/post.html \
@@ -57,7 +56,6 @@ about.html: src/about.md $(COMMON_TEMPLATES) src/templates/about.html
 		-o $@ $<
 
 index.html: meta/index.json $(COMMON_TEMPLATES) src/templates/index.html
-	echo "$< -> $@"
 	echo '' | pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/index.html \
@@ -70,7 +68,6 @@ meta/index.json: src/meta.py $(POSTS_MD)
 	python3 src/meta.py index -i $(POSTS_MD) -o $@
 
 $(COURSES_HTML): posts/%.html: src/courses/%.md meta/%.yaml $(COMMON_TEMPLATES) src/templates/post.html
-	echo "$< -> $@"
 	pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/post.html \
@@ -83,7 +80,6 @@ $(COURSES_META): meta/%.yaml: src/courses/%.md src/meta.py
 	python3 src/meta.py post -i $< -o $@
 
 courses.html: meta/courses.json $(COMMON_TEMPLATES) src/templates/index.html
-	echo "$< -> $@"
 	echo '' | pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/index.html \
