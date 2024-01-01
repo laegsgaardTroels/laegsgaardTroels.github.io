@@ -12,11 +12,11 @@ COMMON_TEMPLATES := src/templates/head.html src/templates/navigation.html src/te
 
 COURSES_MD := $(wildcard src/courses/*.md)
 COURSES_HTML := $(COURSES_MD:src/courses/%.md=posts/%.html)
-COURSES_META := $(COURSES_MD:src/courses/%.md=meta/%.yaml)
+COURSES_META := $(COURSES_MD:src/courses/%.md=meta/%.json)
 
 POSTS_MD := $(wildcard src/posts/*.md)
 POSTS_HTML := $(POSTS_MD:src/posts/%.md=posts/%.html)
-POSTS_META := $(POSTS_MD:src/posts/%.md=meta/%.yaml)
+POSTS_META := $(POSTS_MD:src/posts/%.md=meta/%.json)
 
 .PHONY: all
 all: index.html about.html courses.html $(POSTS_HTML) $(COURSES_HTML)
@@ -35,16 +35,16 @@ clean:
 	rm -f $(COURSES_META)
 	rm -f meta/index.json
 
-$(POSTS_HTML): posts/%.html: src/posts/%.md meta/%.yaml $(COMMON_TEMPLATES) src/templates/post.html
+$(POSTS_HTML): posts/%.html: src/posts/%.md meta/%.json $(COMMON_TEMPLATES) src/templates/post.html
 	pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/post.html \
-		--metadata-file ${@:posts/%.html=meta/%.yaml} \
+		--metadata-file ${@:posts/%.html=meta/%.json} \
 		--from markdown+backtick_code_blocks+inline_code_attributes \
 		--to html \
 		-o $@ $<
 
-$(POSTS_META): meta/%.yaml: src/posts/%.md src/meta.py
+$(POSTS_META): meta/%.json: src/posts/%.md src/meta.py
 	python3 src/meta.py post -i $< -o $@
 
 about.html: src/about.md $(COMMON_TEMPLATES) src/templates/about.html
@@ -67,16 +67,16 @@ index.html: meta/index.json $(COMMON_TEMPLATES) src/templates/index.html
 meta/index.json: src/meta.py $(POSTS_MD)
 	python3 src/meta.py index -i $(POSTS_MD) -o $@
 
-$(COURSES_HTML): posts/%.html: src/courses/%.md meta/%.yaml $(COMMON_TEMPLATES) src/templates/post.html
+$(COURSES_HTML): posts/%.html: src/courses/%.md meta/%.json $(COMMON_TEMPLATES) src/templates/post.html
 	pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/post.html \
-		--metadata-file ${@:posts/%.html=meta/%.yaml} \
+		--metadata-file ${@:posts/%.html=meta/%.json} \
 		--from markdown+backtick_code_blocks+inline_code_attributes \
 		--to html \
 		-o $@ $<
 
-$(COURSES_META): meta/%.yaml: src/courses/%.md src/meta.py
+$(COURSES_META): meta/%.json: src/courses/%.md src/meta.py
 	python3 src/meta.py post -i $< -o $@
 
 courses.html: meta/courses.json $(COMMON_TEMPLATES) src/templates/index.html
