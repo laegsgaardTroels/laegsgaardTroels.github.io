@@ -1,7 +1,6 @@
 author: "Troels L\xE6gsgaard"
 category: Python
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-23-autoreload
-content: ''
 date: '2021-05-23'
 day: '23'
 excerpt: When making stuff in a Jupyter Notebook I often find it usefull to refactor

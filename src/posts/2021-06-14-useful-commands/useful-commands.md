@@ -1,6 +1,6 @@
 ---
 author: "Troels L\xE6gsgaard"
-category: Bash
+category: Terminal
 code: ''
 content: ''
 date: '2021-06-14'
@@ -57,6 +57,19 @@ some_command || true
 ```bash
 cd to/new/directory/
 cd -                               # Go back to previous directory.
+```
+
+To get a history log of previous directories type `cd -` and then `<TAB>`. The result should be something like below if you use `zsh`.
+
+```bash
+cd -
+1 -- ~/Git/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-05-23-autoreload
+2 -- ~/Git/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-06-09-haversine
+3 -- ~/Git/laegsgaardTroels/laegsgaardTroels.github.io/src
+4 -- ~/Git/laegsgaardTroels/laegsgaardTroels.github.io/src/posts
+5 -- ~/Git/laegsgaardTroels/laegsgaardTroels.github.io/posts/2021-06-09-haversine
+6 -- ~/Setup/dotfiles
+7 -- ~
 ```
 
 #### Clear the shell with `clear`

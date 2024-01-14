@@ -48,6 +48,17 @@ post:
   url: posts/2022-01-17-articles-and-blogposts/articles-and-blogposts.html
   year: '2022'
 - author: "Troels L\xE6gsgaard"
+  category: Python
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-09-14-bokeh-example
+  date: '2021-09-14'
+  day: '14'
+  excerpt: An app used to display real estate data in Denmark. [...]
+  image: /src/posts/2021-09-14-bokeh-example/app.png
+  month: 09
+  title: Bokeh Example
+  url: posts/2021-09-14-bokeh-example/bokeh-example.html
+  year: '2021'
+- author: "Troels L\xE6gsgaard"
   category: Text Editor
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-08-29-vim
   content: ''
@@ -123,7 +134,6 @@ post:
 - author: "Troels L\xE6gsgaard"
   category: Python
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-23-autoreload
-  content: ''
   date: '2021-05-23'
   day: '23'
   excerpt: When making stuff in a Jupyter Notebook I often find it usefull to refactor
