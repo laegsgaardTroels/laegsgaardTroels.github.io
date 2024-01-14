@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+      <style>
+        img {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        figcaption {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        code {
+          font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+          background-color: #f5f5f5;
+          padding: .2em .4em;
+          font-size: 85%;
+          margin: 0;
+        }
+        pre {
+          margin: 1em 0;
+          background-color: #f5f5f5;
+          padding: 1em;
+          overflow: auto;
+        }
+        pre code {
+          padding: 0;
+          overflow: visible;
+          overflow-wrap: normal;
+        }
+        .sourceCode {
+         background-color: #f5f5f5;
+         overflow: visible;
+        }
+        hr {
+          background-color: #1a1a1a;
+          border: none;
+          height: 1px;
+          margin: 1em 0;
+        }
+        table {
+          margin: 1em 0;
+          border-collapse: collapse;
+          width: 100%;
+          overflow-x: auto;
+          display: block;
+          font-variant-numeric: lining-nums tabular-nums;
+        }
+        table caption {
+          margin-bottom: 0.75em;
+        }
+        tbody {
+          margin-top: 0.5em;
+          border-top: 1px solid #1a1a1a;
+          border-bottom: 1px solid #1a1a1a;
+        }
+        th {
+          border-top: 1px solid #1a1a1a;
+          padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+        td {
+          padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+        header {
+          margin-bottom: 4em;
+          text-align: center;
+        }
+        #TOC li {
+          list-style: none;
+        }
+        #TOC ul {
+          padding-left: 1.3em;
+        }
+        #TOC > ul {
+          padding-left: 0;
+        }
+        #TOC a:not(:hover) {
+          text-decoration: none;
+        }
+        code{white-space: pre-wrap;}
+        span.smallcaps{font-variant: small-caps;}
+        span.underline{text-decoration: underline;}
+        div.column{display: inline-block; vertical-align: top; width: 50%;}
+        div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+        ul.task-list{list-style: none;}
+        pre > code.sourceCode { white-space: pre; position: relative; }
+        pre > code.sourceCode > span { line-height: 1.25; }
+        pre > code.sourceCode > span:empty { height: 1.2em; }
+        .sourceCode { overflow: visible; }
+        code.sourceCode > span { color: inherit; text-decoration: inherit; }
+        div.sourceCode { margin: 1em 0; }
+        pre.sourceCode { margin: 0; }
+        @media screen {
+        div.sourceCode { overflow: auto; }
+        }
+        @media print {
+        pre > code.sourceCode { white-space: pre-wrap; }
+        pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+        }
+        pre.numberSource code
+          { counter-reset: source-line 0; }
+        pre.numberSource code > span
+          { position: relative; left: -4em; counter-increment: source-line; }
+        pre.numberSource code > span > a:first-child::before
+          { content: counter(source-line);
+            position: relative; left: -1em; text-align: right; vertical-align: baseline;
+            border: none; display: inline-block;
+            -webkit-touch-callout: none; -webkit-user-select: none;
+            -khtml-user-select: none; -moz-user-select: none;
+            -ms-user-select: none; user-select: none;
+            padding: 0 4px; width: 4em;
+            color: #aaaaaa;
+          }
+        pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+        div.sourceCode
+          {   }
+        @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+        }
+        code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+        code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+        code span.at { color: #7d9029; } /* Attribute */
+        code span.bn { color: #40a070; } /* BaseN */
+        code span.bu { } /* BuiltIn */
+        code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+        code span.ch { color: #4070a0; } /* Char */
+        code span.cn { color: #880000; } /* Constant */
+        code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+        code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+        code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+        code span.dt { color: #902000; } /* DataType */
+        code span.dv { color: #40a070; } /* DecVal */
+        code span.er { color: #ff0000; font-weight: bold; } /* Error */
+        code span.ex { } /* Extension */
+        code span.fl { color: #40a070; } /* Float */
+        code span.fu { color: #06287e; } /* Function */
+        code span.im { color: #007020; font-weight: bold; } /* Import */
+        code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+        code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+        code span.op { color: #666666; } /* Operator */
+        code span.ot { color: #007020; } /* Other */
+        code span.pp { color: #bc7a00; } /* Preprocessor */
+        code span.sc { color: #4070a0; } /* SpecialChar */
+        code span.ss { color: #bb6688; } /* SpecialString */
+        code span.st { color: #4070a0; } /* String */
+        code span.va { color: #19177c; } /* Variable */
+        code span.vs { color: #4070a0; } /* VerbatimString */
+        code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      </style>
+              <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+      
+                <!-- Using Bootstrap starter template: https://getbootstrap.com/docs/4.0/getting-started/introduction/-->
+                <!-- Required meta tags -->
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="shortcut icon" type="image/png" href="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png">
+
+                <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css">Bootstrap CSS -->
+
+
+                <!-- 
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({
+                    jax: ["input/TeX", "output/HTML-CSS"],
+                    tex2jax: {
+                      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+                      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+                      processEscapes: true,
+                      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                    }
+                    //,
+                    //displayAlign: "left",
+                    //displayIndent: "2em"
+                  });
+                </script>
+                <script type="text/javascript" async
+                        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+                </script>
+                MathJax -->
+
+                <!-- Font Awesome CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                <!-- Disqus -->
+                <script id="dsq-count-scr" src="//machinelearningnotes-1.disqus.com/count.js" async></script>
+            
+    <title>Correlation Clustering</title>
+  </head>
+  <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">ML-Notes</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/index.html"> Blog </a>
+                    <a class="nav-link" href="/courses.html"> Courses </a>
+                    <a class="nav-link" href="/about.html"> About </a>
+                </div>
+            </div>
+        </nav>
+
+    
+    <div class="container">
+        <br>
+        <div class="page-header">
+            <div class="pull-left">
+                <h1>Correlation Clustering</h1>
+                <strong>Technique</strong>
+                <div class="text-muted">2022-01-17</div>
+            </div>
+            
+            <div class="pull-right">
+
+                                <div class="text-right">
+                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src//posts/2022-01-17-correlation-clustering">
+                        [<i>View source</i> <span class="fa fa-github"></span>]
+                    </a>
+                </div>
+                
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        
+
+        <br>
+        <div id="4dc62a35-2896-4024-977d-026edb331b70" class="cell code"
+        data-execution_count="9">
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster <span class="im">import</span> hierarchy <span class="im">as</span> hc</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>matplotlib.rcParams[<span class="st">&#39;figure.figsize&#39;</span>] <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">12</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>aarhus_apartments <span class="op">=</span> pd.read_csv(<span class="st">&#39;aarhus_apartments.csv&#39;</span>)</span></code></pre></div>
+        </div>
+        <div id="6d69f6cd-d7a1-4b39-844e-29e1f61f5ed4" class="cell code"
+        data-execution_count="12">
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aarhus_apartments.corr()</span></code></pre></div>
+        <div class="output execute_result" data-execution_count="12">
+        <div>
+        <style scoped>
+            .dataframe tbody tr th:only-of-type {
+                vertical-align: middle;
+            }
+
+            .dataframe tbody tr th {
+                vertical-align: top;
+            }
+
+            .dataframe thead th {
+                text-align: right;
+            }
+        </style>
+        <table border="1" class="dataframe">
+          <thead>
+            <tr style="text-align: right;">
+              <th></th>
+              <th>zip_code</th>
+              <th>price</th>
+              <th>rooms</th>
+              <th>size</th>
+              <th>build_year</th>
+              <th>latitude</th>
+              <th>longitude</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>zip_code</th>
+              <td>1.000000</td>
+              <td>-0.145322</td>
+              <td>-0.129532</td>
+              <td>-0.146553</td>
+              <td>0.010671</td>
+              <td>0.622659</td>
+              <td>0.244359</td>
+            </tr>
+            <tr>
+              <th>price</th>
+              <td>-0.145322</td>
+              <td>1.000000</td>
+              <td>0.416454</td>
+              <td>0.567506</td>
+              <td>-0.075140</td>
+              <td>0.004019</td>
+              <td>0.181975</td>
+            </tr>
+            <tr>
+              <th>rooms</th>
+              <td>-0.129532</td>
+              <td>0.416454</td>
+              <td>1.000000</td>
+              <td>0.795884</td>
+              <td>-0.127959</td>
+              <td>-0.050889</td>
+              <td>0.081551</td>
+            </tr>
+            <tr>
+              <th>size</th>
+              <td>-0.146553</td>
+              <td>0.567506</td>
+              <td>0.795884</td>
+              <td>1.000000</td>
+              <td>-0.064468</td>
+              <td>0.003794</td>
+              <td>0.225137</td>
+            </tr>
+            <tr>
+              <th>build_year</th>
+              <td>0.010671</td>
+              <td>-0.075140</td>
+              <td>-0.127959</td>
+              <td>-0.064468</td>
+              <td>1.000000</td>
+              <td>0.061176</td>
+              <td>0.062275</td>
+            </tr>
+            <tr>
+              <th>latitude</th>
+              <td>0.622659</td>
+              <td>0.004019</td>
+              <td>-0.050889</td>
+              <td>0.003794</td>
+              <td>0.061176</td>
+              <td>1.000000</td>
+              <td>0.534906</td>
+            </tr>
+            <tr>
+              <th>longitude</th>
+              <td>0.244359</td>
+              <td>0.181975</td>
+              <td>0.081551</td>
+              <td>0.225137</td>
+              <td>0.062275</td>
+              <td>0.534906</td>
+              <td>1.000000</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        </div>
+        </div>
+        <div id="48635f6a-f842-43e4-96d5-68c522aa5edc" class="cell code"
+        data-execution_count="8">
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> correlation_matrix(df):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Plots the correlation matrix.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">        df (pd.DataFrame): A pandas DataFrame.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    corr <span class="op">=</span> df.corr()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> plt.figure()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    plt.matshow(corr, fignum<span class="op">=</span>f.number)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    plt.xticks(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">range</span>(<span class="bu">len</span>(corr.columns)),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        corr.columns,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">14</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        rotation<span class="op">=</span><span class="dv">45</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    plt.yticks(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">range</span>(<span class="bu">len</span>(corr.columns)),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        corr.columns,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">14</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    cb <span class="op">=</span> plt.colorbar()</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    cb.ax.tick_params(labelsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Correlation Matrix&#39;</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>correlation_matrix(aarhus_apartments)</span></code></pre></div>
+        <div class="output display_data">
+        <p><img
+        src="/posts/2022-01-17-correlation-clustering/551c293854eebdd60a8bc5db15784858cff6bc2c.png" /></p>
+        </div>
+        </div>
+        <div id="9e1eb31e-ad88-44b2-85a2-b7c08a6ebb21" class="cell code"
+        data-execution_count="11">
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> correlation_dendogram(df, method<span class="op">=</span><span class="st">&#39;single&#39;</span>):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Used to plot the dendogram from a correlation matrix.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">    1 - corr ** 2 can be interpreted as the unexplained variance</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    from a linear model between a bivariate distribution (X, Y).</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">    This can be interpreted as a distance matrix</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">        df (pd.DataFrame):</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    corr <span class="op">=</span> df.corr()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    corr <span class="op">=</span> np.<span class="bu">round</span>(corr, <span class="dv">2</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    distance_matrix <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> corr <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    corr_condensed <span class="op">=</span> hc.distance.squareform(distance_matrix)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> hc.linkage(corr_condensed, method<span class="op">=</span>method)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    hc.dendrogram(</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        z,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        labels<span class="op">=</span>corr.columns,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        orientation<span class="op">=</span><span class="st">&#39;left&#39;</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        leaf_font_size<span class="op">=</span><span class="dv">16</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    plt.title(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Agglomerative Clustering, single linkage with &quot;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;distance = $1 - </span><span class="ch">\\</span><span class="st">rho^2$&quot;</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;Unexplained Variance&quot;</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>correlation_dendogram(aarhus_apartments)</span></code></pre></div>
+        <div class="output display_data">
+        <p><img
+        src="/posts/2022-01-17-correlation-clustering/6679bd3cda18afcd17133ee61978d84e4bc3241a.png" /></p>
+        </div>
+        </div>
+        <br>
+        <br>
+
+        <!--- Disqus --->
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+           var disqus_config = function () {
+           this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+           this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+           };
+                 */
+            (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://machinelearningnotes-1.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>        
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+  </body>
+</html>

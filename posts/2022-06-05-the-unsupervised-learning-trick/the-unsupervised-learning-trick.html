@@ -186,7 +186,10 @@
 
                 <!-- Disqus -->
                 <script id="dsq-count-scr" src="//machinelearningnotes-1.disqus.com/count.js" async></script>
-            
+                      <script
+                      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+                      type="text/javascript"></script>
+      
     <title>The Unsupervised Learning Trick</title>
   </head>
   <body>
@@ -218,8 +221,8 @@
             <div class="pull-right">
 
                                 <div class="text-right">
-                    <a href="https://github.com/laegsgaardTroels/the-unsupervised-learning-trick">
-                        [<i>View code on Github</i> <span class="fa fa-github"></span>]
+                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src//posts/2022-06-05-the-unsupervised-learning-trick">
+                        [<i>View source</i> <span class="fa fa-github"></span>]
                     </a>
                 </div>
                 
@@ -229,152 +232,179 @@
         
 
         <br>
-        <div id="8ae4f599-c580-43e3-af93-3e7845baa11a" class="cell code"
-        data-execution_count="1">
-        <div class="sourceCode" id="cb1"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>display(Markdown(<span class="st">&quot;README.md&quot;</span>))</span></code></pre></div>
-        <div class="output display_data">
-        <pre><code>&lt;IPython.core.display.Markdown object&gt;</code></pre>
-        </div>
+        <div id="1f291ec0-082f-4fe6-b87a-ad84cb330366"
+        class="cell markdown">
+        <h1 id="the-unsupervised-learning-trick">The Unsupervised
+        Learning Trick</h1>
+        <p><strong>Purpose:</strong> Show the unsupervised learning
+        trick on the mnist data using a Random Forest.<!--more--></p>
+        <p>The unsupervised learning trick is done by creating a new
+        class in a classification problem using simulated data.</p>
+        <p>The data is simulated by randomly sampling from the
+        <strong>univariate empirical distribution</strong> for each
+        feature (not the <strong>multivariate empirical
+        distribution</strong>). For this new class each feature is
+        independent wrt. the empirical distribution:</p>
+        <p><span class="math display">\[\mathbb{P}(X_1, \dots, X_n) =
+        \mathbb{P}(X_1) \cdots \mathbb{P}(X_n)\]</span></p>
+        <p>As explained by Adele Cutler in [1]:</p>
+        <p>The Unsupervised Learning Trick. Label the “real” data as
+        class 1. Construct cases from a synthetic second class as
+        follows:</p>
+        <ol>
+        <li>Randomly select the value for variable 1 from all the
+        observed values of variable 1.</li>
+        <li>Independently, randomly select the value for variable 2 from
+        all the observed values of variable 2.</li>
+        <li>Similarly for variables 3,...,M.</li>
+        </ol>
+        <p>The Synthetic Second Class. The synthetic second class has
+        the same marginal distributions as the “real” data, but we have
+        destroyed all the dependencies between the variables. Now we
+        have a 2-class classification problem.</p>
+        <p>Run random forests !</p>
+        <h2 id="references">References</h2>
+        <p>[1] Slide 57-58.
+        state-of-the-art-data-mining-using-random-forest-leo-breiman-adele-cutler.pdf</p>
+        <p>[2] <a href="http://yann.lecun.com/exdb/mnist/"
+        class="uri">http://yann.lecun.com/exdb/mnist/</a></p>
         </div>
         <div id="e05a34ca-2ba2-4620-bdc9-b5f1fe6e9164" class="cell code"
         data-execution_count="2">
-        <div class="sourceCode" id="cb3"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dataclasses</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Config:</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    train_images_path: <span class="bu">str</span> <span class="op">=</span> <span class="st">&#39;data/processed/train-images-idx3-ubyte&#39;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    train_labels_path: <span class="bu">str</span> <span class="op">=</span> <span class="st">&#39;data/processed/train-labels-idx1-ubyte&#39;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    train_sample_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">60000</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    test_images_path: <span class="bu">str</span>  <span class="op">=</span> <span class="st">&#39;data/processed/t10k-images-idx3-ubyte&#39;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    test_labels_path: <span class="bu">str</span>  <span class="op">=</span> <span class="st">&#39;data/processed/t10k-labels-idx1-ubyte&#39;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    test_sample_size: <span class="bu">int</span>  <span class="op">=</span> <span class="dv">10000</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    with_unsupervised_learning_trick: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    seed: <span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    train_n_unknowns: <span class="bu">int</span> <span class="op">=</span> <span class="dv">6000</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    test_n_unknowns: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    random_forest_kwargs: <span class="bu">dict</span> <span class="op">=</span> dataclasses.field(</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        default_factory<span class="op">=</span><span class="kw">lambda</span>:{</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;n_estimators&#39;</span>: <span class="dv">500</span>,</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;max_depth&#39;</span>: <span class="dv">13</span>,</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;random_state&#39;</span>: <span class="dv">42</span>,</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;n_jobs&#39;</span>: <span class="op">-</span><span class="dv">1</span>,</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> Config()</span></code></pre></div>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dataclasses</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclasses.dataclass</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Config:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    train_images_path: <span class="bu">str</span> <span class="op">=</span> <span class="st">&#39;data/processed/train-images-idx3-ubyte&#39;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    train_labels_path: <span class="bu">str</span> <span class="op">=</span> <span class="st">&#39;data/processed/train-labels-idx1-ubyte&#39;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    train_sample_size: <span class="bu">int</span> <span class="op">=</span> <span class="dv">60000</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    test_images_path: <span class="bu">str</span>  <span class="op">=</span> <span class="st">&#39;data/processed/t10k-images-idx3-ubyte&#39;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    test_labels_path: <span class="bu">str</span>  <span class="op">=</span> <span class="st">&#39;data/processed/t10k-labels-idx1-ubyte&#39;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    test_sample_size: <span class="bu">int</span>  <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    with_unsupervised_learning_trick: <span class="bu">bool</span> <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    seed: <span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    train_n_unknowns: <span class="bu">int</span> <span class="op">=</span> <span class="dv">6000</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    test_n_unknowns: <span class="bu">int</span> <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    random_forest_kwargs: <span class="bu">dict</span> <span class="op">=</span> dataclasses.field(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        default_factory<span class="op">=</span><span class="kw">lambda</span>:{</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;n_estimators&#39;</span>: <span class="dv">500</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;max_depth&#39;</span>: <span class="dv">13</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;random_state&#39;</span>: <span class="dv">42</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;n_jobs&#39;</span>: <span class="op">-</span><span class="dv">1</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> Config()</span></code></pre></div>
         </div>
         <div id="431d12da-04bc-43ea-bddf-997d3cd8f09f" class="cell code"
         data-execution_count="3">
-        <div class="sourceCode" id="cb4"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_images(images_path):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(images_path, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> f:</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        magic_number <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        n_images <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        n_columns <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        n_rows <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        images <span class="op">=</span> np.frombuffer(f.read(), dtype<span class="op">=</span>np.uint8)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> images.reshape(n_images, n_columns <span class="op">*</span> n_rows)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> magic_number, n_images, n_columns, n_rows, images</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_labels(labels_path):</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(labels_path, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> f:</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        magic_number <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        n_items <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        labels <span class="op">=</span> np.frombuffer(f.read(), dtype<span class="op">=</span>np.uint8)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> magic_number, n_items, labels</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_train(config):</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    _, _, _, _, images <span class="op">=</span> load_images(</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        images_path<span class="op">=</span>config.train_images_path</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    _, _, labels <span class="op">=</span> load_labels(</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        labels_path<span class="op">=</span>config.train_labels_path,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> images[<span class="dv">0</span>:config.train_sample_size,:]</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> labels[<span class="dv">0</span>:config.train_sample_size]</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> images, labels</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_test(config):</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    _, _, _, _, images <span class="op">=</span> load_images(</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        images_path<span class="op">=</span>config.test_images_path</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    _, _, labels <span class="op">=</span> load_labels(</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        labels_path<span class="op">=</span>config.test_labels_path,</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> images[<span class="dv">0</span>:config.test_sample_size,:]</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> labels[<span class="dv">0</span>:config.test_sample_size]</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> images, labels</span></code></pre></div>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_images(images_path):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(images_path, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        magic_number <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        n_images <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        n_columns <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        n_rows <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        images <span class="op">=</span> np.frombuffer(f.read(), dtype<span class="op">=</span>np.uint8)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> images.reshape(n_images, n_columns <span class="op">*</span> n_rows)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> magic_number, n_images, n_columns, n_rows, images</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_labels(labels_path):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(labels_path, <span class="st">&#39;rb&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        magic_number <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        n_items <span class="op">=</span> <span class="bu">int</span>.from_bytes(f.read(<span class="dv">4</span>), <span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        labels <span class="op">=</span> np.frombuffer(f.read(), dtype<span class="op">=</span>np.uint8)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> magic_number, n_items, labels</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_train(config):</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    _, _, _, _, images <span class="op">=</span> load_images(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        images_path<span class="op">=</span>config.train_images_path</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    _, _, labels <span class="op">=</span> load_labels(</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        labels_path<span class="op">=</span>config.train_labels_path,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> images[<span class="dv">0</span>:config.train_sample_size,:]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> labels[<span class="dv">0</span>:config.train_sample_size]</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> images, labels</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_test(config):</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    _, _, _, _, images <span class="op">=</span> load_images(</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        images_path<span class="op">=</span>config.test_images_path</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    _, _, labels <span class="op">=</span> load_labels(</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        labels_path<span class="op">=</span>config.test_labels_path,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    images <span class="op">=</span> images[<span class="dv">0</span>:config.test_sample_size,:]</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> labels[<span class="dv">0</span>:config.test_sample_size]</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> images, labels</span></code></pre></div>
         </div>
         <div id="dde88838-c316-42a2-80a3-44d75ee6b51f" class="cell code"
         data-execution_count="4">
-        <div class="sourceCode" id="cb5"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unsupervised_learning_trick(X, y, n_unknowns):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the simulated observations.</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> []</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> feature_idx <span class="kw">in</span> <span class="bu">range</span>(X_train.shape[<span class="dv">1</span>]):</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Randomly select the value for variable from all the observed values of variable.</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        random_idxs <span class="op">=</span> np.random.choice(X_train.shape[<span class="dv">0</span>], size<span class="op">=</span>n_unknowns)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        feature <span class="op">=</span> X_train[random_idxs, feature_idx]</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Save.</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        features.append(feature)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine. Unknowns are assigned label -1.</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    X_unknown <span class="op">=</span> np.column_stack(features)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    y_unknown <span class="op">=</span> np.repeat(<span class="op">-</span><span class="dv">1</span>, n_unknowns)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Concatenate with original data.</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.r_[X, X_unknown]</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.r_[y, y_unknown]</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, y</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(y_true, y_pred):</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(metrics.classification_report(y_true, y_pred))</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    metrics.ConfusionMatrixDisplay.from_predictions(y_true, y_pred, ax<span class="op">=</span>ax, normalize<span class="op">=</span><span class="st">&#39;true&#39;</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eyeball(X, y, y_hat, y_prob, n_max_eyeballs<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row_idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(X.shape[<span class="dv">0</span>], n_max_eyeballs)):</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;True Label&#39;</span>, y[row_idx])</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;Predicted Label&#39;</span>, y_hat[row_idx])</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;Predicted Probability&#39;</span>, np.<span class="bu">max</span>(y_prob[row_idx]))</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        plt.figure()</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        plt.imshow(X[row_idx, :].reshape(<span class="dv">28</span>, <span class="dv">28</span>))</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        plt.show()</span></code></pre></div>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unsupervised_learning_trick(X, y, n_unknowns):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the simulated observations.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    features <span class="op">=</span> []</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> feature_idx <span class="kw">in</span> <span class="bu">range</span>(X_train.shape[<span class="dv">1</span>]):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Randomly select the value for variable from all the observed values of variable.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        random_idxs <span class="op">=</span> np.random.choice(X_train.shape[<span class="dv">0</span>], size<span class="op">=</span>n_unknowns)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        feature <span class="op">=</span> X_train[random_idxs, feature_idx]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Save.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        features.append(feature)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Combine. Unknowns are assigned label -1.</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    X_unknown <span class="op">=</span> np.column_stack(features)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    y_unknown <span class="op">=</span> np.repeat(<span class="op">-</span><span class="dv">1</span>, n_unknowns)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Concatenate with original data.</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.r_[X, X_unknown]</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.r_[y, y_unknown]</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X, y</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate(y_true, y_pred):</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(metrics.classification_report(y_true, y_pred))</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    metrics.ConfusionMatrixDisplay.from_predictions(y_true, y_pred, ax<span class="op">=</span>ax, normalize<span class="op">=</span><span class="st">&#39;true&#39;</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eyeball(X, y, y_hat, y_prob, n_max_eyeballs<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row_idx <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(X.shape[<span class="dv">0</span>], n_max_eyeballs)):</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;True Label&#39;</span>, y[row_idx])</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;Predicted Label&#39;</span>, y_hat[row_idx])</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&#39;Predicted Probability&#39;</span>, np.<span class="bu">max</span>(y_prob[row_idx]))</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        plt.figure()</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        plt.imshow(X[row_idx, :].reshape(<span class="dv">28</span>, <span class="dv">28</span>))</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        plt.show()</span></code></pre></div>
         </div>
         <div id="223ee022-d7fb-4069-9f5b-a382ecaa3089" class="cell code"
         data-execution_count="5">
-        <div class="sourceCode" id="cb6"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(config.seed)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> load_train(config)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> config.with_unsupervised_learning_trick:</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    X_train, y_train <span class="op">=</span> unsupervised_learning_trick(X_train, y_train, n_unknowns<span class="op">=</span>config.train_n_unknowns)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(<span class="op">**</span>config.random_forest_kwargs)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train, y_train)</span></code></pre></div>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(config.seed)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> load_train(config)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> config.with_unsupervised_learning_trick:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    X_train, y_train <span class="op">=</span> unsupervised_learning_trick(X_train, y_train, n_unknowns<span class="op">=</span>config.train_n_unknowns)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(<span class="op">**</span>config.random_forest_kwargs)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train, y_train)</span></code></pre></div>
         <div class="output execute_result" data-execution_count="5">
         <style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestClassifier(max_depth=13, n_estimators=500, n_jobs=-1,
                                random_state=42)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestClassifier</label><div class="sk-toggleable__content"><pre>RandomForestClassifier(max_depth=13, n_estimators=500, n_jobs=-1,
@@ -383,9 +413,9 @@
         </div>
         <div id="5e7ec3a1-913c-43d0-aa20-bc3f2ec8c0be" class="cell code"
         data-execution_count="6">
-        <div class="sourceCode" id="cb7"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y_hat_train <span class="op">=</span> rf.predict(X_train)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>evaluate(y_train, y_hat_train)</span></code></pre></div>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y_hat_train <span class="op">=</span> rf.predict(X_train)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>evaluate(y_train, y_hat_train)</span></code></pre></div>
         <div class="output stream stdout">
         <pre><code>              precision    recall  f1-score   support
 
@@ -409,18 +439,18 @@ weighted avg       0.99      0.99      0.99     66000
         </div>
         <div class="output display_data">
         <p><img
-        src="bff4ee960215bb5ab4eba29d432907b3bc474af4.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/bff4ee960215bb5ab4eba29d432907b3bc474af4.png" /></p>
         </div>
         </div>
         <div id="2ebcb4d9-1760-4462-ab8e-7d948881595d" class="cell code"
         data-execution_count="7">
-        <div class="sourceCode" id="cb9"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X_test, y_test <span class="op">=</span> load_test(config)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> config.with_unsupervised_learning_trick:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    X_test, y_test <span class="op">=</span> unsupervised_learning_trick(X_test, y_test, n_unknowns<span class="op">=</span>config.test_n_unknowns)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y_hat_test <span class="op">=</span> rf.predict(X_test)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>y_prob_test <span class="op">=</span> rf.predict_proba(X_test)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>evaluate(y_test, y_hat_test)</span></code></pre></div>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_test, y_test <span class="op">=</span> load_test(config)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> config.with_unsupervised_learning_trick:</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    X_test, y_test <span class="op">=</span> unsupervised_learning_trick(X_test, y_test, n_unknowns<span class="op">=</span>config.test_n_unknowns)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>y_hat_test <span class="op">=</span> rf.predict(X_test)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y_prob_test <span class="op">=</span> rf.predict_proba(X_test)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>evaluate(y_test, y_hat_test)</span></code></pre></div>
         <div class="output stream stdout">
         <pre><code>              precision    recall  f1-score   support
 
@@ -444,7 +474,7 @@ weighted avg       0.96      0.96      0.96     11000
         </div>
         <div class="output display_data">
         <p><img
-        src="abbf316f0854f2e7ffa3525e389ee5b6e8aff4e8.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/abbf316f0854f2e7ffa3525e389ee5b6e8aff4e8.png" /></p>
         </div>
         </div>
         <div id="886ad753-4e00-493e-bb7b-79339ea67d24"
@@ -453,16 +483,16 @@ weighted avg       0.96      0.96      0.96     11000
         </div>
         <div id="002143b9-efd8-4fc0-8af2-77aac8b07476" class="cell code"
         data-execution_count="8">
-        <div class="sourceCode" id="cb11"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>not_unknown_mask <span class="op">=</span> y_test <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total&quot;</span>, <span class="bu">sum</span>(not_unknown_mask))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>eyeball(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_test[not_unknown_mask],</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y_test[not_unknown_mask],</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    y_hat<span class="op">=</span>y_hat_test[not_unknown_mask],</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    y_prob<span class="op">=</span>y_prob_test[not_unknown_mask]</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>not_unknown_mask <span class="op">=</span> y_test <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total&quot;</span>, <span class="bu">sum</span>(not_unknown_mask))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>eyeball(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_test[not_unknown_mask],</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y_test[not_unknown_mask],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    y_hat<span class="op">=</span>y_hat_test[not_unknown_mask],</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    y_prob<span class="op">=</span>y_prob_test[not_unknown_mask]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
         <div class="output stream stdout">
         <pre><code>Total 10000
 
@@ -473,7 +503,7 @@ Predicted Probability 0.9793516538192172
         </div>
         <div class="output display_data">
         <p><img
-        src="b0b69eaff19739f19594a6c6cba38cbdfcbaabcf.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/b0b69eaff19739f19594a6c6cba38cbdfcbaabcf.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 2
@@ -483,7 +513,7 @@ Predicted Probability 0.7504016701535301
         </div>
         <div class="output display_data">
         <p><img
-        src="5049db732e876831ee0333aaf174dac2bd48f61f.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/5049db732e876831ee0333aaf174dac2bd48f61f.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 1
@@ -493,7 +523,7 @@ Predicted Probability 0.9738755382964321
         </div>
         <div class="output display_data">
         <p><img
-        src="d1a21bb6d2563fd55310537aec480f3b8ef2f7b9.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/d1a21bb6d2563fd55310537aec480f3b8ef2f7b9.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 0
@@ -503,7 +533,7 @@ Predicted Probability 0.9352415713509062
         </div>
         <div class="output display_data">
         <p><img
-        src="87fd3b9fe444f4fcfcd40b2b532af532bd2ab595.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/87fd3b9fe444f4fcfcd40b2b532af532bd2ab595.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 4
@@ -513,7 +543,7 @@ Predicted Probability 0.8931474951134427
         </div>
         <div class="output display_data">
         <p><img
-        src="82b4265bf600c766ac7976fbf07020d6114603a3.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/82b4265bf600c766ac7976fbf07020d6114603a3.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 1
@@ -523,7 +553,7 @@ Predicted Probability 0.9789041021483729
         </div>
         <div class="output display_data">
         <p><img
-        src="cde35e768ad89ed728aa13cf33c939a1b4f84d34.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/cde35e768ad89ed728aa13cf33c939a1b4f84d34.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 4
@@ -533,7 +563,7 @@ Predicted Probability 0.6839885479117203
         </div>
         <div class="output display_data">
         <p><img
-        src="0eb4366466efa8f5ad265135c1b183801e22934d.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/0eb4366466efa8f5ad265135c1b183801e22934d.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 9
@@ -543,7 +573,7 @@ Predicted Probability 0.5554514860202037
         </div>
         <div class="output display_data">
         <p><img
-        src="aa61b4adadc1fbf4cc39bb643097bb87ce397070.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/aa61b4adadc1fbf4cc39bb643097bb87ce397070.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 5
@@ -553,7 +583,7 @@ Predicted Probability 0.2591955406086213
         </div>
         <div class="output display_data">
         <p><img
-        src="4a09484aa2e03695f530559ecf9b912071487a47.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/4a09484aa2e03695f530559ecf9b912071487a47.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 9
@@ -563,7 +593,7 @@ Predicted Probability 0.7983953847065036
         </div>
         <div class="output display_data">
         <p><img
-        src="77c217d8abcf7286aeb05df0589e7a5dbf376354.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/77c217d8abcf7286aeb05df0589e7a5dbf376354.png" /></p>
         </div>
         </div>
         <div id="312745e9-a740-47da-a67b-a8bbb6282b62"
@@ -573,16 +603,16 @@ Predicted Probability 0.7983953847065036
         </div>
         <div id="d260f3fc-9e19-40cb-b6ba-a3fb70929451" class="cell code"
         data-execution_count="12">
-        <div class="sourceCode" id="cb22"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>unknown_mask <span class="op">=</span> y_hat_test <span class="op">==</span> <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total&quot;</span>, <span class="bu">sum</span>(unknown_mask))</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>eyeball(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_test[unknown_mask],</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y_test[unknown_mask],</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    y_hat<span class="op">=</span>y_hat_test[unknown_mask],</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    y_prob<span class="op">=</span>y_prob_test[unknown_mask],</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+        <div class="sourceCode" id="cb20"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>unknown_mask <span class="op">=</span> y_hat_test <span class="op">==</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Total&quot;</span>, <span class="bu">sum</span>(unknown_mask))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>eyeball(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    X<span class="op">=</span>X_test[unknown_mask],</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y_test[unknown_mask],</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    y_hat<span class="op">=</span>y_hat_test[unknown_mask],</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    y_prob<span class="op">=</span>y_prob_test[unknown_mask],</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
         <div class="output stream stdout">
         <pre><code>Total 1022
 
@@ -593,7 +623,7 @@ Predicted Probability 0.2222329669340371
         </div>
         <div class="output display_data">
         <p><img
-        src="2ce765913f512423ed09c3916033b6d81d505476.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/2ce765913f512423ed09c3916033b6d81d505476.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 8
@@ -603,7 +633,7 @@ Predicted Probability 0.1951142756865323
         </div>
         <div class="output display_data">
         <p><img
-        src="95f34916ca7740213f4e49d89fda1e4146918467.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/95f34916ca7740213f4e49d89fda1e4146918467.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 8
@@ -613,7 +643,7 @@ Predicted Probability 0.17248933928188173
         </div>
         <div class="output display_data">
         <p><img
-        src="66bfef7da1e7f35d8c27548d440f653852b3c5a5.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/66bfef7da1e7f35d8c27548d440f653852b3c5a5.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 7
@@ -623,7 +653,7 @@ Predicted Probability 0.22828327150130867
         </div>
         <div class="output display_data">
         <p><img
-        src="25a464b431c73b7756b2e67d08c658067b956bdf.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/25a464b431c73b7756b2e67d08c658067b956bdf.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 8
@@ -633,7 +663,7 @@ Predicted Probability 0.30708866966945164
         </div>
         <div class="output display_data">
         <p><img
-        src="d8d4573b7207705075bb2db19327d6eef48f5ae5.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/d8d4573b7207705075bb2db19327d6eef48f5ae5.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 4
@@ -643,7 +673,7 @@ Predicted Probability 0.19787391342365956
         </div>
         <div class="output display_data">
         <p><img
-        src="08a5e3aabe86f49ff217d58e63f03e74bff02e2e.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/08a5e3aabe86f49ff217d58e63f03e74bff02e2e.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 8
@@ -653,7 +683,7 @@ Predicted Probability 0.225606998174814
         </div>
         <div class="output display_data">
         <p><img
-        src="9d2f76ab556aa59585d539192f97b0d4d981bbeb.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/9d2f76ab556aa59585d539192f97b0d4d981bbeb.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 8
@@ -663,7 +693,7 @@ Predicted Probability 0.22178239104303824
         </div>
         <div class="output display_data">
         <p><img
-        src="467d8f0131d8b81cf765d32bc7e6f36d50e36fb8.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/467d8f0131d8b81cf765d32bc7e6f36d50e36fb8.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 0
@@ -673,7 +703,7 @@ Predicted Probability 0.20292505069056974
         </div>
         <div class="output display_data">
         <p><img
-        src="face55500864295c3c34bc803430ed5dc67c65eb.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/face55500864295c3c34bc803430ed5dc67c65eb.png" /></p>
         </div>
         <div class="output stream stdout">
         <pre><code>True Label 1
@@ -683,7 +713,7 @@ Predicted Probability 0.16867325565278937
         </div>
         <div class="output display_data">
         <p><img
-        src="f97d7dcdaf1e7ace5c21ee49eae00de8b981168d.png" /></p>
+        src="/posts/2022-06-05-the-unsupervised-learning-trick/f97d7dcdaf1e7ace5c21ee49eae00de8b981168d.png" /></p>
         </div>
         </div>
         <br>

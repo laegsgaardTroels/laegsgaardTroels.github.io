@@ -3,7 +3,6 @@ post:
 - author: "Troels L\xE6gsgaard"
   category: Python
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-10-16-intervals
-  content: ''
   date: '2022-10-16'
   day: '16'
   excerpt: Intervals manipulation in Python. [...]
@@ -24,6 +23,29 @@ post:
   month: '06'
   title: The Unsupervised Learning Trick
   url: posts/2022-06-05-the-unsupervised-learning-trick/the-unsupervised-learning-trick.html
+  year: '2022'
+- author: "Troels L\xE6gsgaard"
+  category: Technique
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-01-17-correlation-clustering
+  date: '2022-01-17'
+  day: '17'
+  excerpt: An example of how to cluster numerical features using their correlation.
+    [...]
+  image: /src/posts/2022-01-17-correlation-clustering/correlation.svg
+  month: '01'
+  title: Correlation Clustering
+  url: posts/2022-01-17-correlation-clustering/correlation_clustering.html
+  year: '2022'
+- author: "Troels L\xE6gsgaard"
+  category: References
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-01-17-articles-and-blogposts
+  date: '2022-01-17'
+  day: '17'
+  excerpt: A list of references to articles and blogposts I find nice. [...]
+  image: /assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png
+  month: '01'
+  title: Articles and Blogposts
+  url: posts/2022-01-17-articles-and-blogposts/articles-and-blogposts.html
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: Text Editor
@@ -157,20 +179,6 @@ post:
   url: posts/2020-03-05-machine-learning-yearning/machine-learning-yearning.html
   year: '2020'
 - author: "Troels L\xE6gsgaard"
-  category: Course
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-01-01-applied-data-science-with-pyspark
-  content: ''
-  date: '2020-01-01'
-  day: '01'
-  excerpt: Spark is a popular framework for processing big data, widely used in the
-    industry. This course will give you a short introduction to the popular Python
-    API to the Spark framework. [...]
-  image: /assets/images/base/apache_spark.svg
-  month: '01'
-  title: Applied Data Science With Pyspark
-  url: posts/2020-01-01-applied-data-science-with-pyspark/applied-data-science-with-pyspark.html
-  year: '2020'
-- author: "Troels L\xE6gsgaard"
   category: Thoughts
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables
   content: ''
@@ -196,21 +204,6 @@ post:
   month: '12'
   title: Difference Between The Pyspark Pipeline And The Sklearn Pipeline
   url: posts/2019-12-04-difference-between-the-pyspark-pipeline-and-the-sklearn-pipeline/difference-between-the-pyspark-pipeline-and-the-sklearn-pipeline.html
-  year: '2019'
-- author: "Troels L\xE6gsgaard"
-  category: Course
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-08-11-applied-data-science-with-r
-  content: ''
-  date: '2019-08-11'
-  day: '11'
-  excerpt: Learn how to solve many commonly faced problems when applying R for Data
-    Science and become an even more important part of your company. This course will
-    introduce you to the most important Data Science tools in R to effectively solve
-    many real life problems. [...]
-  image: /assets/images/base/r.svg
-  month: 08
-  title: Applied Data Science With R
-  url: posts/2019-08-11-applied-data-science-with-r/applied-data-science-with-r.html
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Riddle
@@ -319,7 +312,6 @@ post:
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-09-29-adaboost-the-original-boosting-algorithm
-  content: ''
   date: '2017-09-29'
   day: '29'
   excerpt: In this post the famous AdaBoost algoritm will be implemented in R [...]

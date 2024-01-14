@@ -1,17 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Algorithm
-code: https://github.com/laegsgaardTroels/adaboost-the-original-boosting-algorithm
-content: ''
-date: '2017-09-29'
-day: '29'
-excerpt: In this post the famous AdaBoost algoritm will be implemented in R [...]
-image: /assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png
-month: 09
-title: Adaboost The Original Boosting Algorithm
-url: /posts/2017-09-29-adaboost-the-original-boosting-algorithm.html
-year: '2017'
----
 In this post the famous AdaBoost algoritm will be implemented in R<!--more--> and tested on simulated data. The post is intented to yield some intuition and understanding about what boosting is via an exercise.
 
 What is boosting? Lets start explaining this with a nice analogy provided by the masters of boosting: Yoav Freund and Robert E. Schapire, you could imagine the horse racing-gampler being an overly intelligent gambler from Peaky Blinders:

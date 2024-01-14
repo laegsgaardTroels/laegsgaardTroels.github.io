@@ -1,0 +1,13 @@
+author: "Troels L\xE6gsgaard"
+category: Statistical Learning
+code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2018-11-09-model-evaluation
+content: ''
+date: '2018-11-09'
+day: 09
+excerpt: Giving an estimate of generalization error in Machine Learning is vital.
+  [...]
+image: /assets/images/2018-11-09-model-evaluation-part-1/Generalization_bound.png
+month: '11'
+title: Model Evaluation
+url: posts/2018-11-09-model-evaluation/model-evaluation.html
+year: '2018'

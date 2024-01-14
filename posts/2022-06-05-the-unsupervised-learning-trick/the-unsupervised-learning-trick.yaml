@@ -1,0 +1,13 @@
+author: "Troels L\xE6gsgaard"
+category: Algorithm
+code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-06-05-the-unsupervised-learning-trick
+content: ''
+date: '2022-06-05'
+day: '05'
+excerpt: In this git repository I show the unsupervised learning trick on the mnist
+  data using a Random Forest. It works sorta ok. [...]
+image: /assets/images/2022-06-05-the-unsupervised-learning-trick/the-unsupervised-learning-trick.png
+month: '06'
+title: The Unsupervised Learning Trick
+url: posts/2022-06-05-the-unsupervised-learning-trick/the-unsupervised-learning-trick.html
+year: '2022'

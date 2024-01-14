@@ -1,0 +1,14 @@
+author: "Troels L\xE6gsgaard"
+category: Course
+code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-01-01-applied-data-science-with-pyspark
+content: ''
+date: '2020-01-01'
+day: '01'
+excerpt: Spark is a popular framework for processing big data, widely used in the
+  industry. This course will give you a short introduction to the popular Python API
+  to the Spark framework. [...]
+image: /assets/images/base/apache_spark.svg
+month: '01'
+title: Applied Data Science With Pyspark
+url: posts/2020-01-01-applied-data-science-with-pyspark/applied-data-science-with-pyspark.html
+year: '2020'

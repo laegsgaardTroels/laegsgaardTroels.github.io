@@ -15,18 +15,40 @@ def print_yaml_header(args):
     yaml.dump(headers, sys.stdout)
 
 
-def build_index_md(args):
+def index_md(args):
     index_md = {
         "title": "Machine Learning Notes",
         "post": [],
     }
     for path in sorted(args.path, reverse=True):
         post_metadata = yaml.safe_load(path.read_text())
-        post_metadata["author"] = "Troels Lægsgaard"
-        post_metadata["url"] = str(path.relative_to("src").with_suffix(".html"))
-        post_metadata["code"] = "https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/" + str(path.parent)
-        index_md["post"].append(post_metadata)
+        if post_metadata.get('category', 'Not Course') != 'Course':
+            index_md["post"].append(post_metadata)
     print(f"---\n{yaml.dump(index_md)}---""")
+
+
+def courses_md(args):
+    courses_md = {
+        "title": "Courses",
+        "post": [],
+    }
+    for path in sorted(args.path, reverse=True):
+        post_metadata = yaml.safe_load(path.read_text())
+        if post_metadata.get('category', 'Not Course') == 'Course':
+            courses_md["post"].append(post_metadata)
+    print(f"---\n{yaml.dump(courses_md)}---""")
+
+
+def metadata(args):
+    metadata = yaml.safe_load(args.path.read_text())
+    if metadata is None:
+        metadata = {}
+    metadata["year"], metadata["month"], metadata["day"] = args.path.parent.stem.split('-')[:3]
+    metadata["date"] = '-'.join(args.path.parent.stem.split('-')[:3])
+    metadata["author"] = "Troels Lægsgaard"
+    metadata["url"] = str(args.path.relative_to("src").with_suffix(".html"))
+    metadata["code"] = "https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/" + str(args.path.parent)
+    yaml.dump(metadata, sys.stdout)
 
 
 if __name__ == '__main__':
@@ -43,13 +65,29 @@ if __name__ == '__main__':
     )
     print_yaml_header_parser.set_defaults(func=print_yaml_header)
 
-    build_index_md_parser = subparsers.add_parser(
-        'build_index_md', help='Build the index.md.'
+    index_md_parser = subparsers.add_parser(
+        'index_md', help='Build the index.md.'
     )
-    build_index_md_parser.add_argument(
+    index_md_parser.add_argument(
         'path', type=pathlib.Path, nargs='+',
     )
-    build_index_md_parser.set_defaults(func=build_index_md)
+    index_md_parser.set_defaults(func=index_md)
+
+    courses_md_parser = subparsers.add_parser(
+            'courses_md', help='Build the courses.md.'
+    )
+    courses_md_parser.add_argument(
+        'path', type=pathlib.Path, nargs='+',
+    )
+    courses_md_parser.set_defaults(func=courses_md)
+
+    metadata_parser = subparsers.add_parser(
+        'metadata', help='Build metadata'
+    )
+    metadata_parser.add_argument(
+        'path', type=pathlib.Path,
+    )
+    metadata_parser.set_defaults(func=metadata)
 
     args = parser.parse_args()
     args.func(args)

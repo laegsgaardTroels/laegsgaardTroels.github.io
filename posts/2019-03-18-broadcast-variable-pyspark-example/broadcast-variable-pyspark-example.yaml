@@ -1,0 +1,13 @@
+author: "Troels L\xE6gsgaard"
+category: Programming
+code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-03-18-broadcast-variable-pyspark-example
+content: ''
+date: '2019-03-18'
+day: '18'
+excerpt: Broadcasting a variable is useful for repeatedly used read-only variables
+  in an application [...]
+image: assets/images/base/apache_spark.svg
+month: '03'
+title: Broadcast Variable Pyspark Example
+url: posts/2019-03-18-broadcast-variable-pyspark-example/broadcast-variable-pyspark-example.html
+year: '2019'
