@@ -24,7 +24,7 @@ def build_index_md(args):
         post_metadata = yaml.safe_load(path.read_text())
         post_metadata["author"] = "Troels Lægsgaard"
         post_metadata["url"] = str(path.relative_to("src").with_suffix(".html"))
-        post_metadata["code"] = "https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/" + str(path.parent)
+        post_metadata["code"] = "https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/" + str(path.parent)
         index_md["post"].append(post_metadata)
     print(f"---\n{yaml.dump(index_md)}---""")
 

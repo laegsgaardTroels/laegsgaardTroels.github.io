@@ -2,7 +2,7 @@
 post:
 - author: "Troels L\xE6gsgaard"
   category: Python
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2022-10-16-intervals
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-10-16-intervals
   content: ''
   date: '2022-10-16'
   day: '16'
@@ -14,7 +14,7 @@ post:
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2022-06-05-the-unsupervised-learning-trick
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-06-05-the-unsupervised-learning-trick
   content: ''
   date: '2022-06-05'
   day: '05'
@@ -27,7 +27,7 @@ post:
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: Text Editor
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-08-29-vim
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-08-29-vim
   content: ''
   date: '2021-08-29'
   day: '29'
@@ -39,7 +39,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Python
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-07-09-python-logging
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-python-logging
   content: ''
   date: '2021-07-09'
   day: 09
@@ -51,7 +51,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Docker
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-07-09-docker-container
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-docker-container
   content: ''
   date: '2021-07-09'
   day: 09
@@ -63,7 +63,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Bash
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-06-14-useful-commands
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-06-14-useful-commands
   content: ''
   date: '2021-06-14'
   day: '14'
@@ -75,7 +75,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Distance Metric
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-06-09-haversine
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-06-09-haversine
   content: ''
   date: '2021-06-09'
   day: 09
@@ -87,7 +87,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Python
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-05-24-tqdm
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-24-tqdm
   content: ''
   date: '2021-05-24'
   day: '24'
@@ -100,7 +100,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Python
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-05-23-autoreload
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-23-autoreload
   content: ''
   date: '2021-05-23'
   day: '23'
@@ -114,7 +114,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Thoughts
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-05-02-operationel-range
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-02-operationel-range
   content: ''
   date: '2021-05-02'
   day: '02'
@@ -131,7 +131,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-04-16-hodrick-prescott-filtering
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-04-16-hodrick-prescott-filtering
   content: ''
   date: '2021-04-16'
   day: '16'
@@ -145,7 +145,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Technology
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2020-03-05-machine-learning-yearning
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-03-05-machine-learning-yearning
   content: ''
   date: '2020-03-05'
   day: '05'
@@ -158,7 +158,7 @@ post:
   year: '2020'
 - author: "Troels L\xE6gsgaard"
   category: Course
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2020-01-01-applied-data-science-with-pyspark
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-01-01-applied-data-science-with-pyspark
   content: ''
   date: '2020-01-01'
   day: '01'
@@ -172,7 +172,7 @@ post:
   year: '2020'
 - author: "Troels L\xE6gsgaard"
   category: Thoughts
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables
   content: ''
   date: '2019-12-05'
   day: '05'
@@ -185,7 +185,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Programming
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-12-04-difference-between-the-pyspark-pipeline-and-the-sklearn-pipeline
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-04-difference-between-the-pyspark-pipeline-and-the-sklearn-pipeline
   content: ''
   date: '2019-12-04'
   day: '04'
@@ -199,7 +199,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Course
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-08-11-applied-data-science-with-r
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-08-11-applied-data-science-with-r
   content: ''
   date: '2019-08-11'
   day: '11'
@@ -214,7 +214,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Riddle
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-07-28-lazy-proof-of-monty-hall
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-07-28-lazy-proof-of-monty-hall
   content: ''
   date: '2019-07-28'
   day: '28'
@@ -227,7 +227,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Technology
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-07-11-pydata-london
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-07-11-pydata-london
   content: ''
   date: '2019-07-11'
   day: '11'
@@ -240,7 +240,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Programming
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-06-01-3-pyspark-tricks
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-06-01-3-pyspark-tricks
   content: ''
   date: '2019-06-01'
   day: '01'
@@ -252,7 +252,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Programming
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-03-18-broadcast-variable-pyspark-example
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-03-18-broadcast-variable-pyspark-example
   content: ''
   date: '2019-03-18'
   day: '18'
@@ -265,7 +265,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-02-27-gradient-descent
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-27-gradient-descent
   content: ''
   date: '2019-02-27'
   day: '27'
@@ -279,7 +279,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Encoding
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2019-02-25-leave-one-out-encoding
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-25-leave-one-out-encoding
   content: ''
   date: '2019-02-25'
   day: '25'
@@ -292,7 +292,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Statistical Learning
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2018-11-09-model-evaluation
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2018-11-09-model-evaluation
   content: ''
   date: '2018-11-09'
   day: 09
@@ -305,7 +305,7 @@ post:
   year: '2018'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2017-11-06-xgboost
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-11-06-xgboost
   content: ''
   date: '2017-11-06'
   day: '06'
@@ -318,7 +318,7 @@ post:
   year: '2017'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2017-09-29-adaboost-the-original-boosting-algorithm
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-09-29-adaboost-the-original-boosting-algorithm
   content: ''
   date: '2017-09-29'
   day: '29'
@@ -330,7 +330,7 @@ post:
   year: '2017'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2017-06-30-blagging
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-06-30-blagging
   content: ''
   date: '2017-06-30'
   day: '30'
@@ -343,7 +343,7 @@ post:
   year: '2017'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2017-05-21-perceptron
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-05-21-perceptron
   content: ''
   date: '2017-05-21'
   day: '21'
