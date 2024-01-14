@@ -18,7 +18,7 @@ A presentation I did on the book Machine Learning Yearning by Andrew Ng using re
 
 remark.js is a nice javascript library for creating slideshows in the browser. It is very easy to get started, check out [1, 2] for more information.
 
-View the <a href="/machine_learning_yearning_presentation.html">Presentation</a>.
+View the <a href="/src/posts/2020-03-05-machine-learning-yearning/machine_learning_yearning_presentation.html">Presentation</a>.
 
 
 # References
