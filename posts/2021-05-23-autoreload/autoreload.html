@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+      <style>
+        img {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        figcaption {
+          max-width: 100%;
+          margin: auto;
+          display: block;
+        }
+        code {
+          font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+          background-color: #f5f5f5;
+          padding: .2em .4em;
+          font-size: 85%;
+          margin: 0;
+        }
+        pre {
+          margin: 1em 0;
+          background-color: #f5f5f5;
+          padding: 1em;
+          overflow: auto;
+        }
+        pre code {
+          padding: 0;
+          overflow: visible;
+          overflow-wrap: normal;
+        }
+        .sourceCode {
+         background-color: #f5f5f5;
+         overflow: visible;
+        }
+        hr {
+          background-color: #1a1a1a;
+          border: none;
+          height: 1px;
+          margin: 1em 0;
+        }
+        table {
+          margin: 1em 0;
+          border-collapse: collapse;
+          width: 100%;
+          overflow-x: auto;
+          display: block;
+          font-variant-numeric: lining-nums tabular-nums;
+        }
+        table caption {
+          margin-bottom: 0.75em;
+        }
+        tbody {
+          margin-top: 0.5em;
+          border-top: 1px solid #1a1a1a;
+          border-bottom: 1px solid #1a1a1a;
+        }
+        th {
+          border-top: 1px solid #1a1a1a;
+          padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+        td {
+          padding: 0.125em 0.5em 0.25em 0.5em;
+        }
+        header {
+          margin-bottom: 4em;
+          text-align: center;
+        }
+        #TOC li {
+          list-style: none;
+        }
+        #TOC ul {
+          padding-left: 1.3em;
+        }
+        #TOC > ul {
+          padding-left: 0;
+        }
+        #TOC a:not(:hover) {
+          text-decoration: none;
+        }
+        code{white-space: pre-wrap;}
+        span.smallcaps{font-variant: small-caps;}
+        span.underline{text-decoration: underline;}
+        div.column{display: inline-block; vertical-align: top; width: 50%;}
+        div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+        ul.task-list{list-style: none;}
+        pre > code.sourceCode { white-space: pre; position: relative; }
+        pre > code.sourceCode > span { line-height: 1.25; }
+        pre > code.sourceCode > span:empty { height: 1.2em; }
+        .sourceCode { overflow: visible; }
+        code.sourceCode > span { color: inherit; text-decoration: inherit; }
+        div.sourceCode { margin: 1em 0; }
+        pre.sourceCode { margin: 0; }
+        @media screen {
+        div.sourceCode { overflow: auto; }
+        }
+        @media print {
+        pre > code.sourceCode { white-space: pre-wrap; }
+        pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+        }
+        pre.numberSource code
+          { counter-reset: source-line 0; }
+        pre.numberSource code > span
+          { position: relative; left: -4em; counter-increment: source-line; }
+        pre.numberSource code > span > a:first-child::before
+          { content: counter(source-line);
+            position: relative; left: -1em; text-align: right; vertical-align: baseline;
+            border: none; display: inline-block;
+            -webkit-touch-callout: none; -webkit-user-select: none;
+            -khtml-user-select: none; -moz-user-select: none;
+            -ms-user-select: none; user-select: none;
+            padding: 0 4px; width: 4em;
+            color: #aaaaaa;
+          }
+        pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+        div.sourceCode
+          {   }
+        @media screen {
+        pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+        }
+        code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+        code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+        code span.at { color: #7d9029; } /* Attribute */
+        code span.bn { color: #40a070; } /* BaseN */
+        code span.bu { } /* BuiltIn */
+        code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+        code span.ch { color: #4070a0; } /* Char */
+        code span.cn { color: #880000; } /* Constant */
+        code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+        code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+        code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+        code span.dt { color: #902000; } /* DataType */
+        code span.dv { color: #40a070; } /* DecVal */
+        code span.er { color: #ff0000; font-weight: bold; } /* Error */
+        code span.ex { } /* Extension */
+        code span.fl { color: #40a070; } /* Float */
+        code span.fu { color: #06287e; } /* Function */
+        code span.im { color: #007020; font-weight: bold; } /* Import */
+        code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+        code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+        code span.op { color: #666666; } /* Operator */
+        code span.ot { color: #007020; } /* Other */
+        code span.pp { color: #bc7a00; } /* Preprocessor */
+        code span.sc { color: #4070a0; } /* SpecialChar */
+        code span.ss { color: #bb6688; } /* SpecialString */
+        code span.st { color: #4070a0; } /* String */
+        code span.va { color: #19177c; } /* Variable */
+        code span.vs { color: #4070a0; } /* VerbatimString */
+        code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+      </style>
+              <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+      
+                <!-- Using Bootstrap starter template: https://getbootstrap.com/docs/4.0/getting-started/introduction/-->
+                <!-- Required meta tags -->
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="shortcut icon" type="image/png" href="/assets/images/2017-09-29-adaboost-the-original-boosting-algorithm/AdaBoostExampleData.png">
+
+                <!-- <link rel="stylesheet" href="/assets/css/bootstrap.min.css">Bootstrap CSS -->
+
+
+                <!-- 
+                <script type="text/x-mathjax-config">
+                    MathJax.Hub.Config({
+                    jax: ["input/TeX", "output/HTML-CSS"],
+                    tex2jax: {
+                      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+                      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+                      processEscapes: true,
+                      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                    }
+                    //,
+                    //displayAlign: "left",
+                    //displayIndent: "2em"
+                  });
+                </script>
+                <script type="text/javascript" async
+                        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+                </script>
+                MathJax -->
+
+                <!-- Font Awesome CSS -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+                <!-- Disqus -->
+                <script id="dsq-count-scr" src="//machinelearningnotes-1.disqus.com/count.js" async></script>
+            
+    <title>Autoreload</title>
+  </head>
+  <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">ML-Notes</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/index.html"> Blog </a>
+                    <a class="nav-link" href="/courses.html"> Courses </a>
+                    <a class="nav-link" href="/about.html"> About </a>
+                </div>
+            </div>
+        </nav>
+
+    
+    <div class="container">
+        <br>
+        <div class="page-header">
+            <div class="pull-left">
+                <h1>Autoreload</h1>
+                <strong>Python</strong>
+                <div class="text-muted">2021-05-23</div>
+            </div>
+            
+            <div class="pull-right">
+
+                                <div class="text-right">
+                    <a href="https://github.com/laegsgaardTroels/autoreload">
+                        [<i>View code on Github</i> <span class="fa fa-github"></span>]
+                    </a>
+                </div>
+                
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        
+
+        <br>
+        <p>When making stuff in a Jupyter Notebook I often find it
+        usefull to refactor stuff I use across notebooks into a Python
+        module. To do this smoothly I install the module in editable
+        mode and use the awesome Jupyter autoreload magic.
+        <!--more--></p>
+        <p>A minimal example is a project:</p>
+        <pre><code>.
+├── foo
+│   └── __init__.py
+├── notebooks
+│   └── example.ipynb
+├── README.md
+└── setup.py</code></pre>
+        <p>Now we create a virtual environment:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~$</span> virtualenv .venv</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~$</span> source .venv/bin/activate</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">~$</span> pip install jupyterlab</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">~$</span> pip install <span class="at">-e</span> .</span></code></pre></div>
+        <p>The <code>-e</code> flag installs the module in editable
+        mode, meaning that you can modify your source code in
+        <code>foo/</code> and have the changes take effect without you
+        having to rebuild and reinstall, see [3].</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~$</span> pip install <span class="at">-h</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-e,</span> <span class="at">--editable</span> <span class="op">&lt;</span>path/url<span class="op">&gt;</span>   Install a project in editable mode <span class="er">(</span><span class="ex">i.e.</span> setuptools <span class="st">&quot;develop mode&quot;</span><span class="kw">)</span> <span class="ex">from</span> a local project path or a VCS url.</span></code></pre></div>
+        <h2 id="jupyter-magic">Jupyter magic</h2>
+        <p><code>autoreload</code> is an IPython extension to reload
+        modules before executing user code.</p>
+        <p><code>autoreload</code> reloads modules automatically before
+        entering the execution of code typed at the IPython prompt.</p>
+        <p>This makes for example the following workflow possible:</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> foo <span class="im">import</span> some_function</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>some_function()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 42</span></span></code></pre></div>
+        <p>Open <code>foo/__init__.py</code> in an editor and change
+        <code>some_function</code> to return 43.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>some_function()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 43</span></span></code></pre></div>
+        <p>The module was reloaded without reloading it explicitly, and
+        the object imported with
+        <code>from foo import some_function</code> was also updated.</p>
+        <h1 id="references">References</h1>
+        <p>[1]
+        https://pip.pypa.io/en/latest/cli/pip_install/#editable-installs</p>
+        <p>[2]
+        https://ipython.org/ipython-doc/3/config/extensions/autoreload.html</p>
+        <p>[3]
+        https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html#development-mode</p>
+        <br>
+        <br>
+
+        <!--- Disqus --->
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+           var disqus_config = function () {
+           this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+           this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+           };
+                 */
+            (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://machinelearningnotes-1.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>        
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+  </body>
+</html>

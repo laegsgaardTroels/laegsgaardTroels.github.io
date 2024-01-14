@@ -1,0 +1,6 @@
+name: intervals
+channels:
+  - conda-forge
+dependencies:
+  - jupyterlab
+  - numpy
