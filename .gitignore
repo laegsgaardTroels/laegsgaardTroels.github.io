@@ -142,3 +142,5 @@ vendor/
 _git
 
 *.h5
+
+envs
