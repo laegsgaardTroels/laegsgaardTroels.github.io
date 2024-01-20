@@ -1,6 +1,18 @@
 ---
 post:
 - author: "Troels L\xE6gsgaard"
+  category: Reinforcement Learning
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2023-09-30-reinforcement-learning-cartpole-v0
+  date: '2023-09-30'
+  day: '30'
+  excerpt: Solve the `CartPole-v0` from OpenAI `gym` using Q-learning with experience
+    resampling. [...]
+  image: /src/posts/2023-09-30-reinforcement-learning-cartpole-v0/cart_pole.gif
+  month: 09
+  title: Reinforcement Learning `CartPole-v0`
+  url: posts/2023-09-30-reinforcement-learning-cartpole-v0/reinforcement-learning-cartpole-v0.html
+  year: '2023'
+- author: "Troels L\xE6gsgaard"
   category: Python
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-10-16-intervals
   date: '2022-10-16'

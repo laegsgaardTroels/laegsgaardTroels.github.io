@@ -201,7 +201,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="/index.html"> Blog </a>
+                    <a class="nav-link" href="/index.html"> Notes </a>
                     <a class="nav-link" href="/courses.html"> Courses </a>
                     <a class="nav-link" href="/about.html"> About </a>
                 </div>
@@ -232,10 +232,10 @@
         
 
         <br>
-        <div id="1f291ec0-082f-4fe6-b87a-ad84cb330366"
-        class="cell markdown">
-        <h1 id="the-unsupervised-learning-trick">The Unsupervised
-        Learning Trick</h1>
+        <div id="db8860f3-c7d7-4983-9771-523ae728070b"
+        class="cell markdown" data-editable="true"
+        data-slideshow="{&quot;slide_type&quot;:&quot;&quot;}"
+        data-tags="[]">
         <p><strong>Purpose:</strong> Show the unsupervised learning
         trick on the mnist data using a Random Forest.<!--more--></p>
         <p>The unsupervised learning trick is done by creating a new

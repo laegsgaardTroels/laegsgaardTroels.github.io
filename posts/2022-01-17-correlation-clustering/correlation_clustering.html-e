@@ -186,7 +186,10 @@
 
                 <!-- Disqus -->
                 <script id="dsq-count-scr" src="//machinelearningnotes-1.disqus.com/count.js" async></script>
-            
+                      <script
+                      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+                      type="text/javascript"></script>
+      
     <title>Correlation Clustering</title>
   </head>
   <body>
@@ -198,7 +201,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="/index.html"> Blog </a>
+                    <a class="nav-link" href="/index.html"> Notes </a>
                     <a class="nav-link" href="/courses.html"> Courses </a>
                     <a class="nav-link" href="/about.html"> About </a>
                 </div>
@@ -231,9 +234,16 @@
         <br>
         <div id="b662e2db-85eb-4625-9a8b-79407966c883"
         class="cell markdown">
-        <h1 id="correlation-clustering">Correlation Clustering</h1>
-        <p>An example of how to cluster numerical features using their
-        correlation.</p>
+        <p><strong>Purpose</strong>: Show an example of how to cluster
+        numerical features using their correlation.</p>
+        <p>The number <span class="math inline">\(\rho(X, Y) ^2\)</span>
+        is called the coefficient of determination. It measures how much
+        of the variation in <span class="math inline">\(Y\)</span> can
+        be explained by a linear relationship to <span
+        class="math inline">\(X\)</span>, see [1]. And <span
+        class="math inline">\(1 - \rho(X, Y) ^2\)</span> is the amount
+        of unexplained variation from a linear relationship with <span
+        class="math inline">\(X\)</span>.</p>
         <p><span class="image placeholder"
         data-original-image-src="correlation.svg"
         data-original-image-title=""></span></p>

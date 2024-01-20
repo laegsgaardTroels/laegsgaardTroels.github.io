@@ -1,0 +1,11 @@
+name: reinforcement-learning
+channels:
+  - conda-forge
+dependencies:
+  - gymnasium
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - scikit-learn
+  - tensorflow
+  - pyglet

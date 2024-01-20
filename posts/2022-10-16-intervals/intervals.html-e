@@ -201,7 +201,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="/index.html"> Blog </a>
+                    <a class="nav-link" href="/index.html"> Notes </a>
                     <a class="nav-link" href="/courses.html"> Courses </a>
                     <a class="nav-link" href="/about.html"> About </a>
                 </div>
@@ -234,15 +234,10 @@
         <br>
         <div id="60b41dba-6956-4d69-9c13-ac57ec440fb6"
         class="cell markdown">
-        <h1 id="intervals">Intervals</h1>
         <p><strong>Purpose:</strong> Show ways of making operations in
         Python on sets defined as lists of intervals e.g. sets of the
         form A=[[a1, a2], [a3, a4], ..., [an-1, an]] and B=[[b1, b2],
         [b3, b4], ..., [bm-1, bm]].</p>
-        </div>
-        <div id="4f391fb9-3b51-49a7-81ea-00f45b4f584c"
-        class="cell markdown">
-        <h2 id="test-of-intersection">Test of Intersection</h2>
         <p>Union of two sets A=[a1, a2] and B=[b1, b2] can be done by
         first checking that the sets intersect a check of this can be
         done using below rule:</p>

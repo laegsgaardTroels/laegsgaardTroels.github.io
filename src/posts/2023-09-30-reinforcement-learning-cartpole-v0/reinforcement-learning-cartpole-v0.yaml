@@ -1,0 +1,4 @@
+title: Reinforcement Learning `CartPole-v0`
+category: Reinforcement Learning
+excerpt: Solve the `CartPole-v0` from OpenAI `gym` using Q-learning with experience resampling. [...]
+image: /src/posts/2023-09-30-reinforcement-learning-cartpole-v0/cart_pole.gif
