@@ -140,3 +140,5 @@ vendor/
 
 # Ignore git projects with example code.
 _git
+
+*.h5
