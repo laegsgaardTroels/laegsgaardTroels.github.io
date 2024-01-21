@@ -221,7 +221,7 @@
             <div class="pull-right">
 
                                 <div class="text-right">
-                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src//posts/2021-04-16-hodrick-prescott-filtering">
+                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-04-16-hodrick-prescott-filtering">
                         [<i>View source</i> <span class="fa fa-github"></span>]
                     </a>
                 </div>
@@ -365,7 +365,7 @@
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2021-04-16-hodrick-prescott-filtering/5c959cab4d0c5bb542e5532c6a71f84ef2449fde.png" /></p>
+        src="posts/2021-04-16-hodrick-prescott-filtering/5c959cab4d0c5bb542e5532c6a71f84ef2449fde.png" /></p>
         </div>
         </div>
         <div id="b0be0a05" class="cell markdown">
@@ -436,7 +436,7 @@
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2021-04-16-hodrick-prescott-filtering/bdae2c366f566e921bb7ff5a538375688ae82eea.png" /></p>
+        src="posts/2021-04-16-hodrick-prescott-filtering/bdae2c366f566e921bb7ff5a538375688ae82eea.png" /></p>
         </div>
         </div>
         <div id="0e43f315-1ce3-472f-b162-3b6784d95423"
@@ -458,7 +458,7 @@
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2021-04-16-hodrick-prescott-filtering/4d17078c9252996393140bca8d7a54271c50cc94.png" /></p>
+        src="posts/2021-04-16-hodrick-prescott-filtering/4d17078c9252996393140bca8d7a54271c50cc94.png" /></p>
         </div>
         </div>
         <div id="0c9dc9d2-9142-403d-b796-54158ce8c1d3"
@@ -477,7 +477,7 @@
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2021-04-16-hodrick-prescott-filtering/8f408ee29fdb6e76d26f36c51adefe9464e5b5c8.png" /></p>
+        src="posts/2021-04-16-hodrick-prescott-filtering/8f408ee29fdb6e76d26f36c51adefe9464e5b5c8.png" /></p>
         </div>
         </div>
         <div id="60d2010b" class="cell markdown">
@@ -533,7 +533,7 @@
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2021-04-16-hodrick-prescott-filtering/c0628c2ab0b763bedf6dd550bda606def598c03a.png" /></p>
+        src="posts/2021-04-16-hodrick-prescott-filtering/c0628c2ab0b763bedf6dd550bda606def598c03a.png" /></p>
         </div>
         </div>
         <div id="5ae90131" class="cell markdown">

@@ -1,13 +1,12 @@
 author: "Troels L\xE6gsgaard"
 category: Algorithm
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-04-16-hodrick-prescott-filtering
-content: ''
 date: '2021-04-16'
 day: '16'
 excerpt: Hodrick-Prescott filtering is a filtering method. A *filtering method* can
   be used to find $x_t$ given $x_1,\dots,x_t$. In this post we will go through a simple
   filtering example with Hodrick-Prescott filtering. [...]
-image: /assets/images/2021-04-16-hodrick-prescott-filtering_files/2021-04-16-hodrick-prescott-filtering_2_0.png
+image: /src/posts/2021-04-16-hodrick-prescott-filtering/hodrick-prescott-filtering.png
 month: '04'
 title: Hodrick Prescott Filtering
 url: posts/2021-04-16-hodrick-prescott-filtering/hodrick-prescott-filtering.html
