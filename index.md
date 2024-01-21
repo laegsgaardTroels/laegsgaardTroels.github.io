@@ -281,13 +281,12 @@ post:
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-27-gradient-descent
-  content: ''
   date: '2019-02-27'
   day: '27'
   excerpt: The gradient descent algorithm and its variants are some of the most widely
     used optimization algorithms in machine learning today. In this post a super simple
     example of gradient descent will be implemented. [...]
-  image: /assets/images/2019-02-27-gradient-descent_files/gradient_descent.svg
+  image: /src/posts/2019-02-27-gradient-descent/gradient-descent.svg
   month: '02'
   title: Gradient Descent
   url: posts/2019-02-27-gradient-descent/gradient-descent.html
@@ -358,13 +357,12 @@ post:
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-05-21-perceptron
-  content: ''
   date: '2017-05-21'
   day: '21'
   excerpt: The Perceptron by Rosenblat is one of the earliest machine learning algorithms.
     It was proposed as a model of an artificial neuron, and can be used for classification.
     [...]
-  image: /assets/images/2017-05-21-perceptron/neuron.png
+  image: /src/posts/2017-05-21-perceptron/perceptron.png
   month: '05'
   title: Perceptron
   url: posts/2017-05-21-perceptron/perceptron.html

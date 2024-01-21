@@ -221,7 +221,7 @@
             <div class="pull-right">
 
                                 <div class="text-right">
-                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src//posts/2019-02-27-gradient-descent">
+                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-27-gradient-descent">
                         [<i>View source</i> <span class="fa fa-github"></span>]
                     </a>
                 </div>
@@ -264,7 +264,7 @@
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.title(<span class="st">&#39;Loss function&#39;</span>, size<span class="op">=</span><span class="dv">20</span>)</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2019-02-27-gradient-descent/56edc4e41910aa52557f03796e350bb6b8e4636e.png" /></p>
+        src="posts/2019-02-27-gradient-descent/56edc4e41910aa52557f03796e350bb6b8e4636e.png" /></p>
         </div>
         </div>
         <section id="algorithm" class="cell markdown">
@@ -346,7 +346,7 @@
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2019-02-27-gradient-descent/8dde943c4d7fc7cd9c92b42786c1fa0cf614dce5.png" /></p>
+        src="posts/2019-02-27-gradient-descent/8dde943c4d7fc7cd9c92b42786c1fa0cf614dce5.png" /></p>
         </div>
         </div>
         <div class="cell markdown">
@@ -365,7 +365,7 @@
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    plot(theta_path, eta)</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2019-02-27-gradient-descent/735d3e6045507aa49c4810c72777b63d3bbfd9a3.png" /></p>
+        src="posts/2019-02-27-gradient-descent/735d3e6045507aa49c4810c72777b63d3bbfd9a3.png" /></p>
         </div>
         </div>
         <div class="cell markdown">
@@ -383,7 +383,7 @@
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> plt.text(theta_path[<span class="op">-</span><span class="dv">1</span>], L(theta_path[<span class="op">-</span><span class="dv">1</span>]), <span class="vs">r&#39;$\theta_T$&#39;</span>, size <span class="op">=</span> <span class="dv">20</span>)</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2019-02-27-gradient-descent/77c37df0108f154025a98a6ed13ef21018856cfd.png" /></p>
+        src="posts/2019-02-27-gradient-descent/77c37df0108f154025a98a6ed13ef21018856cfd.png" /></p>
         </div>
         </div>
         <section id="intuition" class="cell markdown">

@@ -1,13 +1,12 @@
 author: "Troels L\xE6gsgaard"
 category: Algorithm
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-27-gradient-descent
-content: ''
 date: '2019-02-27'
 day: '27'
 excerpt: The gradient descent algorithm and its variants are some of the most widely
   used optimization algorithms in machine learning today. In this post a super simple
   example of gradient descent will be implemented. [...]
-image: /assets/images/2019-02-27-gradient-descent_files/gradient_descent.svg
+image: /src/posts/2019-02-27-gradient-descent/gradient-descent.svg
 month: '02'
 title: Gradient Descent
 url: posts/2019-02-27-gradient-descent/gradient-descent.html

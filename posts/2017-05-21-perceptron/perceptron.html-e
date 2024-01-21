@@ -218,7 +218,7 @@
             <div class="pull-right">
 
                                 <div class="text-right">
-                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src//posts/2017-05-21-perceptron">
+                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-05-21-perceptron">
                         [<i>View source</i> <span class="fa fa-github"></span>]
                     </a>
                 </div>
@@ -450,7 +450,7 @@
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2017-05-21-perceptron/c1c7febb059e1a789f32c4e2b2b09aece2786dc4.png" /></p>
+        src="posts/2017-05-21-perceptron/c1c7febb059e1a789f32c4e2b2b09aece2786dc4.png" /></p>
         </div>
         </div>
         <div id="04fd86cf-622f-41d1-bebb-ddc450db16a9"
@@ -469,7 +469,7 @@
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div>
         <div class="output display_data">
         <p><img
-        src="/posts/2017-05-21-perceptron/ef276c7416d4c3b055de7f6f262ac62605e25c72.png" /></p>
+        src="posts/2017-05-21-perceptron/ef276c7416d4c3b055de7f6f262ac62605e25c72.png" /></p>
         </div>
         </div>
         <div id="9fe31766" class="cell markdown">

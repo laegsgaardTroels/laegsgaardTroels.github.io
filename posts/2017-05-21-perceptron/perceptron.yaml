@@ -1,13 +1,12 @@
 author: "Troels L\xE6gsgaard"
 category: Algorithm
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-05-21-perceptron
-content: ''
 date: '2017-05-21'
 day: '21'
 excerpt: The Perceptron by Rosenblat is one of the earliest machine learning algorithms.
   It was proposed as a model of an artificial neuron, and can be used for classification.
   [...]
-image: /assets/images/2017-05-21-perceptron/neuron.png
+image: /src/posts/2017-05-21-perceptron/perceptron.png
 month: '05'
 title: Perceptron
 url: posts/2017-05-21-perceptron/perceptron.html
