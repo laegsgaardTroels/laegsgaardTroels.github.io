@@ -13,7 +13,16 @@ url: /posts/2021-06-14-useful-commands.html
 year: '2021'
 ---
 
-Useful commands and operators. <!--more-->
+Useful commands, operators and more. <!--more-->
+
+#### Shortcuts
+
+- `<TAB>`: Lets you autocomplete whatever. 
+- `<CTRL+R>`: A reverse search lets you search through the `history`. Very useful! 
+- `<CTRL+C>`: Send a SIGINT to a running program to shut it down.
+- `<CTRL-L>`: A shortcut for `clear`.
+- `<CTRL-A>`: Move the cursor to the beginning.
+- `<CTRL-E>`: Move the cursor to the end.
 
 #### `||` and `&&`
 
