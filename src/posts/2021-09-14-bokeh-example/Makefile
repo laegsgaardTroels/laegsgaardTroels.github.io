@@ -1,4 +1,4 @@
-PYTHON_INTERPRETER := python3
+PYTHON_INTERPRETER := python
 DEV_PORT := 8080
 PROD_PORT := 8080
 CONTAINER_NAME := real-estate-bokeh-example-container
