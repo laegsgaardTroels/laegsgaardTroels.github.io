@@ -80,7 +80,7 @@ Then there are lots of nontrivial pairs of independent events. This example does
 
 ## Example: A Dice
 
-A thought of mine. An example of above would be a single dice $X$ defined on $(\\{1,2,3,4,5,6\\}, \mathcal{F}, \mathbb{P})$ where $\mathcal{F}=\mathcal{P}(\Omega)$ and the probability is the discrete uniform distribution $\mathbb{P}(A)=\frac{\rvert A \rvert}{N}$ as above.
+A thought of mine. An example of above would be a single dice $X$ defined on $(\{1,2,3,4,5,6\}, \mathcal{F}, \mathbb{P})$ where $\mathcal{F}=\mathcal{P}(\Omega)$ and the probability is the discrete uniform distribution $\mathbb{P}(A)=\frac{\rvert A \rvert}{N}$ as above.
 
 Now 6 is not a prime number. Its unique prime factorization is $6=2\cdot3$. Now each outcome can be mapped 1-1 with an index consisting of two random numbers $I\in\{1,2\}$ and $J\in\{1,2,3\}$ with uniform distribution e.g. $\mathbb{P}(I=i)=\frac{1}{2}$ and $\mathbb{P}(J=j)=\frac{1}{3}$ for $i=1,2$ and $j=1,2,3$.
 
