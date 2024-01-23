@@ -1,4 +1,4 @@
-<img src="/assets/images/base/1800x1200.jpg" width="50%" height="50%">
+<img src="/assets/images/base/1800x1200.jpg" width="500px" height="auto">
 <h3>Troels Lægsgaard</h3>
 <p>
     This blog consists of notes created by me, Troels Lægsgaard. The notes on the site are
