@@ -43,6 +43,14 @@
                 </div>
                 $endif$
 
+                $if(email)$
+                <div class="text-right">
+                    <a href="mailto:laegsgaardtroels@gmail.com" target="_blank">
+                        [<i>E-mail: laegsgaardtroels@gmail.com</i> <span class="fa fa-envelope"></span>]
+                    </a>
+                </div>
+                $endif$
+
             </div>
             <div class="clearfix"></div>
         </div>
@@ -53,7 +61,9 @@
         <br>
         <br>
 
+        $if(chat)$
         $disqus.html()$
+        $endif$
         
     </div>
 

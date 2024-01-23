@@ -1,4 +1,5 @@
 title: "Bokeh Example"
+author: "Troels Lægsgaard"
 category: Python
 excerpt: An app used to display real estate data in Denmark. [...]
 image: /src/posts/2021-09-14-bokeh-example/app.png

@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Algorithm
+chat: true
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-06-05-the-unsupervised-learning-trick
-content: ''
 date: '2022-06-05'
 day: '05'
 excerpt: In this git repository I show the unsupervised learning trick on the mnist

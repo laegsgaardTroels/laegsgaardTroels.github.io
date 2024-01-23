@@ -1,12 +1,5 @@
-author: "Troels L\xE6gsgaard"
+title: Tqdm
+author: "Troels Lægsgaard"
 category: Python
-code: ''
-content: ''
-date: '2021-05-24'
-day: '24'
 excerpt: '`tqdm` is a nice Python module for creating a progressbar when processing a list of items. [...]'
 image: /assets/images/base/python.svg
-month: '05'
-title: Tqdm
-url: /posts/2021-05-24-tqdm.html
-year: '2021'

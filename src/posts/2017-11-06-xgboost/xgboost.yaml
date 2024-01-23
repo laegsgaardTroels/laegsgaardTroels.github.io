@@ -1,12 +1,6 @@
-author: "Troels L\xE6gsgaard"
+title: XGBoost
+author: "Troels Lægsgaard"
 category: Algorithm
-code: ''
-content: ''
 date: '2017-11-06'
-day: '06'
 excerpt: In this post we will go through an example application of the XGBoost algorithm [...]
 image: /assets/images/2017-11-06-xgboost/treeXGB.jpeg
-month: '11'
-title: Xgboost
-url: /posts/2017-11-06-xgboost.html
-year: '2017'

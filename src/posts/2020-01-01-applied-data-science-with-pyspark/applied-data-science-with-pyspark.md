@@ -1,20 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Course
-code: ''
-content: ''
-date: '2020-01-01'
-day: '01'
-excerpt: Spark is a popular framework for processing big data, widely used in the
-  industry. This course will give you a short introduction to the popular Python API
-  to the Spark framework. [...]
-image: /assets/images/base/apache_spark.svg
-month: '01'
-title: Applied Data Science With Pyspark
-url: /posts/2020-01-01-applied-data-science-with-pyspark.html
-year: '2020'
----
-
 Spark is a popular framework for processing big data, widely used in the industry. This course will give you a short introduction to the popular Python API to the Spark framework.<!--more-->
 
 The goal of the course is to get the participant started using PySpark through interactive lession in the parts of PySpark one uses the most as a Data Scientist.

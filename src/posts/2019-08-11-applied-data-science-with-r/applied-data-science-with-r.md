@@ -1,20 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Course
-code: ''
-content: ''
-date: '2019-08-11'
-day: '11'
-excerpt: Learn how to solve many commonly faced problems when applying R for Data
-  Science and become an even more important part of your company. This course will
-  introduce you to the most important Data Science tools in R to effectively solve
-  many real life problems. [...]
-image: /assets/images/base/r.svg
-month: 08
-title: Applied Data Science With R
-url: /posts/2019-08-11-applied-data-science-with-r.html
-year: '2019'
----
 Learn how to solve many commonly faced problems when applying R for Data Science and become an even more important part of your company. This course will introduce you to the most important Data Science tools in R to effectively solve many real life problems.<!--more-->
 
 <h4>Participant profile</h4>
@@ -22,8 +5,6 @@ Learn how to solve many commonly faced problems when applying R for Data Science
 You have experience with programming from your daily work with data or from your education and have a basic Mathematical understanding. Basic experience with programming in R will be helpful.
 
 <h4>Content</h4>
-
-View the slides from the course here:
 
 <ol>
     <li><b>Introduction</b> Introduction to the RStudio IDE, the most popular IDE for R programming.</li>

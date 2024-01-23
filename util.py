@@ -47,7 +47,10 @@ def metadata(args):
     metadata["date"] = '-'.join(args.path.parent.stem.split('-')[:3])
     metadata["author"] = "Troels Lægsgaard"
     metadata["url"] = str(args.path.relative_to("src").with_suffix(".html"))
-    metadata["code"] = "https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/" + str(args.path.parent)
+    if "code" not in metadata:
+        metadata["code"] = "https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/" + str(args.path.parent)
+    if "chat" not in metadata:
+        metadata["chat"] = True
     yaml.dump(metadata, sys.stdout)
 
 

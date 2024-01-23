@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Text Editor
-code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-08-29-vim
-content: ''
+chat: true
+code: https://github.com/laegsgaardTroels/dotfiles
 date: '2021-08-29'
 day: '29'
 excerpt: Commands i find useful in Vim. [...]

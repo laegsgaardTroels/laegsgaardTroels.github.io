@@ -1,12 +1,5 @@
-author: "Troels L\xE6gsgaard"
-category: Distance Metric
-code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/src/posts/2021-06-09-haversine/
-content: ''
-date: '2021-06-09'
-day: '09'
-excerpt: The haversine fomula. [...]
-image: /src/posts/2021-06-09-haversine/law-of-haversines.svg
-month: '06'
 title: Haversine
-url: /posts/2021-06-09-haversine/haversine.html
-year: '2021'
+author: "Troels Lægsgaard"
+category: Distance Metric
+excerpt: The haversine distance can be used to calculate the distance between two points on a sphere. Here is my derivation of it. [...]
+image: /src/posts/2021-06-09-haversine/law-of-haversines.svg

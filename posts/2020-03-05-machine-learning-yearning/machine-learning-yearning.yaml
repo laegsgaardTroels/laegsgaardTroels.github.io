@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Technology
-code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-03-05-machine-learning-yearning
-content: ''
+chat: true
+code: https://github.com/laegsgaardTroels/machine-learning-yearning-presentation
 date: '2020-03-05'
 day: '05'
 excerpt: A presentation I did on the book Machine Learning Yearning by Andrew Ng using

@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Programming
+chat: true
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-04-difference-between-the-pyspark-pipeline-and-the-sklearn-pipeline
-content: ''
 date: '2019-12-04'
 day: '04'
 excerpt: The pipeline object in sklearn makes it easy to sequentially apply a list

@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Programming
+chat: true
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-06-01-3-pyspark-tricks
-content: ''
 date: '2019-06-01'
 day: '01'
 excerpt: Some useful patterns / tricks I find myself using at work. [...]

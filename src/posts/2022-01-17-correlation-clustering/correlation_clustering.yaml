@@ -1,4 +1,5 @@
 title: "Correlation Clustering"
+author: "Troels Lægsgaard"
 excerpt: "An example of how to cluster numerical features using their correlation. [...]"
 image: "/src/posts/2022-01-17-correlation-clustering/correlation.svg"
 category: "Technique"

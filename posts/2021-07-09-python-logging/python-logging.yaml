@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Python
+chat: true
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-python-logging
-content: ''
 date: '2021-07-09'
 day: 09
 excerpt: Logging is a nice debugging tool in Python. [...]

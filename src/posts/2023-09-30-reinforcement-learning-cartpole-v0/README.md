@@ -1,4 +1,4 @@
-# 6_CartPole-v0_exercise
+# `CartPole-v0`
 
 Solved using deep Q-learning. See the main functions in `train.py` and `evaluate.py`
 

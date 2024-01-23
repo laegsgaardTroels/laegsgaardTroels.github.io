@@ -2,10 +2,27 @@
 post:
 - author: "Troels L\xE6gsgaard"
   category: Course
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-01-01-applied-data-science-with-pyspark
-  content: ''
+  chat: false
+  code: false
+  date: '2023-09-30'
+  day: '30'
+  email: laegsgaardtroels@gmail.com
+  excerpt: Learn how to solve many commonly faced problems when applying Python for
+    Data Science and become an even more important part of your company. This course
+    will introduce you to the most important Data Science tools in Python to effectively
+    solve many real life problems. [...]
+  image: /assets/images/base/python.svg
+  month: 09
+  title: Applied Data Science With Python
+  url: posts/2023-09-30-applied-data-science-with-python/applied-data-science-with-python.html
+  year: '2023'
+- author: "Troels L\xE6gsgaard"
+  category: Course
+  chat: false
+  code: false
   date: '2020-01-01'
   day: '01'
+  email: laegsgaardtroels@gmail.com
   excerpt: Spark is a popular framework for processing big data, widely used in the
     industry. This course will give you a short introduction to the popular Python
     API to the Spark framework. [...]
@@ -16,10 +33,11 @@ post:
   year: '2020'
 - author: "Troels L\xE6gsgaard"
   category: Course
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-08-11-applied-data-science-with-r
-  content: ''
+  chat: false
+  code: false
   date: '2019-08-11'
   day: '11'
+  email: laegsgaardtroels@gmail.com
   excerpt: Learn how to solve many commonly faced problems when applying R for Data
     Science and become an even more important part of your company. This course will
     introduce you to the most important Data Science tools in R to effectively solve

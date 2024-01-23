@@ -2,6 +2,7 @@
 post:
 - author: "Troels L\xE6gsgaard"
   category: Reinforcement Learning
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2023-09-30-reinforcement-learning-cartpole-v0
   date: '2023-09-30'
   day: '30'
@@ -14,6 +15,7 @@ post:
   year: '2023'
 - author: "Troels L\xE6gsgaard"
   category: Python
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-10-16-intervals
   date: '2022-10-16'
   day: '16'
@@ -25,8 +27,8 @@ post:
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-06-05-the-unsupervised-learning-trick
-  content: ''
   date: '2022-06-05'
   day: '05'
   excerpt: In this git repository I show the unsupervised learning trick on the mnist
@@ -38,6 +40,7 @@ post:
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: Technique
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-01-17-correlation-clustering
   date: '2022-01-17'
   day: '17'
@@ -50,6 +53,7 @@ post:
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: References
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2022-01-17-articles-and-blogposts
   date: '2022-01-17'
   day: '17'
@@ -61,6 +65,7 @@ post:
   year: '2022'
 - author: "Troels L\xE6gsgaard"
   category: Python
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-09-14-bokeh-example
   date: '2021-09-14'
   day: '14'
@@ -72,8 +77,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Text Editor
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-08-29-vim
-  content: ''
+  chat: true
+  code: https://github.com/laegsgaardTroels/dotfiles
   date: '2021-08-29'
   day: '29'
   excerpt: Commands i find useful in Vim. [...]
@@ -84,8 +89,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Python
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-python-logging
-  content: ''
   date: '2021-07-09'
   day: 09
   excerpt: Logging is a nice debugging tool in Python. [...]
@@ -96,8 +101,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Docker
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-docker-container
-  content: ''
   date: '2021-07-09'
   day: 09
   excerpt: Commands to run a minimal docker container. [...]
@@ -108,8 +113,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Bash
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-06-14-useful-commands
-  content: ''
   date: '2021-06-14'
   day: '14'
   excerpt: Useful commands and operators. [...]
@@ -120,11 +125,12 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Distance Metric
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-06-09-haversine
-  content: ''
   date: '2021-06-09'
   day: 09
-  excerpt: The haversine fomula. [...]
+  excerpt: The haversine distance can be used to calculate the distance between two
+    points on a sphere. Here is my derivation of it. [...]
   image: /src/posts/2021-06-09-haversine/law-of-haversines.svg
   month: '06'
   title: Haversine
@@ -132,8 +138,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Python
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-24-tqdm
-  content: ''
   date: '2021-05-24'
   day: '24'
   excerpt: '`tqdm` is a nice Python module for creating a progressbar when processing
@@ -145,6 +151,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Python
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-23-autoreload
   date: '2021-05-23'
   day: '23'
@@ -158,8 +165,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Thoughts
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-02-operationel-range
-  content: ''
   date: '2021-05-02'
   day: '02'
   excerpt: While working at Maersk there was a power-to-speed model used for planning,
@@ -175,6 +182,7 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-04-16-hodrick-prescott-filtering
   date: '2021-04-16'
   day: '16'
@@ -188,8 +196,8 @@ post:
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Technology
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2020-03-05-machine-learning-yearning
-  content: ''
+  chat: true
+  code: https://github.com/laegsgaardTroels/machine-learning-yearning-presentation
   date: '2020-03-05'
   day: '05'
   excerpt: A presentation I did on the book Machine Learning Yearning by Andrew Ng
@@ -201,8 +209,8 @@ post:
   year: '2020'
 - author: "Troels L\xE6gsgaard"
   category: Thoughts
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables
-  content: ''
   date: '2019-12-05'
   day: '05'
   excerpt: Random variables have an intuitive definition, but might not fully cover
@@ -214,8 +222,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Programming
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-04-difference-between-the-pyspark-pipeline-and-the-sklearn-pipeline
-  content: ''
   date: '2019-12-04'
   day: '04'
   excerpt: The pipeline object in sklearn makes it easy to sequentially apply a list
@@ -228,8 +236,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Riddle
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-07-28-lazy-proof-of-monty-hall
-  content: ''
   date: '2019-07-28'
   day: '28'
   excerpt: The [Monty Hall problem](https://en.wikipedia.org/wiki/Monty_Hall_problem)
@@ -241,8 +249,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Technology
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-07-11-pydata-london
-  content: ''
   date: '2019-07-11'
   day: '11'
   excerpt: While working at Maersk I went to PyData 2019. I found two presentations
@@ -254,8 +262,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Programming
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-06-01-3-pyspark-tricks
-  content: ''
   date: '2019-06-01'
   day: '01'
   excerpt: Some useful patterns / tricks I find myself using at work. [...]
@@ -266,8 +274,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Programming
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-03-18-broadcast-variable-pyspark-example
-  content: ''
   date: '2019-03-18'
   day: '18'
   excerpt: Broadcasting a variable is useful for repeatedly used read-only variables
@@ -279,6 +287,7 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-27-gradient-descent
   date: '2019-02-27'
   day: '27'
@@ -292,8 +301,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Encoding
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-02-25-leave-one-out-encoding
-  content: ''
   date: '2019-02-25'
   day: '25'
   excerpt: Leave one out encoding is a new feature encoding technique used by a Kaggle
@@ -305,8 +314,8 @@ post:
   year: '2019'
 - author: "Troels L\xE6gsgaard"
   category: Statistical Learning
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2018-11-09-model-evaluation
-  content: ''
   date: '2018-11-09'
   day: 09
   excerpt: Giving an estimate of generalization error in Machine Learning is vital.
@@ -318,19 +327,20 @@ post:
   year: '2018'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-11-06-xgboost
-  content: ''
   date: '2017-11-06'
   day: '06'
   excerpt: In this post we will go through an example application of the XGBoost algorithm
     [...]
   image: /assets/images/2017-11-06-xgboost/treeXGB.jpeg
   month: '11'
-  title: Xgboost
+  title: XGBoost
   url: posts/2017-11-06-xgboost/xgboost.html
   year: '2017'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-09-29-adaboost-the-original-boosting-algorithm
   date: '2017-09-29'
   day: '29'
@@ -342,8 +352,8 @@ post:
   year: '2017'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-06-30-blagging
-  content: ''
   date: '2017-06-30'
   day: '30'
   excerpt: 'Two sampling methods often applied in practice are: **oversampling** and
@@ -355,6 +365,7 @@ post:
   year: '2017'
 - author: "Troels L\xE6gsgaard"
   category: Algorithm
+  chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2017-05-21-perceptron
   date: '2017-05-21'
   day: '21'

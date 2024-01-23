@@ -1,7 +1,7 @@
 author: "Troels L\xE6gsgaard"
 category: Thoughts
+chat: true
 code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables
-content: ''
 date: '2019-12-05'
 day: '05'
 excerpt: Random variables have an intuitive definition, but might not fully cover
