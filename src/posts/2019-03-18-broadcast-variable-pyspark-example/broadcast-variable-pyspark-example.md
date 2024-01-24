@@ -1,19 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Programming
-code: ''
-content: ''
-date: '2019-03-18'
-day: '18'
-excerpt: Broadcasting a variable is useful for repeatedly used read-only variables
-  in an application [...]
-image: assets/images/base/apache_spark.svg
-month: '03'
-title: Broadcast Variable Pyspark Example
-url: /posts/2019-03-18-broadcast-variable-pyspark-example.html
-year: '2019'
----
-
 Broadcasting a variable is useful for repeatedly used read-only variables in an application<!--more-->, like large lookup tables or similar. Spark automatically sends all variables referenced in your closures to the worker nodes. While this is convenient, it can also be inefficient because (1) the default task launching mechanism is optimized for small task sizes, and (2) you might, in fact, use the same variable in multiple parallel operations, but Spark will send it separately for each
 operation [1, page 104]. A broadcast variable in is an object of type `spark.broadcast.Broadcast[T]`, it wraps a Serializable value of type `T`. This value can be accessed by calling the `value` property. The variable will be sent to each node once and should be treated as read-only (updates will not be propagated to other nodes)[1, page 104-106]. If you broadcast the variable it will be distributed efficiently once per node.
 

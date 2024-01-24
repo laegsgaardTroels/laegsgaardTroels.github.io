@@ -1,20 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Riddle
-code: ''
-content: ''
-date: '2019-07-28'
-day: '28'
-excerpt: The [Monty Hall problem](https://en.wikipedia.org/wiki/Monty_Hall_problem)
-  is an awesome brain teaser [...]
-image: /assets/images/2019-07-28-lazy-proof-of-monty-hall/goat.png
-month: '07'
-title: Lazy Proof Of Monty Hall
-url: /posts/2019-07-28-lazy-proof-of-monty-hall.html
-year: '2019'
----
-
-
 The [Monty Hall problem](https://en.wikipedia.org/wiki/Monty_Hall_problem) is an awesome brain teaser<!--more-->:
 
 " *Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to your advantage to switch your choice?* "

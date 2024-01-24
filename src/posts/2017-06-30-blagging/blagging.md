@@ -1,19 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Algorithm
-code: https://github.com/laegsgaardTroels/blagging
-content: ''
-date: '2017-06-30'
-day: '30'
-excerpt: 'Two sampling methods often applied in practice are: **oversampling** and
-  **undersampling**. [...]'
-image: /assets/images/2017-06-30-blagging/samplingUnderMany.png
-month: '06'
-title: Blagging
-url: /posts/2017-06-30-blagging.html
-year: '2017'
----
-
 Two sampling methods often applied in practice are: **oversampling** and **undersampling**. <!--more--> Oversampling randomly over-samples from the minority class and undersampling randomly down-samples the majority class, both until a threshold is met. Both methods can be seen as a scale in the weight of the loss function, for positive and negative samples, s.t. they're more equally represented in the likelihood function.
 
 <figure>

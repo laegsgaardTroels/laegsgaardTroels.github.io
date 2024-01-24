@@ -1,18 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Programming
-code: ''
-content: ''
-date: '2019-06-01'
-day: '01'
-excerpt: Some useful patterns / tricks I find myself using at work. [...]
-image: /assets/images/base/apache_spark.svg
-month: '06'
-title: Pyspark Tricks
-url: /posts/2019-06-01-3-pyspark-tricks.html
-year: '2019'
----
-
 Some useful patterns / tricks I find myself using at work.<!--more-->
 
 ## Union after loop

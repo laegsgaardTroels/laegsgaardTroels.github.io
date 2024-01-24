@@ -1,18 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Terminal
-code: ''
-content: ''
-date: '2021-06-14'
-day: '14'
-excerpt: Useful commands and operators. [...]
-image: /assets/images/base/linux.svg
-month: '06'
-title: Useful Commands
-url: /posts/2021-06-14-useful-commands.html
-year: '2021'
----
-
 Useful commands, operators and more. <!--more-->
 
 #### Shortcuts

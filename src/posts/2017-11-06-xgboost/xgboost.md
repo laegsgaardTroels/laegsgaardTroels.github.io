@@ -1,18 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Algorithm
-code: ''
-content: ''
-date: '2017-11-06'
-day: '06'
-excerpt: In this post we will go through an example application of the XGBoost algorithm
-  [...]
-image: /assets/images/2017-11-06-xgboost/treeXGB.jpeg
-month: '11'
-title: Xgboost
-url: /posts/2017-11-06-xgboost.html
-year: '2017'
----
 In this post we will go through an example application of the XGBoost algorithm<!--more--> using data from a competition on the crowdsourced machine learning homepage <a src="https://www.kaggle.com">Kaggle</a>. We will show some of the model diagnostics one can make with XGBoost. One of these being the partial dependence plot, which is a general technique for analyzing black box methods like XGBoost.
 
 

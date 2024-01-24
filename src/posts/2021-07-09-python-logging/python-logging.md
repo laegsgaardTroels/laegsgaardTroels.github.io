@@ -1,18 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Python
-code: ''
-content: ''
-date: '2021-07-09'
-day: 09
-excerpt: Logging is a nice debugging tool in Python. [...]
-image: /assets/images/base/python.svg
-month: '07'
-title: Python Logging
-url: /posts/2021-07-09-python-logging.html
-year: '2021'
----
-
 Logging is a nice debugging tool in Python. <!--more--> A mimimal example would be:
 
 ```python

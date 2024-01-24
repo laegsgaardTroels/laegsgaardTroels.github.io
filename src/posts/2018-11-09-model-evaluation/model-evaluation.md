@@ -1,19 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Statistical Learning
-code: ''
-content: ''
-date: '2018-11-09'
-day: 09
-excerpt: Giving an estimate of generalization error in Machine Learning is vital.
-  [...]
-image: /assets/images/2018-11-09-model-evaluation-part-1/Generalization_bound.png
-month: '11'
-title: Model Evaluation
-url: /posts/2018-11-09-model-evaluation.html
-year: '2018'
----
-
 Giving an estimate of generalization error in Machine Learning is vital.<!--more-->
 
 This is to minimize *risk* given a hypothesis space $\mathcal{H}$. To simplyfy matters assume the hypothesis space consists of a finilite set of estimators $$\mathcal{H}=\{h_1,h_2,\dots,h_M\}$$. Given a *loss function* $L$ which we for simplicity assume is the 0-1 loss $$L(\hat{y},y)=1_{\{\hat{y}\neq y\}}(\hat{y},y)$$. Risk is then defined as

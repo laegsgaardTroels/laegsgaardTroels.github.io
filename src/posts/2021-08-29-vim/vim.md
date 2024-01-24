@@ -1,18 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Text Editor
-code: https://github.com/laegsgaardTroels/dotfiles
-content: ''
-date: '2021-08-29'
-day: '29'
-excerpt: Commands i find useful in Vim. [...]
-image: /assets/images/base/vim.svg
-month: 08
-title: Vim
-url: /posts/2021-08-29-vim.html
-year: '2021'
----
-
 Commands i find useful in Vim.<!--more-->
 
 A good place to start using vim is to go through the guide in:

@@ -1,18 +1,3 @@
----
-author: "Troels L\xE6gsgaard"
-category: Docker
-code: ''
-content: ''
-date: '2021-07-09'
-day: 09
-excerpt: Commands to run a minimal docker container. [...]
-image: /assets/images/base/docker.svg
-month: '07'
-title: Docker Container
-url: /posts/2021-07-09-docker-container.html
-year: '2021'
----
-
 Commands to run a minimal docker container.<!--more--> 
 
 cname is the name of our image and its tag. Stop and remove a container.
