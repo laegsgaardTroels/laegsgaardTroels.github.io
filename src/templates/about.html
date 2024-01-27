@@ -26,35 +26,19 @@
 
     <div class="container">
         <br>
-        <div class="page-header">
-            <div class="pull-left">
-                <h1>$title$</h1>
-                <strong>$category$</strong>
-                <div class="text-muted">$date$</div>
-            </div>
+        <div class="card"
+                  style="border: 3.0;
+                         background: transparent;
+                         padding: 10%;"
+            >
             
-            <div class="pull-right">
 
-                $if(code)$
-                <div class="text-right">
-                    <a href="$code$">
-                        [<i>View code on Github</i> <span class="fa fa-github"></span>]
-                    </a>
-                </div>
-                $endif$
-
-            </div>
-            <div class="clearfix"></div>
+            <br>
+            $body$
         </div>
-        
-
-        <br>
-        $body$
         <br>
         <br>
-        
     </div>
-
 
     $footer.html()$
     

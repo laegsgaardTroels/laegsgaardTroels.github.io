@@ -61,6 +61,7 @@ about.html: src/about.md $(COMMON_TEMPLATES) src/templates/about.html
 	pandoc \
 		$(PANDOC_OPTIONS) \
 		--template=src/templates/about.html \
+		--metadata title="About" \
 		--from markdown \
 		--to html \
 		-o $@ $<
