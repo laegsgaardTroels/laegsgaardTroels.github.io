@@ -59,14 +59,16 @@
         <br>
         $body$
         <br>
-        <br>
-
+        
         $if(chat)$
-        $disqus.html()$
+        <h2>Comments</h2>
+        <p>Feel free to comment here below. A Github account is required.</p>
+        $gisqus.html()$
         $endif$
+
+        <br>
         
     </div>
-
 
     $footer.html()$
     
