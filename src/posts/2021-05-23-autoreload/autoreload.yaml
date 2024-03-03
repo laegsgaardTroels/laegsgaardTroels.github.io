@@ -1,5 +1,0 @@
-title: Autoreload
-author: "Troels Lægsgaard"
-category: Python
-excerpt: When making stuff in a Jupyter Notebook I often find it usefull to refactor stuff I use across notebooks into a Python module. To do this smoothly I install the module in editable mode and use the awesome Jupyter autoreload magic. [...]
-image: /assets/images/base/python.svg

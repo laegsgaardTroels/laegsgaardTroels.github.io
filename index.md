@@ -1,6 +1,18 @@
 ---
 post:
 - author: "Troels L\xE6gsgaard"
+  category: Python
+  chat: true
+  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2024-03-03-python-project
+  date: '2024-03-03'
+  day: '03'
+  excerpt: Notes on good ideas for organizing a Python project. [...]
+  image: /assets/images/base/python.svg
+  month: '03'
+  title: Python Projects
+  url: posts/2024-03-03-python-project/python-project.html
+  year: '2024'
+- author: "Troels L\xE6gsgaard"
   category: Reinforcement Learning
   chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2023-09-30-reinforcement-learning-cartpole-v0
@@ -88,18 +100,6 @@ post:
   url: posts/2021-08-29-vim/vim.html
   year: '2021'
 - author: "Troels L\xE6gsgaard"
-  category: Python
-  chat: true
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-python-logging
-  date: '2021-07-09'
-  day: 09
-  excerpt: Logging is a nice debugging tool in Python. [...]
-  image: /assets/images/base/python.svg
-  month: '07'
-  title: Python Logging
-  url: posts/2021-07-09-python-logging/python-logging.html
-  year: '2021'
-- author: "Troels L\xE6gsgaard"
   category: Docker
   chat: true
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-07-09-docker-container
@@ -148,20 +148,6 @@ post:
   month: '05'
   title: Tqdm
   url: posts/2021-05-24-tqdm/tqdm.html
-  year: '2021'
-- author: "Troels L\xE6gsgaard"
-  category: Python
-  chat: true
-  code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2021-05-23-autoreload
-  date: '2021-05-23'
-  day: '23'
-  excerpt: When making stuff in a Jupyter Notebook I often find it usefull to refactor
-    stuff I use across notebooks into a Python module. To do this smoothly I install
-    the module in editable mode and use the awesome Jupyter autoreload magic. [...]
-  image: /assets/images/base/python.svg
-  month: '05'
-  title: Autoreload
-  url: posts/2021-05-23-autoreload/autoreload.html
   year: '2021'
 - author: "Troels L\xE6gsgaard"
   category: Thoughts
