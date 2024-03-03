@@ -78,7 +78,7 @@ post:
 - author: "Troels L\xE6gsgaard"
   category: Text Editor
   chat: true
-  code: https://github.com/laegsgaardTroels/dotfiles
+  code: https://github.com/laegsgaardTroels/Setup
   date: '2021-08-29'
   day: '29'
   excerpt: Commands i find useful in Vim. [...]

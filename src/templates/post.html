@@ -1,24 +1,26 @@
 <!doctype html>
 <html lang="en">
-  <head>
 
-      <style>
+<head>
+
+    <style>
         $styles.html()$
-      </style>
-      $for(css)$
-        <link rel="stylesheet" href="$css$" />
-      $endfor$
+    </style>
+    $for(css)$
+    <link rel="stylesheet" href="$css$" />
+    $endfor$
 
-      $for(header-includes)$
-          $header-includes$
-      $endfor$
-      $if(math)$
-          $math$
-      $endif$
+    $for(header-includes)$
+    $header-includes$
+    $endfor$
+    $if(math)$
+    $math$
+    $endif$
 
     <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
-  </head>
-  <body>
+</head>
+
+<body>
 
     $for(include-before)$
     $include-before$
@@ -32,7 +34,7 @@
                 <strong>$category$</strong>
                 <div class="text-muted">$date$</div>
             </div>
-            
+
             <div class="pull-right">
 
                 $if(code)$
@@ -54,12 +56,12 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        
+
 
         <br>
         $body$
         <br>
-        
+
         $if(chat)$
         <h2>Comments</h2>
         <p>Feel free to comment here below. A Github account is required.</p>
@@ -67,10 +69,11 @@
         $endif$
 
         <br>
-        
+
     </div>
 
     $footer.html()$
-    
-  </body>
+
+</body>
+
 </html>
