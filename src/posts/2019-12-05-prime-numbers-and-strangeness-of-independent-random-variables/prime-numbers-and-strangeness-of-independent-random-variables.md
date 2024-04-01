@@ -1,20 +1,4 @@
----
-author: "Troels L\xE6gsgaard"
-category: Thoughts
-code: ''
-content: ''
-date: '2019-12-05'
-day: '05'
-excerpt: Random variables have an intuitive definition, but might not fully cover
-  the intuitive concept of independence. [...]
-image: /assets/images/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables/prime_number.png
-month: '12'
-title: Prime Numbers And Strangeness Of Independent Random Variables
-url: /posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables.html
-year: '2019'
----
-
-Random variables have an intuitive definition, but might not fully cover the intuitive concept of independence.  <!--more--> 
+A counter intuitive fact about random variables.  <!--more--> 
 
 Assume a probability space $(\Omega, \mathcal{F}, \mathbb{P})$. Where the sample space is finite $\vert\Omega\vert=N$, the events are the powerset of $\Omega$ e.g. $\mathcal{F}=\mathcal{P}(\Omega)$ and the probability is the discrete uniform distribution $\mathbb{P}(A)=\frac{\rvert A \rvert}{N}$.
 
@@ -76,13 +60,13 @@ $$
 N=2^{127}=170141183460469231731687303715884105728
 $$
 
-Then there are lots of nontrivial pairs of independent events. This example does not imply that the definition of independence is wrong, but in my view that the mathematical definition of independence wrong, but it does seem unintuitive.
+Then there are lots of nontrivial pairs of independent events.
 
 ## Example: A Dice
 
-A thought of mine. An example of above would be a single dice $X$ defined on $(\{1,2,3,4,5,6\}, \mathcal{F}, \mathbb{P})$ where $\mathcal{F}=\mathcal{P}(\Omega)$ and the probability is the discrete uniform distribution $\mathbb{P}(A)=\frac{\rvert A \rvert}{N}$ as above.
+A related thought of mine. Let $X$ be a dice $(\{1,2,3,4,5,6\}, \mathcal{F}, \mathbb{P})$ where $\mathcal{F}=\mathcal{P}(\Omega)$ and the probability is the discrete uniform distribution $\mathbb{P}(A)=\frac{\rvert A \rvert}{N}$ as above.
 
-Now 6 is not a prime number. Its unique prime factorization is $6=2\cdot3$. Now each outcome can be mapped 1-1 with an index consisting of two random numbers $I\in\{1,2\}$ and $J\in\{1,2,3\}$ with uniform distribution e.g. $\mathbb{P}(I=i)=\frac{1}{2}$ and $\mathbb{P}(J=j)=\frac{1}{3}$ for $i=1,2$ and $j=1,2,3$.
+Now 6 is not a prime number. Its unique prime factorization is $6=2\cdot3$. Each outcome can be mapped 1-1 with an index consisting of two random numbers $I\in\{1,2\}$ and $J\in\{1,2,3\}$ each with uniform distribution e.g. $\mathbb{P}(I=i)=\frac{1}{2}$ and $\mathbb{P}(J=j)=\frac{1}{3}$ for $i=1,2$ and $j=1,2,3$.
 
 As an example:
 
@@ -93,7 +77,7 @@ $$
     I = 1, J = 3 \Rightarrow X = 3 \\
     I = 2, J = 1 \Rightarrow X = 4 \\
     I = 2, J = 2 \Rightarrow X = 5 \\
-    I = 2, J = 6 \Rightarrow X = 6
+    I = 2, J = 3 \Rightarrow X = 6
 \end{aligned}
 $$
 

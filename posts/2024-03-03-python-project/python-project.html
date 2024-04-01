@@ -213,38 +213,38 @@
 
 
         <br>
-        <div id="37e31df1-1c13-42df-bc78-646e18931976"
+        <div id="3ab7e696-c3c2-4bc7-80ee-9d79d93733cd"
+        class="cell code">
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+        </div>
+        <div id="bd5ea4a6-b691-42b5-9dff-c23e3f885e66"
+        class="cell markdown">
+        <p><strong>Purpose:</strong> Notes on good ideas for organizing
+        and developing a Python project.</p>
+        </div>
+        <div id="044a3d26-707f-4ea8-8b67-323f6800eccd"
+        class="cell markdown" data-tags="[]">
+        <h2 id="project-layout">Project layout</h2>
+        <p>Use <code>src</code>-layout, see <a
+        href="https://setuptools.pypa.io/en/latest/userguide/package_discovery.html#src-layout">src-layout</a>.</p>
+        </div>
+        <div id="82942c9a-8bf5-4475-b6fb-2949b2a95673" class="cell code"
+        data-execution_count="1">
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sh</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="op">-</span>p src<span class="op">/</span>foo</span></code></pre></div>
+        </div>
+        <div id="23bf351b-54f1-4031-9c3b-2ba4b2ec736e"
         class="cell markdown">
         <h2 id="virtual-environment">Virtual environment</h2>
         </div>
-        <div id="3f28d0e7-b8aa-4fe3-900f-7e2c2a183ca8" class="cell code"
-        data-execution_count="8">
-        <div class="sourceCode" id="cb1"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>tree .</span></code></pre></div>
-        <div class="output stream stdout">
-        <pre><code>.
-├── README.md
-├── foo
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-39.pyc
-│   │   └── mappings.cpython-39.pyc
-│   └── mappings.py
-├── python_project.ipynb
-├── python_project.md
-├── python_project.yaml
-└── setup.py
-
-3 directories, 9 files
-</code></pre>
-        </div>
-        </div>
         <div id="f8d7ed9b-256d-4e82-88f0-e79070eccca7"
         class="cell markdown">
-        <p>Install the virtual environment.</p>
+        <p>Use a virtual environment.</p>
         </div>
         <div id="9c4b76a2-03c0-4a1e-855e-826f3c88842b" class="cell code"
-        data-execution_count="10">
+        data-execution_count="2">
         <div class="sourceCode" id="cb3"><pre
         class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sh</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>python <span class="op">-</span>m venv venv</span>
@@ -252,9 +252,13 @@
         </div>
         <div id="7056e4b8-e42d-4c75-9921-a9c4fe69dea5"
         class="cell markdown">
-        <p>Then we install the package in editable mode. This enables us
-        to edit the package on the fly without the need to reinstall
-        it.</p>
+        <h2 id="editable-install">Editable install</h2>
+        <p>Then we install the package in editable mode, see <a
+        href="https://pip.pypa.io/en/latest/cli/pip_install/#editable-installs">editable-installs</a>
+        and <a
+        href="https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html#development-mode">development-mode</a>.
+        This enables us to edit the package on the fly without the need
+        to reinstall it.</p>
         <p>The <code>-e</code> flag installs the module in editable
         mode, meaning that you can modify your source code in
         <code>foo/</code> and have the changes take effect without you
@@ -263,15 +267,65 @@
         class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~$</span> pip install <span class="at">-h</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-e,</span> <span class="at">--editable</span> <span class="op">&lt;</span>path/url<span class="op">&gt;</span>   Install a project in editable mode <span class="er">(</span><span class="ex">i.e.</span> setuptools <span class="st">&quot;develop mode&quot;</span><span class="kw">)</span> <span class="ex">from</span> a local project path or a VCS url.</span></code></pre></div>
         </div>
-        <div id="16500d94-08bd-4998-a54e-05109e037f66"
-        class="cell code">
+        <div id="e469b167-d577-478b-8a6f-79c44e2a130e"
+        class="cell markdown">
+        <p>To run an editable install we need a <code>setup.py</code>
+        file.</p>
+        </div>
+        <div id="cdebfdd1-e081-4730-b783-019067afb620" class="cell code"
+        data-execution_count="3">
         <div class="sourceCode" id="cb5"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sh</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pip install <span class="op">-</span>e .</span></code></pre></div>
+        class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile setup.py</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> setuptools <span class="im">import</span> setup, find_packages</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>setup(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">&quot;foo&quot;</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    version<span class="op">=</span><span class="st">&quot;0.0.1&quot;</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    description<span class="op">=</span><span class="st">&quot;A package illustrating editable install.&quot;</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    url<span class="op">=</span><span class="st">&quot;https://github.com/laegsgaardTroels/autoreload&quot;</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    package_dir<span class="op">=</span>{<span class="st">&quot;&quot;</span>: <span class="st">&quot;src&quot;</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    packages<span class="op">=</span>find_packages(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        where<span class="op">=</span><span class="st">&quot;src&quot;</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        include<span class="op">=</span>[<span class="st">&quot;foo*&quot;</span>],</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+        <div class="output stream stdout">
+        <pre><code>Overwriting setup.py
+</code></pre>
+        </div>
+        </div>
+        <div id="16500d94-08bd-4998-a54e-05109e037f66" class="cell code"
+        data-execution_count="4">
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sh</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pip install <span class="op">-</span>e .</span></code></pre></div>
+        <div class="output stream stdout">
+        <pre><code>Obtaining file:///Users/troelslaegsgaard/Git/laegsgaardTroels/laegsgaardTroels.github.io/src//posts/2024-03-03-python-project
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status &#39;done&#39;
+Installing collected packages: foo
+  Attempting uninstall: foo
+    Found existing installation: foo 0.0.1
+    Uninstalling foo-0.0.1:
+      Successfully uninstalled foo-0.0.1
+  Running setup.py develop for foo
+Successfully installed foo-0.0.1
+</code></pre>
+        </div>
+        <div class="output stream stderr">
+        <pre><code>
+[notice] A new release of pip is available: 23.2.1 -&gt; 24.0
+[notice] To update, run: pip install --upgrade pip
+</code></pre>
+        </div>
         </div>
         <div id="8c1da2e5-7178-48ad-a956-b16d515d5b53"
         class="cell markdown" data-tags="[]">
         <h2 id="jupyter-magic">Jupyter magic</h2>
+        <p>Use <code>autoreload</code> when making prototypes, see <a
+        href="https://ipython.org/ipython-doc/3/config/extensions/autoreload.html">autoreload</a>.</p>
         <p><code>autoreload</code> is an IPython extension to reload
         modules before executing user code.</p>
         <p><code>autoreload</code> reloads modules automatically before
@@ -279,30 +333,30 @@
         <p>This makes for example the following workflow possible:</p>
         </div>
         <div id="be50e7f2-0afb-40b2-96d8-d33a1c46e846" class="cell code"
-        data-execution_count="1">
-        <div class="sourceCode" id="cb6"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span></code></pre></div>
+        data-execution_count="5">
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span></code></pre></div>
         </div>
         <div id="d081edff-0512-4cb3-b3bc-15f1e988d815" class="cell code"
-        data-execution_count="2">
-        <div class="sourceCode" id="cb7"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile foo<span class="op">/</span>mappings.py</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> some_function() <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">42</span> </span></code></pre></div>
+        data-execution_count="6">
+        <div class="sourceCode" id="cb11"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile src<span class="op">/</span>foo<span class="op">/</span>mappings.py</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> some_function() <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">42</span> </span></code></pre></div>
         <div class="output stream stdout">
-        <pre><code>Overwriting foo/mappings.py
+        <pre><code>Overwriting src/foo/mappings.py
 </code></pre>
         </div>
         </div>
         <div id="fa7b61b5-dd6a-41c4-9aff-9914a5d9cf2c" class="cell code"
-        data-execution_count="3">
-        <div class="sourceCode" id="cb9"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> foo <span class="im">import</span> mappings</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mappings.some_function()</span></code></pre></div>
-        <div class="output execute_result" data-execution_count="3">
+        data-execution_count="7">
+        <div class="sourceCode" id="cb13"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> foo <span class="im">import</span> mappings</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mappings.some_function()</span></code></pre></div>
+        <div class="output execute_result" data-execution_count="7">
         <pre><code>42</code></pre>
         </div>
         </div>
@@ -311,14 +365,14 @@
         <p>Now if we change <code>some_function</code> to return 43.</p>
         </div>
         <div id="9298bf41-f961-41d7-8a1d-1d5d69107a0c" class="cell code"
-        data-execution_count="4">
-        <div class="sourceCode" id="cb11"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile foo<span class="op">/</span>mappings.py</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> some_function() <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">43</span></span></code></pre></div>
+        data-execution_count="8">
+        <div class="sourceCode" id="cb15"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile src<span class="op">/</span>foo<span class="op">/</span>mappings.py</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> some_function() <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">43</span></span></code></pre></div>
         <div class="output stream stdout">
-        <pre><code>Overwriting foo/mappings.py
+        <pre><code>Overwriting src/foo/mappings.py
 </code></pre>
         </div>
         </div>
@@ -327,10 +381,10 @@
         <p>And we call it again then.</p>
         </div>
         <div id="731465ba-8ad3-4701-b951-6d424437f4d9" class="cell code"
-        data-execution_count="5">
-        <div class="sourceCode" id="cb13"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mappings.some_function()</span></code></pre></div>
-        <div class="output execute_result" data-execution_count="5">
+        data-execution_count="9">
+        <div class="sourceCode" id="cb17"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mappings.some_function()</span></code></pre></div>
+        <div class="output execute_result" data-execution_count="9">
         <pre><code>43</code></pre>
         </div>
         </div>
@@ -345,6 +399,16 @@
         <h2 id="testing">Testing</h2>
         <p>Often used tools for testing in Python are
         <code>pytest</code> (most common) and <code>unittest</code>.</p>
+        <p>So use <code>pytest</code> and put the tests in a
+        <code>tests/</code> folder in the same directory. This is
+        recommended by <code>pytest</code>, see <a
+        href="https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html#tests-outside-application-code">tests-outside-application-code</a></p>
+        </div>
+        <div id="260e8bf6-0956-4601-8f16-ebe0efb5a655" class="cell code"
+        data-execution_count="10">
+        <div class="sourceCode" id="cb19"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>sh</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mkdir <span class="op">-</span>p tests</span></code></pre></div>
         </div>
         <div id="21ff65c9-90cf-4c19-a2f9-1916d1d46b9f"
         class="cell markdown">
@@ -362,7 +426,8 @@
         <h2 id="pre-commit-hooks">Pre-commit hooks</h2>
         <p><a href="https://pre-commit.com">pre-commit</a> is often used
         to run a series of checks before making commits to git e.g.
-        black code formatting pyright etc.</p>
+        <code>black</code> code formatting, <code>pyright</code>,
+        <code>isort</code> etc.</p>
         </div>
         <div id="0db48398-0021-4554-96e3-4bb175413d1a"
         class="cell markdown">
@@ -371,25 +436,25 @@
         mimimal example would be:</p>
         </div>
         <div id="3b23667b-835a-45e5-ab79-2d99e8526bca" class="cell code"
-        data-execution_count="60">
-        <div class="sourceCode" id="cb15"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile foo<span class="op">/</span>downloader.py</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>FILES <span class="op">=</span> [<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>]</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_all():</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> FILES:</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        download_file(filename)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_file(filename):</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f&#39;Beginning download of </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">&#39;</span>)</span></code></pre></div>
+        data-execution_count="11">
+        <div class="sourceCode" id="cb20"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>writefile src<span class="op">/</span>foo<span class="op">/</span>downloader.py</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>FILES <span class="op">=</span> [<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_all():</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> FILES:</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        download_file(filename)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_file(filename):</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    logger.info(<span class="ss">f&#39;Beginning download of </span><span class="sc">{</span>filename<span class="sc">}</span><span class="ss">&#39;</span>)</span></code></pre></div>
         <div class="output stream stdout">
-        <pre><code>Overwriting foo/downloader.py
+        <pre><code>Overwriting src/foo/downloader.py
 </code></pre>
         </div>
         </div>
@@ -401,43 +466,37 @@
         <code>logging.basicConfig(...)</code>.</p>
         </div>
         <div id="8d622631-790e-4ebd-8fae-0fd73f9c18e1" class="cell code"
-        data-execution_count="61">
-        <div class="sourceCode" id="cb17"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(asctime)s</span><span class="st"> - </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    stream<span class="op">=</span>sys.stdout,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.INFO,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    datefmt<span class="op">=</span><span class="st">&#39;</span><span class="sc">%d</span><span class="st">-%b-%y %H:%M:%S&#39;</span>,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    force<span class="op">=</span><span class="va">True</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+        data-execution_count="12">
+        <div class="sourceCode" id="cb22"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>logging.basicConfig(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&#39;</span><span class="sc">%(asctime)s</span><span class="st"> - </span><span class="sc">%(message)s</span><span class="st">&#39;</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    stream<span class="op">=</span>sys.stdout,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    level<span class="op">=</span>logging.INFO,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    datefmt<span class="op">=</span><span class="st">&#39;</span><span class="sc">%d</span><span class="st">-%b-%y %H:%M:%S&#39;</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    force<span class="op">=</span><span class="va">True</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
         </div>
         <div id="84b59178-1a63-4240-a79f-a7d774802f9e" class="cell code"
-        data-execution_count="63">
-        <div class="sourceCode" id="cb18"><pre
-        class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> foo <span class="im">import</span> downloader</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>downloader.download_all()</span></code></pre></div>
+        data-execution_count="13">
+        <div class="sourceCode" id="cb23"><pre
+        class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> foo <span class="im">import</span> downloader</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>downloader.download_all()</span></code></pre></div>
         <div class="output stream stdout">
-        <pre><code>03-Mar-24 12:14:09 - Beginning download of foo
-03-Mar-24 12:14:09 - Beginning download of bar
+        <pre><code>01-Apr-24 19:21:45 - Beginning download of foo
+01-Apr-24 19:21:45 - Beginning download of bar
 </code></pre>
         </div>
         </div>
-        <div id="ff749fa9-9b74-4e34-b65e-deeaa45901ed"
+        <div id="4db85d99-5333-4a88-b611-1691119bf055"
         class="cell markdown">
-        <h1 id="references">References</h1>
-        <p>[1] <a
-        href="https://pip.pypa.io/en/latest/cli/pip_install/#editable-installs"
-        class="uri">https://pip.pypa.io/en/latest/cli/pip_install/#editable-installs</a></p>
-        <p>[2] <a
-        href="https://ipython.org/ipython-doc/3/config/extensions/autoreload.html"
-        class="uri">https://ipython.org/ipython-doc/3/config/extensions/autoreload.html</a></p>
-        <p>[3] <a
-        href="https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html#development-mode"
-        class="uri">https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html#development-mode</a></p>
+        <h2 id="cookiecutter">Cookiecutter</h2>
+        <p><a
+        href="https://github.com/cookiecutter/cookiecutter">cookiecutter</a>
+        can be used to create a template Python project.</p>
         </div>
         <br>
 

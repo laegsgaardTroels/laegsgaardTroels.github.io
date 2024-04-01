@@ -141,6 +141,11 @@ Variables</h1>
 
             <div class="pull-right">
 
+                                <div class="text-right">
+                    <a href="https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2019-12-05-prime-numbers-and-strangeness-of-independent-random-variables">
+                        [<i>View source</i> <span class="fa fa-github"></span>]
+                    </a>
+                </div>
                 
                 
             </div>
@@ -149,8 +154,7 @@ Variables</h1>
 
 
         <br>
-        <p>Random variables have an intuitive definition, but might not
-        fully cover the intuitive concept of independence.
+        <p>A counter intuitive fact about random variables.
         <!--more--></p>
         <p>Assume a probability space <span
         class="math inline">\((\Omega, \mathcal{F},
@@ -230,13 +234,10 @@ Variables</h1>
         N=2^{127}=170141183460469231731687303715884105728
         \]</span></p>
         <p>Then there are lots of nontrivial pairs of independent
-        events. This example does not imply that the definition of
-        independence is wrong, but in my view that the mathematical
-        definition of independence wrong, but it does seem
-        unintuitive.</p>
+        events.</p>
         <h2 id="example-a-dice">Example: A Dice</h2>
-        <p>A thought of mine. An example of above would be a single dice
-        <span class="math inline">\(X\)</span> defined on <span
+        <p>A related thought of mine. Let <span
+        class="math inline">\(X\)</span> be a dice <span
         class="math inline">\((\{1,2,3,4,5,6\}, \mathcal{F},
         \mathbb{P})\)</span> where <span
         class="math inline">\(\mathcal{F}=\mathcal{P}(\Omega)\)</span>
@@ -244,10 +245,10 @@ Variables</h1>
         class="math inline">\(\mathbb{P}(A)=\frac{\rvert A
         \rvert}{N}\)</span> as above.</p>
         <p>Now 6 is not a prime number. Its unique prime factorization
-        is <span class="math inline">\(6=2\cdot3\)</span>. Now each
-        outcome can be mapped 1-1 with an index consisting of two random
-        numbers <span class="math inline">\(I\in\{1,2\}\)</span> and
-        <span class="math inline">\(J\in\{1,2,3\}\)</span> with uniform
+        is <span class="math inline">\(6=2\cdot3\)</span>. Each outcome
+        can be mapped 1-1 with an index consisting of two random numbers
+        <span class="math inline">\(I\in\{1,2\}\)</span> and <span
+        class="math inline">\(J\in\{1,2,3\}\)</span> each with uniform
         distribution e.g. <span
         class="math inline">\(\mathbb{P}(I=i)=\frac{1}{2}\)</span> and
         <span class="math inline">\(\mathbb{P}(J=j)=\frac{1}{3}\)</span>
@@ -261,7 +262,7 @@ Variables</h1>
             I = 1, J = 3 \Rightarrow X = 3 \\
             I = 2, J = 1 \Rightarrow X = 4 \\
             I = 2, J = 2 \Rightarrow X = 5 \\
-            I = 2, J = 6 \Rightarrow X = 6
+            I = 2, J = 3 \Rightarrow X = 6
         \end{aligned}
         \]</span></p>
         <p>The mapping is not really that important in my view. What is

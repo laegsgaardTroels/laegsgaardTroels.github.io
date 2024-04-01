@@ -6,7 +6,7 @@ post:
   code: https://github.com/laegsgaardTroels/laegsgaardTroels.github.io/tree/master/src/posts/2024-03-03-python-project
   date: '2024-03-03'
   day: '03'
-  excerpt: Notes on good ideas for organizing a Python project. [...]
+  excerpt: Notes on good ideas for organizing and developing a Python project. [...]
   image: /assets/images/base/python.svg
   month: '03'
   title: Python Projects
