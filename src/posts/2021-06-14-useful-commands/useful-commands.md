@@ -85,7 +85,7 @@ rm -rf folder                      # Remove folder.
 
 ```bash
 mkdir new_dir
-mkdir -p new_dir                   # New error if existing and create parent folders.
+mkdir -p new_dir                   # No error if existing directory and create parent folder(s).
 ```
 
 #### Move and renmae file with `mv`
