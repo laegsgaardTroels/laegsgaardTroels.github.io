@@ -8,7 +8,7 @@ PANDOC_OPTIONS := --include-in-header=src/templates/head.html \
 	--highlight-style src/templates/highlight_style.theme \
 	--mathjax
 
-COMMON_TEMPLATES := src/templates/head.html src/templates/navigation.html src/templates/styles.html
+COMMON_TEMPLATES := src/templates/head.html src/templates/navigation.html src/templates/styles.html src/templates/footer.html
 
 MD := $(shell find src/posts -type f -name '*.md' ! -name README.md -maxdepth 2 -mindepth 2)
 IPYNB := $(shell find src/posts -type f -name '*.ipynb' -maxdepth 2 -mindepth 2)
