@@ -8,8 +8,6 @@ You have experience with programming from your daily work with data or from your
 
 <h4>Content</h4>
 
-View the slides from the course here:
-
 <ol>
     <li><b>Introduction</b> Introduction to the Course.</li>
     <li><b>Azure Databricks Notebooks</b> Introduktion til Spark Azure Databricks Notebooks.</li>
